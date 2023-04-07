@@ -11,7 +11,7 @@ public class QueenBeeModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, QueenBeeMod.MOD_ID);
 
     public static final RegistryObject<Item> STINGER = ITEMS.register("stinger",
-            () -> new Item(new Item.Properties()));
+            () -> new Item(new Item.Properties().food(QueenBeeModFoods.STINGER)));
     public static void register(IEventBus eventBus){
         ITEMS.register(eventBus);
     }

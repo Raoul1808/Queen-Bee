@@ -1,7 +1,9 @@
 package com.cerbon.queenbeemod;
 
+import com.cerbon.queenbeemod.item.QueenBeeCreativeModeTabs;
 import com.cerbon.queenbeemod.item.QueenBeeModItems;
 import com.mojang.logging.LogUtils;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.CreativeModeTabEvent;
@@ -38,12 +40,13 @@ public class QueenBeeMod
         modEventBus.addListener(this::addCreative);
     }
 
-    private void commonSetup(final FMLCommonSetupEvent event)
-    {
+    private void commonSetup(final FMLCommonSetupEvent event) {
     }
 
-    private void addCreative(CreativeModeTabEvent.BuildContents event)
-    {
+    private void addCreative(CreativeModeTabEvent.BuildContents event) {
+        if(event.getTab() == QueenBeeCreativeModeTabs.QUEEN_BEE_TAB){
+            event.accept(QueenBeeModItems.STINGER);
+        }
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call

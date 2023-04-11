@@ -3,8 +3,8 @@ package com.cerbon.queenbeemod;
 import com.cerbon.queenbeemod.item.QueenBeeCreativeModeTabs;
 import com.cerbon.queenbeemod.item.QueenBeeModItems;
 import com.mojang.logging.LogUtils;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
@@ -46,7 +46,6 @@ public class QueenBeeMod
     private void addCreative(CreativeModeTabEvent.BuildContents event) {
         if(event.getTab() == QueenBeeCreativeModeTabs.QUEEN_BEE_TAB){
             event.accept(QueenBeeModItems.STINGER);
-            event.accept(QueenBeeModItems.BEE_ANTENNA);
         }
     }
 

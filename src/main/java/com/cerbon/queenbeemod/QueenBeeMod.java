@@ -1,8 +1,11 @@
 package com.cerbon.queenbeemod;
 
+import com.cerbon.queenbeemod.entity.QueenBeeModEntities;
+import com.cerbon.queenbeemod.entity.client.QueenBeeRenderer;
 import com.cerbon.queenbeemod.item.QueenBeeCreativeModeTabs;
 import com.cerbon.queenbeemod.item.QueenBeeModItems;
 import com.mojang.logging.LogUtils;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.CreativeModeTabEvent;
@@ -26,6 +29,8 @@ public class QueenBeeMod
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         QueenBeeModItems.register(modEventBus);
+        QueenBeeModEntities.register(modEventBus);
+
         MinecraftForge.EVENT_BUS.register(this);
 
         modEventBus.addListener(this::commonSetup);
@@ -37,6 +42,7 @@ public class QueenBeeMod
     private void addCreativeTab(CreativeModeTabEvent.BuildContents event) {
         if(event.getTab() == QueenBeeCreativeModeTabs.QUEEN_BEE_TAB){
             event.accept(QueenBeeModItems.STINGER);
+            event.accept(QueenBeeModItems.QUEEN_BEE_SPAWN_EGG);
         }
     }
 
@@ -47,6 +53,8 @@ public class QueenBeeMod
     public static class ClientModEvents
     {
         @SubscribeEvent
-        public static void onClientSetup(FMLClientSetupEvent event) {}
+        public static void onClientSetup(FMLClientSetupEvent event) {
+            EntityRenderers.register(QueenBeeModEntities.QUEEN_BEE.get(), QueenBeeRenderer::new);
+        }
     }
 }

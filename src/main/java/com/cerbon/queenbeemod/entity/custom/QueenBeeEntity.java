@@ -9,7 +9,10 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.TimeUtil;
 import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -54,6 +57,25 @@ public class QueenBeeEntity extends Monster implements GeoEntity, FlyingAnimal, 
         this.setPathfindingMalus(BlockPathTypes.WATER_BORDER, 16.0F);
         this.setPathfindingMalus(BlockPathTypes.COCOA, -1.0F);
         this.setPathfindingMalus(BlockPathTypes.FENCE, -1.0F);
+    }
+
+    @Override
+    public boolean doHurtTarget(Entity pEntity) {
+        boolean flag = pEntity.hurt(this.damageSources().sting(this), (float)((int)this.getAttributeValue(Attributes.ATTACK_DAMAGE)));
+        if(flag){
+            this.doEnchantDamageEffects(this, pEntity);
+            if(pEntity instanceof LivingEntity){
+                if(this.level.getDifficulty() == Difficulty.EASY){
+                    ((LivingEntity)pEntity).addEffect(new MobEffectInstance(MobEffects.POISON, 200, 0));
+                    ((LivingEntity)pEntity).addEffect(new MobEffectInstance(MobEffects.CONFUSION, 300, 0));
+                } else {
+                    ((LivingEntity)pEntity).addEffect(new MobEffectInstance(MobEffects.POISON, 200, 1));
+                    ((LivingEntity)pEntity).addEffect(new MobEffectInstance(MobEffects.CONFUSION, 300, 0));
+                }
+            }
+            this.playSound(SoundEvents.BEE_STING, 1.0F, 1.0F);
+        }
+        return flag;
     }
 
     @Override

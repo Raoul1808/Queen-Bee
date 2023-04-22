@@ -161,6 +161,10 @@ public class QueenBeeEntity extends Monster implements GeoEntity, FlyingAnimal, 
     }
 
     @Override
+    protected void playStepSound(BlockPos pPos, BlockState pState) {
+    }
+
+    @Override
     protected PathNavigation createNavigation(Level pLevel) {
         FlyingPathNavigation flyingpathnavigation = new FlyingPathNavigation(this, pLevel);
 

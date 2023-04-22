@@ -1,12 +1,7 @@
 package com.cerbon.queenbeemod.entity.custom;
 
-import com.cerbon.queenbeemod.client.QueenBeeAggressiveSoundInstance;
 import com.cerbon.queenbeemod.client.QueenBeeFlyingSoundInstance;
-import com.cerbon.queenbeemod.client.QueenBeeSoundInstance;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.sounds.BeeAggressiveSoundInstance;
-import net.minecraft.client.resources.sounds.BeeFlyingSoundInstance;
-import net.minecraft.client.resources.sounds.BeeSoundInstance;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -31,7 +26,6 @@ import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
-import net.minecraft.world.entity.animal.Bee;
 import net.minecraft.world.entity.animal.FlyingAnimal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
@@ -44,8 +38,8 @@ import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.animation.AnimationState;
+import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.object.PlayState;
 
 import java.util.UUID;
@@ -56,7 +50,6 @@ public class QueenBeeEntity extends Monster implements GeoEntity, FlyingAnimal, 
     private static final UniformInt PERSISTENT_ANGER_TIME = TimeUtil.rangeOfSeconds(20, 39);
     private  AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
     private int underWaterTicks;
-    private Minecraft minecraft = null;
 
     public QueenBeeEntity(EntityType<? extends Monster> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);

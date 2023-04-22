@@ -2,11 +2,8 @@ package com.cerbon.queenbeemod.entity.client;
 
 import com.cerbon.queenbeemod.QueenBeeMod;
 import com.cerbon.queenbeemod.entity.custom.QueenBeeEntity;
-import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
-import software.bernie.geckolib.model.GeoModel;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
 public class QueenBeeRenderer extends GeoEntityRenderer<QueenBeeEntity> {
@@ -15,7 +12,11 @@ public class QueenBeeRenderer extends GeoEntityRenderer<QueenBeeEntity> {
     }
 
     @Override
-    public ResourceLocation getTextureLocation(QueenBeeEntity animatable) {
-        return new ResourceLocation(QueenBeeMod.MOD_ID, "textures/entity/queen_bee.png");
+    public ResourceLocation getTextureLocation(QueenBeeEntity entity) {
+        if(entity.isAngry()){
+            return new ResourceLocation(QueenBeeMod.MOD_ID, "textures/entity/queen_bee_angry.png");
+        }else {
+            return new ResourceLocation(QueenBeeMod.MOD_ID, "textures/entity/queen_bee.png");
+        }
     }
 }

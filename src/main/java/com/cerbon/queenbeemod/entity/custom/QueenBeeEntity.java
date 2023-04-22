@@ -1,5 +1,12 @@
 package com.cerbon.queenbeemod.entity.custom;
 
+import com.cerbon.queenbeemod.client.QueenBeeAggressiveSoundInstance;
+import com.cerbon.queenbeemod.client.QueenBeeFlyingSoundInstance;
+import com.cerbon.queenbeemod.client.QueenBeeSoundInstance;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.sounds.BeeAggressiveSoundInstance;
+import net.minecraft.client.resources.sounds.BeeFlyingSoundInstance;
+import net.minecraft.client.resources.sounds.BeeSoundInstance;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -49,6 +56,8 @@ public class QueenBeeEntity extends Monster implements GeoEntity, FlyingAnimal, 
     private static final UniformInt PERSISTENT_ANGER_TIME = TimeUtil.rangeOfSeconds(20, 39);
     private  AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
     private int underWaterTicks;
+    private Minecraft minecraft = null;
+
     public QueenBeeEntity(EntityType<? extends Monster> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
         this.moveControl = new FlyingMoveControl(this, 20, true);
@@ -139,6 +148,7 @@ public class QueenBeeEntity extends Monster implements GeoEntity, FlyingAnimal, 
     @Nullable
     @Override
     protected SoundEvent getAmbientSound() {
+        Minecraft.getInstance().getSoundManager().play(new QueenBeeFlyingSoundInstance(this));
         return null;
     }
 

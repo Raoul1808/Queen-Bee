@@ -1,6 +1,6 @@
 package com.cerbon.queenbeemod.entity.custom;
 
-import com.cerbon.queenbeemod.client.QueenBeeFlyingSoundInstance;
+import com.cerbon.queenbeemod.client.sound.QueenBeeFlyingSoundInstance;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.syncher.EntityDataAccessor;

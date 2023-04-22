@@ -1,4 +1,4 @@
-package com.cerbon.queenbeemod.client;
+package com.cerbon.queenbeemod.client.sound;
 
 import com.cerbon.queenbeemod.entity.custom.QueenBeeEntity;
 import net.minecraft.client.Minecraft;

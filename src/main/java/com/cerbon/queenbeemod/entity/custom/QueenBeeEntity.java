@@ -2,7 +2,12 @@ package com.cerbon.queenbeemod.entity.custom;
 
 import com.cerbon.queenbeemod.client.sound.QueenBeeFlyingSoundInstance;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.particle.Particle;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleType;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -31,6 +36,7 @@ import net.minecraft.world.entity.animal.FlyingAnimal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
@@ -123,7 +129,7 @@ public class QueenBeeEntity extends Monster implements GeoEntity, FlyingAnimal, 
               .add(Attributes.ATTACK_DAMAGE, 7)
               .add(Attributes.KNOCKBACK_RESISTANCE, 0.5)
               .add(Attributes.FLYING_SPEED, 0.25)
-              .add(Attributes.FOLLOW_RANGE, 64).build();
+              .add(Attributes.FOLLOW_RANGE, 48).build();
     };
     @Override
     protected void registerGoals(){

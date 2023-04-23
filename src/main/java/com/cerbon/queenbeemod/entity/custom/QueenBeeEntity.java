@@ -87,7 +87,7 @@ public class QueenBeeEntity extends Monster implements GeoEntity, FlyingAnimal, 
     public boolean hurt(DamageSource pSource, float pAmount) {
         if (pSource.getEntity() instanceof LivingEntity){
             Level world = this.getLevel();
-            AABB aabb = this.getBoundingBox().inflate(20.0D);
+            AABB aabb = this.getBoundingBox().inflate(48.0D, 10.0D, 48.0D);
             List<Entity> nearbyEntities = world.getEntitiesOfClass(Entity.class, aabb);
 
             for(Entity entity : nearbyEntities){

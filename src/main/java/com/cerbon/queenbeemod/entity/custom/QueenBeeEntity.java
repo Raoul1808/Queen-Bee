@@ -26,6 +26,7 @@ import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
+import net.minecraft.world.entity.animal.Bee;
 import net.minecraft.world.entity.animal.FlyingAnimal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
@@ -33,6 +34,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
+import net.minecraft.world.phys.AABB;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
@@ -42,6 +44,7 @@ import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.object.PlayState;
 
+import java.util.List;
 import java.util.UUID;
 
 public class QueenBeeEntity extends Monster implements GeoEntity, FlyingAnimal, NeutralMob {
@@ -78,6 +81,27 @@ public class QueenBeeEntity extends Monster implements GeoEntity, FlyingAnimal, 
             this.playSound(SoundEvents.BEE_STING, 1.0F, 1.0F);
         }
         return flag;
+    }
+
+    @Override
+    public boolean hurt(DamageSource pSource, float pAmount) {
+        if (pSource.getEntity() instanceof LivingEntity){
+            Level world = this.getLevel();
+            AABB aabb = this.getBoundingBox().inflate(20.0D);
+            List<Entity> nearbyEntities = world.getEntitiesOfClass(Entity.class, aabb);
+
+            for(Entity entity : nearbyEntities){
+                if (entity instanceof Bee){
+                    Bee bee = (Bee) entity;
+                    if (bee.getPersistentAngerTarget() == null) {
+                        bee.setRemainingPersistentAngerTime(630);
+                        bee.setPersistentAngerTarget(pSource.getEntity().getUUID());
+                    }
+                }
+            }
+        }
+
+        return super.hurt(pSource, pAmount);
     }
 
     @Override

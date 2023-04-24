@@ -14,6 +14,7 @@ import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffectUtil;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -30,6 +31,7 @@ import net.minecraft.world.entity.animal.Bee;
 import net.minecraft.world.entity.animal.FlyingAnimal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
@@ -99,9 +101,33 @@ public class QueenBeeEntity extends Monster implements GeoEntity, FlyingAnimal, 
                     }
                 }
             }
+            if(Math.random() <= 0.2){
+                summonPoisonNimbus(pSource);
+            }
         }
 
         return super.hurt(pSource, pAmount);
+    }
+
+    protected void summonPoisonNimbus(DamageSource pSource){
+        AABB aabb = this.getBoundingBox().inflate(4.0D);
+        List<LivingEntity> nearbyEntities = this.level.getEntitiesOfClass(LivingEntity.class, aabb);
+
+        for (LivingEntity entity : nearbyEntities){
+            if (entity == pSource.getEntity()){
+                AreaEffectCloud areaEffectCloud = new AreaEffectCloud(this.level, this.getX(), this.getY(), this.getZ());
+                areaEffectCloud.setOwner(this);
+                areaEffectCloud.setDuration(40);
+                areaEffectCloud.setRadius(4.0F);
+                areaEffectCloud.setPotion(Potions.POISON);
+                entity.addEffect(new MobEffectInstance(MobEffects.POISON, 200, 1)); //Bees should not get the effect (Needs a fix)
+                this.level.addFreshEntity(areaEffectCloud);
+            }
+        }
+    }
+    @Override
+    public boolean canBeAffected(MobEffectInstance pPotionEffect) {
+        return pPotionEffect.getEffect() == MobEffects.POISON ? false : super.canBeAffected(pPotionEffect);
     }
 
     @Override

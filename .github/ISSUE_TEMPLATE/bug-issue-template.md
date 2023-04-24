@@ -1,7 +1,7 @@
 ---
 name: BUG/ISSUE Template
 about: Use this template if you have found a bug or you have a issue with something
-title: "[BUG/ISSUE] Substitute this with your title"
+title: "[BUG/ISSUE] Replace this with your title"
 labels: bug
 assignees: ''
 

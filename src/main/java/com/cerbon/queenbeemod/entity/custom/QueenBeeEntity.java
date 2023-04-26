@@ -86,28 +86,27 @@ public class QueenBeeEntity extends Monster implements GeoEntity, FlyingAnimal, 
 
     @Override
     public boolean hurt(DamageSource pSource, float pAmount) {
-        if (!pSource.isCreativePlayer()){
-            Entity entity = pSource.getEntity();
-            if (entity instanceof LivingEntity){
-                setNearbyBeesAngry((LivingEntity) entity);
+        if (!pSource.isCreativePlayer() && pSource.getEntity() instanceof LivingEntity){
+            Entity target = pSource.getEntity();
 
-                if(Math.random() <= 0.2){
-                    summonAngryBeesTo((LivingEntity) entity);
-                }
+            double d0 = this.getAttributeValue(Attributes.FOLLOW_RANGE);
+            AABB aabb = this.getBoundingBox().inflate(d0, 10.0D, d0);
+            List<Bee> nearbyBees = this.level.getEntitiesOfClass(Bee.class, aabb);
 
-                if(Math.random() <= 0.2){
-                    summonPoisonNimbus(pSource);
-                }
+            if (!nearbyBees.isEmpty()){
+                setNearbyBeesAngry((LivingEntity) target, nearbyBees);
+            }
+            if(Math.random() <= 0.2){
+                summonAngryBeesTo((LivingEntity) target, nearbyBees);
+            }
+            if(Math.random() <= 0.2){
+                summonPoisonNimbus(pSource);
             }
         }
         return super.hurt(pSource, pAmount);
     }
 
-    protected void setNearbyBeesAngry(LivingEntity target){
-        double d0 = this.getAttributeValue(Attributes.FOLLOW_RANGE);
-        AABB aabb = this.getBoundingBox().inflate(d0, 10.0D, d0);
-        List<Bee> nearbyBees = this.level.getEntitiesOfClass(Bee.class, aabb);
-
+    protected void setNearbyBeesAngry(LivingEntity target, List<Bee> nearbyBees){
         for(Bee bee: nearbyBees){
             if (bee.getPersistentAngerTarget() == null){
                 bee.setRemainingPersistentAngerTime(PERSISTENT_ANGER_TIME.sample(this.random));
@@ -116,10 +115,7 @@ public class QueenBeeEntity extends Monster implements GeoEntity, FlyingAnimal, 
         }
     }
 
-    protected void summonAngryBeesTo(LivingEntity target){
-        double d0 = this.getAttributeValue(Attributes.FOLLOW_RANGE);
-        AABB aabb = this.getBoundingBox().inflate(d0, 10.0D, d0);
-        List<Bee> nearbyBees = this.level.getEntitiesOfClass(Bee.class, aabb);
+    protected void summonAngryBeesTo(LivingEntity target, List<Bee> nearbyBees){
         boolean allStung = nearbyBees.stream().allMatch(Bee::hasStung);
 
         if(nearbyBees.isEmpty() || allStung){

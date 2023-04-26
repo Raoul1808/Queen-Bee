@@ -106,10 +106,10 @@ public class QueenBeeEntity extends Monster implements GeoEntity, FlyingAnimal, 
     protected void setNearbyBeesAngry(LivingEntity entity){
         double d0 = this.getAttributeValue(Attributes.FOLLOW_RANGE);
         AABB aabb = this.getBoundingBox().inflate(d0, 10.0D, d0);
-        List<LivingEntity> nearbyEntities = this.level.getEntitiesOfClass(LivingEntity.class, aabb);
+        List<Bee> nearbyBees = this.level.getEntitiesOfClass(Bee.class, aabb);
 
-        for(LivingEntity nearByEntity : nearbyEntities){
-            if (nearByEntity instanceof Bee bee && bee.getPersistentAngerTarget() == null){
+        for(Bee bee: nearbyBees){
+            if (bee.getPersistentAngerTarget() == null){
                 bee.setRemainingPersistentAngerTime(PERSISTENT_ANGER_TIME.sample(this.random));
                 bee.setPersistentAngerTarget(entity.getUUID());
             }

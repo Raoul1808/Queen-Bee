@@ -14,7 +14,6 @@ import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffectUtil;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -87,26 +86,30 @@ public class QueenBeeEntity extends Monster implements GeoEntity, FlyingAnimal, 
 
     @Override
     public boolean hurt(DamageSource pSource, float pAmount) {
-        if (pSource.getEntity() instanceof LivingEntity){
-            Level world = this.getLevel();
-            AABB aabb = this.getBoundingBox().inflate(48.0D, 10.0D, 48.0D);
-            List<Entity> nearbyEntities = world.getEntitiesOfClass(Entity.class, aabb);
+        if (!pSource.isCreativePlayer()){
+            Entity entity = pSource.getEntity();
+            if (entity instanceof LivingEntity){
+                setNearbyBeesAngry((LivingEntity) entity);
 
-            for(Entity entity : nearbyEntities){
-                if (entity instanceof Bee){
-                    Bee bee = (Bee) entity;
-                    if (bee.getPersistentAngerTarget() == null) {
-                        bee.setRemainingPersistentAngerTime(630);
-                        bee.setPersistentAngerTarget(pSource.getEntity().getUUID());
-                    }
+                if(Math.random() <= 0.2){
+                    summonPoisonNimbus(pSource);
                 }
             }
-            if(Math.random() <= 0.2){
-                summonPoisonNimbus(pSource);
+        }
+        return super.hurt(pSource, pAmount);
+    }
+
+    protected void setNearbyBeesAngry(LivingEntity entity){
+        double d0 = this.getAttributeValue(Attributes.FOLLOW_RANGE);
+        AABB aabb = this.getBoundingBox().inflate(d0, 10.0D, d0);
+        List<LivingEntity> nearbyEntities = this.level.getEntitiesOfClass(LivingEntity.class, aabb);
+
+        for(LivingEntity nearByEntity : nearbyEntities){
+            if (nearByEntity instanceof Bee bee && bee.getPersistentAngerTarget() == null){
+                bee.setRemainingPersistentAngerTime(PERSISTENT_ANGER_TIME.sample(this.random));
+                bee.setPersistentAngerTarget(entity.getUUID());
             }
         }
-
-        return super.hurt(pSource, pAmount);
     }
 
     protected void summonPoisonNimbus(DamageSource pSource){
@@ -158,7 +161,7 @@ public class QueenBeeEntity extends Monster implements GeoEntity, FlyingAnimal, 
         this.goalSelector.addGoal(2, new RandomLookAroundGoal(this));
 
         this.targetSelector.addGoal(1, new QueenBeeEntity.QueenBeeHurtByOtherGoal(this).setAlertOthers(new Class[0]));
-        this.targetSelector.addGoal(2, new QueenBeeEntity.QueenBeeBecomeAngryTargetGoal(this));
+        this.targetSelector.addGoal(2, new QueenBeeBecomeAngryTargetGoal(this));
     }
 
     @Override
@@ -314,9 +317,6 @@ public class QueenBeeEntity extends Monster implements GeoEntity, FlyingAnimal, 
             return QueenBeeEntity.this.isAngry() && super.canContinueToUse();
         }
 
-        /**
-         * Returns whether an in-progress EntityAIBase should continue executing
-         */
 
         @Override
         protected void alertOther(Mob pMob, LivingEntity pTarget) {

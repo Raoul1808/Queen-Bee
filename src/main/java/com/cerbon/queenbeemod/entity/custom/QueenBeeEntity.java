@@ -103,7 +103,7 @@ public class QueenBeeEntity extends Monster implements GeoEntity, FlyingAnimal, 
         return super.hurt(pSource, pAmount);
     }
 
-    protected void setNearbyBeesAngry(LivingEntity entity){
+    protected void setNearbyBeesAngry(LivingEntity target){
         double d0 = this.getAttributeValue(Attributes.FOLLOW_RANGE);
         AABB aabb = this.getBoundingBox().inflate(d0, 10.0D, d0);
         List<Bee> nearbyBees = this.level.getEntitiesOfClass(Bee.class, aabb);
@@ -111,12 +111,12 @@ public class QueenBeeEntity extends Monster implements GeoEntity, FlyingAnimal, 
         for(Bee bee: nearbyBees){
             if (bee.getPersistentAngerTarget() == null){
                 bee.setRemainingPersistentAngerTime(PERSISTENT_ANGER_TIME.sample(this.random));
-                bee.setPersistentAngerTarget(entity.getUUID());
+                bee.setPersistentAngerTarget(target.getUUID());
             }
         }
     }
 
-    protected void summonAngryBeesTo(LivingEntity entity){
+    protected void summonAngryBeesTo(LivingEntity target){
         double d0 = this.getAttributeValue(Attributes.FOLLOW_RANGE);
         AABB aabb = this.getBoundingBox().inflate(d0, 10.0D, d0);
         List<Bee> nearbyBees = this.level.getEntitiesOfClass(Bee.class, aabb);
@@ -128,7 +128,7 @@ public class QueenBeeEntity extends Monster implements GeoEntity, FlyingAnimal, 
                 if (bee != null){
                     bee.moveTo(this.getX(), this.getY(), this.getZ());
                     bee.setRemainingPersistentAngerTime(PERSISTENT_ANGER_TIME.sample(this.random));
-                    bee.setPersistentAngerTarget(entity.getUUID());
+                    bee.setPersistentAngerTarget(target.getUUID());
                     this.level.addFreshEntity(bee);
                 }
             }

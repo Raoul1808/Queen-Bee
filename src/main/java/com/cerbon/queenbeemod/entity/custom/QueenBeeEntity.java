@@ -97,7 +97,7 @@ public class QueenBeeEntity extends Monster implements GeoEntity, FlyingAnimal, 
                 setNearbyBeesAngry((LivingEntity) target, nearbyBees);
             }
             if(Math.random() <= 0.2){
-                summonAngryBeesTo((LivingEntity) target, nearbyBees);
+                summonAngryBees((LivingEntity) target, nearbyBees);
             }
             if(Math.random() <= 0.2){
                 summonPoisonNimbus(pSource);
@@ -115,7 +115,7 @@ public class QueenBeeEntity extends Monster implements GeoEntity, FlyingAnimal, 
         }
     }
 
-    protected void summonAngryBeesTo(LivingEntity target, List<Bee> nearbyBees){
+    protected void summonAngryBees(LivingEntity target, List<Bee> nearbyBees){
         boolean allStung = nearbyBees.stream().allMatch(Bee::hasStung);
 
         if(nearbyBees.isEmpty() || allStung){

@@ -96,13 +96,11 @@ public class QueenBeeEntity extends Monster implements GeoEntity, FlyingAnimal, 
             boolean allStung = nearbyBees.stream().allMatch(Bee::hasStung);
 
             if (nearbyBees.isEmpty() || allStung){
-                if(Math.random() <= 0.2){
-                    summonAngryBees((LivingEntity) target);
-                }
+                summonAngryBees(target);
             } else{
-                setNearbyBeesAngry((LivingEntity) target, nearbyBees);
+                setNearbyBeesAngry(target, nearbyBees);
             }
-            
+
             if(Math.random() <= 0.2){
                 summonPoisonNimbus(pSource);
             }
@@ -110,7 +108,7 @@ public class QueenBeeEntity extends Monster implements GeoEntity, FlyingAnimal, 
         return super.hurt(pSource, pAmount);
     }
 
-    protected void setNearbyBeesAngry(LivingEntity target, List<Bee> nearbyBees){
+    protected void setNearbyBeesAngry(Entity target, List<Bee> nearbyBees){
         for(Bee bee: nearbyBees){
             if (bee.getPersistentAngerTarget() == null){
                 bee.setRemainingPersistentAngerTime(PERSISTENT_ANGER_TIME.sample(this.random));
@@ -119,7 +117,7 @@ public class QueenBeeEntity extends Monster implements GeoEntity, FlyingAnimal, 
         }
     }
 
-    protected void summonAngryBees(LivingEntity target){
+    protected void summonAngryBees(Entity target){
         for(int i = 0; i < 3; i++){
             Bee bee = EntityType.BEE.create(this.level);
             if (bee != null){
@@ -175,7 +173,7 @@ public class QueenBeeEntity extends Monster implements GeoEntity, FlyingAnimal, 
     };
     @Override
     protected void registerGoals(){
-        this.goalSelector.addGoal(0, new MeleeAttackGoal(this, 1.2, true));
+        this.goalSelector.addGoal(0, new MeleeAttackGoal(this, 1.4F, true));
         this.goalSelector.addGoal(1, new WaterAvoidingRandomFlyingGoal(this, 1.0D));
         this.goalSelector.addGoal(2, new RandomLookAroundGoal(this));
 

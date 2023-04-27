@@ -166,13 +166,13 @@ public class QueenBeeEntity extends Monster implements GeoEntity, FlyingAnimal, 
 
     public static AttributeSupplier setAttribute(){
       return Monster.createMonsterAttributes()
-              .add(Attributes.MAX_HEALTH, 100)
-              .add(Attributes.MOVEMENT_SPEED, 0.25)
-              .add(Attributes.ARMOR, 5)
-              .add(Attributes.ATTACK_DAMAGE, 7)
-              .add(Attributes.KNOCKBACK_RESISTANCE, 0.5)
-              .add(Attributes.FLYING_SPEED, 0.25)
-              .add(Attributes.FOLLOW_RANGE, 48).build();
+              .add(Attributes.MAX_HEALTH, 100.D)
+              .add(Attributes.MOVEMENT_SPEED, 0.3F)
+              .add(Attributes.ARMOR, 5.0D)
+              .add(Attributes.ATTACK_DAMAGE, 7.0D)
+              .add(Attributes.KNOCKBACK_RESISTANCE, 0.5D)
+              .add(Attributes.FLYING_SPEED, 0.6F)
+              .add(Attributes.FOLLOW_RANGE, 48.D).build();
     };
     @Override
     protected void registerGoals(){

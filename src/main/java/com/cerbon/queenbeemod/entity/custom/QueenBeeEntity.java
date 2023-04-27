@@ -93,13 +93,16 @@ public class QueenBeeEntity extends Monster implements GeoEntity, FlyingAnimal, 
             double d0 = this.getAttributeValue(Attributes.FOLLOW_RANGE);
             AABB aabb = this.getBoundingBox().inflate(d0, 10.0D, d0);
             List<Bee> nearbyBees = this.level.getEntitiesOfClass(Bee.class, aabb);
+            boolean allStung = nearbyBees.stream().allMatch(Bee::hasStung);
 
-            if (!nearbyBees.isEmpty()){
+            if (nearbyBees.isEmpty() || allStung){
+                if(Math.random() <= 0.2){
+                    summonAngryBees((LivingEntity) target);
+                }
+            } else{
                 setNearbyBeesAngry((LivingEntity) target, nearbyBees);
             }
-            if(Math.random() <= 0.2){
-                summonAngryBees((LivingEntity) target, nearbyBees);
-            }
+            
             if(Math.random() <= 0.2){
                 summonPoisonNimbus(pSource);
             }
@@ -116,18 +119,14 @@ public class QueenBeeEntity extends Monster implements GeoEntity, FlyingAnimal, 
         }
     }
 
-    protected void summonAngryBees(LivingEntity target, List<Bee> nearbyBees){
-        boolean allStung = nearbyBees.stream().allMatch(Bee::hasStung);
-
-        if(nearbyBees.isEmpty() || allStung){
-            for(int i = 0; i < 3; i++){
-                Bee bee = EntityType.BEE.create(this.level);
-                if (bee != null){
-                    bee.moveTo(this.getX(), this.getY(), this.getZ());
-                    bee.setRemainingPersistentAngerTime(PERSISTENT_ANGER_TIME.sample(this.random));
-                    bee.setPersistentAngerTarget(target.getUUID());
-                    this.level.addFreshEntity(bee);
-                }
+    protected void summonAngryBees(LivingEntity target){
+        for(int i = 0; i < 3; i++){
+            Bee bee = EntityType.BEE.create(this.level);
+            if (bee != null){
+                bee.moveTo(this.getX(), this.getY(), this.getZ());
+                bee.setRemainingPersistentAngerTime(PERSISTENT_ANGER_TIME.sample(this.random));
+                bee.setPersistentAngerTarget(target.getUUID());
+                this.level.addFreshEntity(bee);
             }
         }
     }

@@ -448,11 +448,10 @@ public class QueenBeeEntity extends Monster implements GeoEntity, FlyingAnimal, 
             for (Bee bee : nearbyBees){
                 if (bee.isAngry()){
                     LivingEntity target = bee.getTarget();
-                    if (target == null)return;
-                    if (this.queenBee.getTarget() == null){
-                        this.queenBee.setRemainingPersistentAngerTime(PERSISTENT_ANGER_TIME.sample(this.queenBee.random));
-                        this.queenBee.setPersistentAngerTarget(target.getUUID());
-                    }
+                    if (target == null || this.queenBee.getTarget() == null)return;
+
+                    this.queenBee.setRemainingPersistentAngerTime(PERSISTENT_ANGER_TIME.sample(this.queenBee.random));
+                    this.queenBee.setPersistentAngerTarget(target.getUUID());
                 }
             }
         }

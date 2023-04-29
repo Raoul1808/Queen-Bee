@@ -243,10 +243,19 @@ public class QueenBeeEntity extends Monster implements GeoEntity, FlyingAnimal, 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
         controllerRegistrar.add(new AnimationController<>(this, "controller", 4, this::predicate));
+        controllerRegistrar.add(new AnimationController<>(this, "attackController", 4, this::attackPredicate));
     }
 
     private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> tAnimationState) {
         tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.queen_bee.idle", Animation.LoopType.LOOP));
+        return PlayState.CONTINUE;
+    }
+
+    private <T extends GeoAnimatable> PlayState attackPredicate(AnimationState<T> tAnimationState) {
+        if (this.swinging && tAnimationState.getController().getAnimationState().equals(AnimationController.State.STOPPED)){
+            tAnimationState.getController().forceAnimationReset();
+            tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.queen_bee.attack", Animation.LoopType.PLAY_ONCE));
+        }
         return PlayState.CONTINUE;
     }
 

@@ -38,6 +38,7 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.AABB;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
@@ -54,7 +55,7 @@ public class QueenBeeEntity extends Monster implements GeoEntity, FlyingAnimal, 
     private static final EntityDataAccessor<Integer> DATA_REMAINING_ANGER_TIME = SynchedEntityData.defineId(QueenBeeEntity.class, EntityDataSerializers.INT);
     private UUID persistentAngerTarget;
     private static final UniformInt PERSISTENT_ANGER_TIME = TimeUtil.rangeOfSeconds(20, 39);
-    private  AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
+    private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
     private int underWaterTicks;
 
     public QueenBeeEntity(EntityType<? extends Monster> pEntityType, Level pLevel) {
@@ -108,7 +109,7 @@ public class QueenBeeEntity extends Monster implements GeoEntity, FlyingAnimal, 
     }
 
     @Override
-    public float getWalkTargetValue(BlockPos pPos, LevelReader pLevel) {
+    public float getWalkTargetValue(@NotNull BlockPos pPos, LevelReader pLevel) {
         return pLevel.getBlockState(pPos).isAir() ? 10.0F : 0.0F;
     }
 
@@ -121,7 +122,7 @@ public class QueenBeeEntity extends Monster implements GeoEntity, FlyingAnimal, 
               .add(Attributes.KNOCKBACK_RESISTANCE, 0.5D)
               .add(Attributes.FLYING_SPEED, 0.6F)
               .add(Attributes.FOLLOW_RANGE, 48.D).build();
-    };
+    }
     @Override
     protected void registerGoals(){
         this.goalSelector.addGoal(0, new MeleeAttackGoal(this, 1.4F, true));
@@ -132,7 +133,7 @@ public class QueenBeeEntity extends Monster implements GeoEntity, FlyingAnimal, 
         this.goalSelector.addGoal(2, new WaterAvoidingRandomFlyingGoal(this, 1.0D));
         this.goalSelector.addGoal(3, new RandomLookAroundGoal(this));
 
-        this.targetSelector.addGoal(1, new QueenBeeEntity.QueenBeeHurtByOtherGoal(this).setAlertOthers(new Class[0]));
+        this.targetSelector.addGoal(1, new QueenBeeEntity.QueenBeeHurtByOtherGoal(this).setAlertOthers());
         this.targetSelector.addGoal(2, new QueenBeeBecomeAngryTargetGoal(this));
         this.targetSelector.addGoal(3, new ResetUniversalAngerTargetGoal<>(this, true));
     }
@@ -172,7 +173,7 @@ public class QueenBeeEntity extends Monster implements GeoEntity, FlyingAnimal, 
     }
 
     @Override
-    protected SoundEvent getHurtSound(DamageSource pDamageSource) {
+    protected SoundEvent getHurtSound(@NotNull DamageSource pDamageSource) {
         return SoundEvents.BEE_HURT;
     }
 
@@ -410,7 +411,7 @@ public class QueenBeeEntity extends Monster implements GeoEntity, FlyingAnimal, 
             if (target == null) return;
 
             ++this.cooldown;
-            if (this.cooldown >= 200) {;
+            if (this.cooldown >= 200) {
                 if (target.distanceToSqr(this.queenBee) <= 49 && this.queenBee.hasLineOfSight(target)) {
                     AreaEffectCloud areaEffectCloud = new AreaEffectCloud(this.queenBee.level, this.queenBee.getX(), this.queenBee.getY(), this.queenBee.getZ());
                     areaEffectCloud.setOwner(this.queenBee);

@@ -372,11 +372,10 @@ public class QueenBeeEntity extends Monster implements GeoEntity, FlyingAnimal, 
                            this.queenBee.level.addFreshEntity(bee);
                        }
                    }
+                   if (this.cooldown >= 200){
+                       this.cooldown = 0;
+                   }
                }
-               if (this.cooldown >= 200){
-                   this.cooldown = 0;
-           }
-
            }
        }
     }
@@ -420,9 +419,10 @@ public class QueenBeeEntity extends Monster implements GeoEntity, FlyingAnimal, 
                     areaEffectCloud.setPotion(Potions.POISON);
                     areaEffectCloud.addEffect(new MobEffectInstance(MobEffects.POISON, 200, 1)); //Bees should not get the effect (Needs a fix)
                     this.queenBee.level.addFreshEntity(areaEffectCloud);
-                }
-                if (this.cooldown >= 200) {
-                    this.cooldown = 0;
+
+                    if (this.cooldown >= 200) {
+                        this.cooldown = 0;
+                    }
                 }
             }
         }

@@ -381,11 +381,11 @@ public class QueenBeeEntity extends Monster implements GeoEntity, FlyingAnimal, 
        }
     }
 
-    static class summonPoisonNimbusGoal extends Goal{
+    static class summonPoisonNimbusGoal extends Goal {
         private final QueenBeeEntity queenBee;
         private int cooldown;
 
-        public summonPoisonNimbusGoal(QueenBeeEntity queenBee){
+        public summonPoisonNimbusGoal(QueenBeeEntity queenBee) {
             this.queenBee = queenBee;
         }
 
@@ -411,22 +411,17 @@ public class QueenBeeEntity extends Monster implements GeoEntity, FlyingAnimal, 
             if (target == null) return;
 
             ++this.cooldown;
-            if (this.cooldown >= 200){
-                AABB aabb = this.queenBee.getBoundingBox().inflate(6.0D);
-                List<LivingEntity> nearbyEntities = this.queenBee.level.getEntitiesOfClass(LivingEntity.class, aabb);
-
-                for (LivingEntity entity : nearbyEntities){
-                    if (entity == target){
-                        AreaEffectCloud areaEffectCloud = new AreaEffectCloud(this.queenBee.level, this.queenBee.getX(), this.queenBee.getY(), this.queenBee.getZ());
-                        areaEffectCloud.setOwner(this.queenBee);
-                        areaEffectCloud.setDuration(40);
-                        areaEffectCloud.setRadius(4.0F);
-                        areaEffectCloud.setPotion(Potions.POISON);
-                        areaEffectCloud.addEffect(new MobEffectInstance(MobEffects.POISON, 200, 1)); //Bees should not get the effect (Needs a fix)
-                        this.queenBee.level.addFreshEntity(areaEffectCloud);
-                    }
+            if (this.cooldown >= 200) {;
+                if (target.distanceToSqr(this.queenBee) <= 49 && this.queenBee.hasLineOfSight(target)) {
+                    AreaEffectCloud areaEffectCloud = new AreaEffectCloud(this.queenBee.level, this.queenBee.getX(), this.queenBee.getY(), this.queenBee.getZ());
+                    areaEffectCloud.setOwner(this.queenBee);
+                    areaEffectCloud.setDuration(40);
+                    areaEffectCloud.setRadius(7.0F);
+                    areaEffectCloud.setPotion(Potions.POISON);
+                    areaEffectCloud.addEffect(new MobEffectInstance(MobEffects.POISON, 200, 1)); //Bees should not get the effect (Needs a fix)
+                    this.queenBee.level.addFreshEntity(areaEffectCloud);
                 }
-                if (this.cooldown >= 200){
+                if (this.cooldown >= 200) {
                     this.cooldown = 0;
                 }
             }

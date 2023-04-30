@@ -1,6 +1,7 @@
-package com.cerbon.queenbeemod.entity.client;
+package com.cerbon.queenbeemod.client.entity.renderer;
 
 import com.cerbon.queenbeemod.QueenBeeMod;
+import com.cerbon.queenbeemod.client.entity.model.QueenBeeModel;
 import com.cerbon.queenbeemod.entity.custom.QueenBeeEntity;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;

@@ -1,4 +1,4 @@
-package com.cerbon.queenbeemod.entity.client;
+package com.cerbon.queenbeemod.client.entity.model;
 
 import com.cerbon.queenbeemod.QueenBeeMod;
 import com.cerbon.queenbeemod.entity.custom.QueenBeeEntity;

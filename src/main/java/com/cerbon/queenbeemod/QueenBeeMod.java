@@ -1,7 +1,7 @@
 package com.cerbon.queenbeemod;
 
 import com.cerbon.queenbeemod.entity.QueenBeeModEntities;
-import com.cerbon.queenbeemod.entity.client.QueenBeeRenderer;
+import com.cerbon.queenbeemod.client.entity.renderer.QueenBeeRenderer;
 import com.cerbon.queenbeemod.item.QueenBeeCreativeModeTabs;
 import com.cerbon.queenbeemod.item.QueenBeeModItems;
 import com.mojang.logging.LogUtils;

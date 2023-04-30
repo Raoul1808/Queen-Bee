@@ -67,6 +67,42 @@ public class QueenBeeEntity extends Monster implements GeoEntity, FlyingAnimal, 
         this.setPathfindingMalus(BlockPathTypes.FENCE, -1.0F);
     }
 
+    public static AttributeSupplier setAttribute(){
+        return Monster.createMonsterAttributes()
+                .add(Attributes.MAX_HEALTH, 100.D)
+                .add(Attributes.MOVEMENT_SPEED, 0.3F)
+                .add(Attributes.ARMOR, 5.0D)
+                .add(Attributes.ATTACK_DAMAGE, 7.0D)
+                .add(Attributes.KNOCKBACK_RESISTANCE, 0.5D)
+                .add(Attributes.FLYING_SPEED, 0.6F)
+                .add(Attributes.FOLLOW_RANGE, 48.D).build();
+    }
+
+    @Override
+    protected void registerGoals(){
+        this.goalSelector.addGoal(0, new MeleeAttackGoal(this, 1.4F, true));
+        this.goalSelector.addGoal(1, new QueenBeeEntity.QueenBeeBecomeAngryWhenBeeIsHurtGoal(this));
+        this.goalSelector.addGoal(1, new QueenBeeEntity.setNearbyBeesAngryGoal(this));
+        this.goalSelector.addGoal(1, new QueenBeeEntity.summonAngryBeesGoal(this));
+        this.goalSelector.addGoal(2, new WaterAvoidingRandomFlyingGoal(this, 1.0D));
+        this.goalSelector.addGoal(3, new RandomLookAroundGoal(this));
+
+        this.targetSelector.addGoal(1, new QueenBeeEntity.QueenBeeHurtByOtherGoal(this).setAlertOthers());
+        this.targetSelector.addGoal(2, new QueenBeeBecomeAngryTargetGoal(this));
+        this.targetSelector.addGoal(3, new ResetUniversalAngerTargetGoal<>(this, true));
+    }
+
+    @Override
+    public MobType getMobType() {
+        return MobType.ARTHROPOD;
+    }
+
+    @Override
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(DATA_REMAINING_ANGER_TIME, 0);
+    }
+
     @Override
     public boolean doHurtTarget(Entity pEntity) {
         boolean flag = pEntity.hurt(this.damageSources().sting(this), (float)((int)this.getAttributeValue(Attributes.ATTACK_DAMAGE)));
@@ -121,43 +157,8 @@ public class QueenBeeEntity extends Monster implements GeoEntity, FlyingAnimal, 
     }
 
     @Override
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(DATA_REMAINING_ANGER_TIME, 0);
-    }
-
-    @Override
     public float getWalkTargetValue(@NotNull BlockPos pPos, LevelReader pLevel) {
         return pLevel.getBlockState(pPos).isAir() ? 10.0F : 0.0F;
-    }
-
-    public static AttributeSupplier setAttribute(){
-      return Monster.createMonsterAttributes()
-              .add(Attributes.MAX_HEALTH, 100.D)
-              .add(Attributes.MOVEMENT_SPEED, 0.3F)
-              .add(Attributes.ARMOR, 5.0D)
-              .add(Attributes.ATTACK_DAMAGE, 7.0D)
-              .add(Attributes.KNOCKBACK_RESISTANCE, 0.5D)
-              .add(Attributes.FLYING_SPEED, 0.6F)
-              .add(Attributes.FOLLOW_RANGE, 48.D).build();
-    }
-    @Override
-    protected void registerGoals(){
-        this.goalSelector.addGoal(0, new MeleeAttackGoal(this, 1.4F, true));
-        this.goalSelector.addGoal(1, new QueenBeeEntity.QueenBeeBecomeAngryWhenBeeIsHurtGoal(this));
-        this.goalSelector.addGoal(1, new QueenBeeEntity.setNearbyBeesAngryGoal(this));
-        this.goalSelector.addGoal(1, new QueenBeeEntity.summonAngryBeesGoal(this));
-        this.goalSelector.addGoal(2, new WaterAvoidingRandomFlyingGoal(this, 1.0D));
-        this.goalSelector.addGoal(3, new RandomLookAroundGoal(this));
-
-        this.targetSelector.addGoal(1, new QueenBeeEntity.QueenBeeHurtByOtherGoal(this).setAlertOthers());
-        this.targetSelector.addGoal(2, new QueenBeeBecomeAngryTargetGoal(this));
-        this.targetSelector.addGoal(3, new ResetUniversalAngerTargetGoal<>(this, true));
-    }
-
-    @Override
-    public MobType getMobType() {
-        return MobType.ARTHROPOD;
     }
 
     @Override

@@ -32,7 +32,6 @@ import net.minecraft.world.entity.animal.Bee;
 import net.minecraft.world.entity.animal.FlyingAnimal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
@@ -92,9 +91,28 @@ public class QueenBeeEntity extends Monster implements GeoEntity, FlyingAnimal, 
         if (!pSource.isCreativePlayer() && pSource.getEntity() instanceof LivingEntity){
             if (this.isAngry()){
                 this.setRemainingPersistentAngerTime(PERSISTENT_ANGER_TIME.sample(this.random));
+
+                if (Math.random() <= 0.2){
+                    this.summonPoisonNimbus();
+                }
             }
         }
         return super.hurt(pSource, pAmount);
+    }
+
+    protected void summonPoisonNimbus(){
+        LivingEntity target = this.getTarget();
+          if (target != null){
+              if (target.distanceToSqr(this) <= 49 && this.hasLineOfSight(target)) {
+                  PoisonNimbusAreaEffectCloud areaEffectCloud = new PoisonNimbusAreaEffectCloud(this.level, this.getX(), this.getY(), this.getZ());
+                  areaEffectCloud.setOwner(this);
+                  areaEffectCloud.setDuration(40);
+                  areaEffectCloud.setRadius(7.0F);
+                  areaEffectCloud.setFixedColor(8889187);
+                  areaEffectCloud.addEffect(new MobEffectInstance(MobEffects.POISON, 200, 1));
+                  this.level.addFreshEntity(areaEffectCloud);
+              }
+          }
     }
 
     @Override
@@ -129,7 +147,6 @@ public class QueenBeeEntity extends Monster implements GeoEntity, FlyingAnimal, 
         this.goalSelector.addGoal(1, new QueenBeeEntity.QueenBeeBecomeAngryWhenBeeIsHurtGoal(this));
         this.goalSelector.addGoal(1, new QueenBeeEntity.setNearbyBeesAngryGoal(this));
         this.goalSelector.addGoal(1, new QueenBeeEntity.summonAngryBeesGoal(this));
-        this.goalSelector.addGoal(1, new QueenBeeEntity.summonPoisonNimbusGoal(this));
         this.goalSelector.addGoal(2, new WaterAvoidingRandomFlyingGoal(this, 1.0D));
         this.goalSelector.addGoal(3, new RandomLookAroundGoal(this));
 
@@ -264,6 +281,24 @@ public class QueenBeeEntity extends Monster implements GeoEntity, FlyingAnimal, 
         return cache;
     }
 
+    static class PoisonNimbusAreaEffectCloud extends AreaEffectCloud{
+        public PoisonNimbusAreaEffectCloud(Level pLevel, double pX, double pY, double pZ) {
+            super(pLevel, pX, pY, pZ);
+        }
+
+        @Override
+        public void addEffect(MobEffectInstance pEffectInstance) {
+            AABB aabb = this.getBoundingBox().inflate( 7.0D);
+            List<LivingEntity> nearbyEntities = this.level.getEntitiesOfClass(LivingEntity.class, aabb);
+
+            for (LivingEntity entity : nearbyEntities){
+                if (!(entity instanceof Bee)){
+                    entity.addEffect(pEffectInstance);
+                }
+            }
+        }
+    }
+
     static class QueenBeeBecomeAngryTargetGoal extends NearestAttackableTargetGoal<Player> {
         public QueenBeeBecomeAngryTargetGoal(QueenBeeEntity pMob) {
             super(pMob, Player.class, 10, true, false, pMob::isAngryAt);
@@ -390,53 +425,53 @@ public class QueenBeeEntity extends Monster implements GeoEntity, FlyingAnimal, 
        }
     }
 
-    static class summonPoisonNimbusGoal extends Goal {
-        private final QueenBeeEntity queenBee;
-        private int cooldown;
-
-        public summonPoisonNimbusGoal(QueenBeeEntity queenBee) {
-            this.queenBee = queenBee;
-        }
-
-        @Override
-        public boolean canUse() {
-            LivingEntity target = this.queenBee.getTarget();
-            return target != null && target.isAlive() && this.queenBee.isAngry();
-        }
-
-        @Override
-        public void start() {
-            this.cooldown = 0;
-        }
-
-        @Override
-        public boolean requiresUpdateEveryTick() {
-            return true;
-        }
-
-        @Override
-        public void tick() {
-            LivingEntity target = this.queenBee.getTarget();
-            if (target == null) return;
-
-            ++this.cooldown;
-            if (this.cooldown >= 200) {
-                if (target.distanceToSqr(this.queenBee) <= 49 && this.queenBee.hasLineOfSight(target)) {
-                    AreaEffectCloud areaEffectCloud = new AreaEffectCloud(this.queenBee.level, this.queenBee.getX(), this.queenBee.getY(), this.queenBee.getZ());
-                    areaEffectCloud.setOwner(this.queenBee);
-                    areaEffectCloud.setDuration(40);
-                    areaEffectCloud.setRadius(7.0F);
-                    areaEffectCloud.setPotion(Potions.POISON);
-                    areaEffectCloud.addEffect(new MobEffectInstance(MobEffects.POISON, 200, 1)); //Bees should not get the effect (Needs a fix)
-                    this.queenBee.level.addFreshEntity(areaEffectCloud);
-
-                    if (this.cooldown >= 200) {
-                        this.cooldown = 0;
-                    }
-                }
-            }
-        }
-    }
+//    static class summonPoisonNimbusGoal extends Goal {
+//        private final QueenBeeEntity queenBee;
+//        private int cooldown;
+//
+//        public summonPoisonNimbusGoal(QueenBeeEntity queenBee) {
+//            this.queenBee = queenBee;
+//        }
+//
+//        @Override
+//        public boolean canUse() {
+//            LivingEntity target = this.queenBee.getTarget();
+//            return target != null && target.isAlive() && this.queenBee.isAngry();
+//        }
+//
+//        @Override
+//        public void start() {
+//            this.cooldown = 0;
+//        }
+//
+//        @Override
+//        public boolean requiresUpdateEveryTick() {
+//            return true;
+//        }
+//
+//        @Override
+//        public void tick() {
+//            LivingEntity target = this.queenBee.getTarget();
+//            if (target == null) return;
+//
+//            ++this.cooldown;
+//            if (this.cooldown >= 200) {
+//                if (target.distanceToSqr(this.queenBee) <= 49 && this.queenBee.hasLineOfSight(target)) {
+//                    AreaEffectCloud areaEffectCloud = new AreaEffectCloud(this.queenBee.level, this.queenBee.getX(), this.queenBee.getY(), this.queenBee.getZ());
+//                    areaEffectCloud.setOwner(this.queenBee);
+//                    areaEffectCloud.setDuration(40);
+//                    areaEffectCloud.setRadius(7.0F);
+//                    areaEffectCloud.setPotion(Potions.POISON);
+//                    areaEffectCloud.addEffect(new MobEffectInstance(MobEffects.POISON, 200, 1)); //Bees should not get the effect (Needs a fix)
+//                    this.queenBee.level.addFreshEntity(areaEffectCloud);
+//
+//                    if (this.cooldown >= 200) {
+//                        this.cooldown = 0;
+//                    }
+//                }
+//            }
+//        }
+//    }
 
     static class QueenBeeBecomeAngryWhenBeeIsHurtGoal extends Goal{
         private final QueenBeeEntity queenBee;

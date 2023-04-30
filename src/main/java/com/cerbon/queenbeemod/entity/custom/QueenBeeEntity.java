@@ -128,7 +128,7 @@ public class QueenBeeEntity extends Monster implements GeoEntity, FlyingAnimal, 
             if (this.isAngry()){
                 this.setRemainingPersistentAngerTime(PERSISTENT_ANGER_TIME.sample(this.random));
 
-                if (Math.random() <= 0.2){
+                if (this.random.nextFloat() <= 0.2F){
                     this.summonPoisonNimbus();
                 }
             }

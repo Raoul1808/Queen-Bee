@@ -154,11 +154,6 @@ public class QueenBeeEntity extends Monster implements GeoEntity, FlyingAnimal, 
     }
 
     @Override
-    public boolean canBeAffected(MobEffectInstance pPotionEffect) {
-        return pPotionEffect.getEffect() == MobEffects.POISON ? false : super.canBeAffected(pPotionEffect);
-    }
-
-    @Override
     public float getWalkTargetValue(@NotNull BlockPos pPos, LevelReader pLevel) {
         return pLevel.getBlockState(pPos).isAir() ? 10.0F : 0.0F;
     }
@@ -305,7 +300,7 @@ public class QueenBeeEntity extends Monster implements GeoEntity, FlyingAnimal, 
             List<LivingEntity> nearbyEntities = this.level.getEntitiesOfClass(LivingEntity.class, aabb);
 
             for (LivingEntity entity : nearbyEntities){
-                if (!(entity instanceof Bee)){
+                if (!(entity instanceof Bee || entity instanceof QueenBeeEntity)){
                     entity.addEffect(pEffectInstance);
                 }
             }

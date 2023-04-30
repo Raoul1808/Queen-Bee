@@ -56,6 +56,7 @@ public class QueenBeeEntity extends Monster implements GeoEntity, FlyingAnimal, 
     private static final UniformInt PERSISTENT_ANGER_TIME = TimeUtil.rangeOfSeconds(20, 39);
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
     private int underWaterTicks;
+    private int poisonNimbusCooldown;
 
     public QueenBeeEntity(EntityType<? extends QueenBeeEntity> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -128,8 +129,9 @@ public class QueenBeeEntity extends Monster implements GeoEntity, FlyingAnimal, 
             if (this.isAngry()){
                 this.setRemainingPersistentAngerTime(PERSISTENT_ANGER_TIME.sample(this.random));
 
-                if (this.random.nextFloat() <= 0.2F){
+                if (this.poisonNimbusCooldown == 0 && this.random.nextFloat() <= 0.2F){
                     this.summonPoisonNimbus();
+                    this.poisonNimbusCooldown = 200;
                 }
             }
         }
@@ -164,6 +166,16 @@ public class QueenBeeEntity extends Monster implements GeoEntity, FlyingAnimal, 
     @Override
     public boolean removeWhenFarAway(double pDistanceToClosestPlayer) {
         return false;
+    }
+
+    @Override
+    public void aiStep() {
+        super.aiStep();
+        if (!this.level.isClientSide){
+            if (this.poisonNimbusCooldown > 0){
+                --poisonNimbusCooldown;
+            }
+        }
     }
 
     @Override

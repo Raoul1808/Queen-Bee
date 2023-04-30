@@ -3,9 +3,6 @@ package com.cerbon.queenbeemod.entity.client;
 import com.cerbon.queenbeemod.QueenBeeMod;
 import com.cerbon.queenbeemod.entity.custom.QueenBeeEntity;
 import net.minecraft.resources.ResourceLocation;
-import software.bernie.geckolib.core.animatable.model.CoreGeoBone;
-import software.bernie.geckolib.core.animatable.model.CoreGeoModel;
-import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.model.GeoModel;
 
 public class QueenBeeModel extends GeoModel<QueenBeeEntity> {

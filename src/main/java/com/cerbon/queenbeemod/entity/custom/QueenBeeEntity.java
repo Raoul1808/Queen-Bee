@@ -57,7 +57,7 @@ public class QueenBeeEntity extends Monster implements GeoEntity, FlyingAnimal, 
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
     private int underWaterTicks;
 
-    public QueenBeeEntity(EntityType<? extends Monster> pEntityType, Level pLevel) {
+    public QueenBeeEntity(EntityType<? extends QueenBeeEntity> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
         this.moveControl = new FlyingMoveControl(this, 20, true);
         this.setPathfindingMalus(BlockPathTypes.DANGER_FIRE, -1.0F);

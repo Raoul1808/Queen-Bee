@@ -61,6 +61,7 @@ public class QueenBeeEntity extends Monster implements GeoEntity, FlyingAnimal, 
     public QueenBeeEntity(EntityType<? extends QueenBeeEntity> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
         this.moveControl = new FlyingMoveControl(this, 20, true);
+        this.xpReward = 20;
         this.setPathfindingMalus(BlockPathTypes.DANGER_FIRE, -1.0F);
         this.setPathfindingMalus(BlockPathTypes.WATER, -1.0F);
         this.setPathfindingMalus(BlockPathTypes.WATER_BORDER, 16.0F);

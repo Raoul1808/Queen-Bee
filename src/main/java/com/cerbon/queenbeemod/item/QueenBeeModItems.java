@@ -4,8 +4,6 @@ import com.cerbon.queenbeemod.QueenBeeMod;
 import com.cerbon.queenbeemod.entity.QueenBeeModEntities;
 import com.cerbon.queenbeemod.item.custom.StingerSwordItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Tier;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;

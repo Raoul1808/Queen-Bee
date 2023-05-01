@@ -1,0 +1,30 @@
+{
+  "display": {
+    "icon": {
+      "item": "queen_bee:stinger"
+    },
+    "title": {
+      "translate": "advancements.it_shouldnt_bee_edible.title"
+    },
+    "description": {
+      "translate": "advancements.it_shouldnt_bee_edible.descr"
+    },
+    "background": "minecraft:textures/block/honeycomb_block.png",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "it_shouldnt_bee_edible": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "queen_bee:stinger"
+          ]
+        }
+      }
+    }
+  }
+}

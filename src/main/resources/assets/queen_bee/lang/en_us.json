@@ -5,5 +5,8 @@
 
   "entity.queen_bee.queen_bee": "Queen Bee",
 
-  "creativemodetab.queen_bee_tab": "Queen Bee"
+  "creativemodetab.queen_bee_tab": "Queen Bee",
+
+  "advancements.it_shouldnt_bee_edible.title": "It Shouldn't Bee Edible",
+  "advancements.it_shouldnt_bee_edible.descr": "Eat the bee stinger"
 }

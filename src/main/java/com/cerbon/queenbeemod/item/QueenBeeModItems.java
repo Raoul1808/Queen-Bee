@@ -2,7 +2,10 @@ package com.cerbon.queenbeemod.item;
 
 import com.cerbon.queenbeemod.QueenBeeMod;
 import com.cerbon.queenbeemod.entity.QueenBeeModEntities;
+import com.cerbon.queenbeemod.item.custom.StingerSwordItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -18,6 +21,10 @@ public class QueenBeeModItems {
     public static final RegistryObject<Item> QUEEN_BEE_SPAWN_EGG = ITEMS.register("queen_bee_spawn_egg",
             () -> new ForgeSpawnEggItem(QueenBeeModEntities.QUEEN_BEE, 0xEDC343, 0x1E1E28,
                     new Item.Properties()));
+
+    public static final RegistryObject<Item> STINGER_SWORD = ITEMS.register("stinger_sword",
+            () -> new StingerSwordItem(3, -2.0F, new Item.Properties()));
+
     public static void register(IEventBus eventBus){
         ITEMS.register(eventBus);
     }

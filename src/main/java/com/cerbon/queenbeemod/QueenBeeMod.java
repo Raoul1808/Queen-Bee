@@ -43,6 +43,7 @@ public class QueenBeeMod
         if(event.getTab() == QueenBeeCreativeModeTabs.QUEEN_BEE_TAB){
             event.accept(QueenBeeModItems.STINGER);
             event.accept(QueenBeeModItems.QUEEN_BEE_SPAWN_EGG);
+            event.accept(QueenBeeModItems.STINGER_SWORD);
         }
     }
 

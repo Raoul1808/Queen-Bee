@@ -4,6 +4,7 @@ import com.cerbon.queenbeemod.client.entity.renderer.QueenBeeRenderer;
 import com.cerbon.queenbeemod.entity.QueenBeeModEntities;
 import com.cerbon.queenbeemod.item.QueenBeeCreativeModeTabs;
 import com.cerbon.queenbeemod.item.QueenBeeModItems;
+import com.cerbon.queenbeemod.loot.QueenBeeModLootModifiers;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraftforge.api.distmarker.Dist;
@@ -30,6 +31,7 @@ public class QueenBeeMod
 
         QueenBeeModItems.register(modEventBus);
         QueenBeeModEntities.register(modEventBus);
+        QueenBeeModLootModifiers.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
 

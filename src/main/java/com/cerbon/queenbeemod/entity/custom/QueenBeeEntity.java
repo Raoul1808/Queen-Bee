@@ -374,8 +374,7 @@ public class QueenBeeEntity extends Monster implements GeoEntity, FlyingAnimal, 
 
             for(Bee bee : nearbyBees){
                 if (bee.getPersistentAngerTarget() == null){
-                    bee.setRemainingPersistentAngerTime(PERSISTENT_ANGER_TIME.sample(this.queenBee.random));
-                    bee.setPersistentAngerTarget(target.getUUID());
+                    bee.setTarget(target);
                 }
             }
         }
@@ -420,8 +419,7 @@ public class QueenBeeEntity extends Monster implements GeoEntity, FlyingAnimal, 
                        Bee bee = EntityType.BEE.create(this.queenBee.level);
                        if (bee != null){
                            bee.moveTo(this.queenBee.getX(), this.queenBee.getY(), this.queenBee.getZ());
-                           bee.setRemainingPersistentAngerTime(PERSISTENT_ANGER_TIME.sample(this.queenBee.random));
-                           bee.setPersistentAngerTarget(target.getUUID());
+                           bee.setTarget(target);
                            this.queenBee.level.addFreshEntity(bee);
                        }
                    }
@@ -502,9 +500,7 @@ public class QueenBeeEntity extends Monster implements GeoEntity, FlyingAnimal, 
                 if (bee.isAngry()){
                     LivingEntity target = bee.getTarget();
                     if (target == null || this.queenBee.getTarget() != null)return;
-
-                    this.queenBee.setRemainingPersistentAngerTime(PERSISTENT_ANGER_TIME.sample(this.queenBee.random));
-                    this.queenBee.setPersistentAngerTarget(target.getUUID());
+                    this.queenBee.setTarget(target);
                 }
             }
         }

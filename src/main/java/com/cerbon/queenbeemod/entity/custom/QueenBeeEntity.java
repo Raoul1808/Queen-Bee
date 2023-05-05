@@ -84,8 +84,8 @@ public class QueenBeeEntity extends Monster implements GeoEntity, FlyingAnimal, 
     protected void registerGoals(){
         this.goalSelector.addGoal(0, new MeleeAttackGoal(this, 1.4F, true));
         this.goalSelector.addGoal(1, new QueenBeeEntity.QueenBeeBecomeAngryWhenBeeIsHurtGoal(this));
-        this.goalSelector.addGoal(1, new QueenBeeEntity.setNearbyBeesAngryGoal(this));
-        this.goalSelector.addGoal(1, new QueenBeeEntity.summonAngryBeesGoal(this));
+        this.goalSelector.addGoal(1, new QueenBeeEntity.SetNearbyBeesAngryGoal(this));
+        this.goalSelector.addGoal(1, new QueenBeeEntity.SummonAngryBeesGoal(this));
         this.goalSelector.addGoal(2, new WaterAvoidingRandomFlyingGoal(this, 1.0D));
         this.goalSelector.addGoal(3, new RandomLookAroundGoal(this));
 
@@ -353,10 +353,10 @@ public class QueenBeeEntity extends Monster implements GeoEntity, FlyingAnimal, 
         }
     }
 
-    static class setNearbyBeesAngryGoal extends Goal {
+    static class SetNearbyBeesAngryGoal extends Goal {
         private final QueenBeeEntity queenBee;
 
-        public setNearbyBeesAngryGoal(QueenBeeEntity queenBee){
+        public SetNearbyBeesAngryGoal(QueenBeeEntity queenBee){
             this.queenBee = queenBee;
         }
         @Override
@@ -381,10 +381,10 @@ public class QueenBeeEntity extends Monster implements GeoEntity, FlyingAnimal, 
         }
     }
 
-    static class summonAngryBeesGoal extends Goal{
+    static class SummonAngryBeesGoal extends Goal{
         private final QueenBeeEntity queenBee;
         private int cooldown;
-        public summonAngryBeesGoal(QueenBeeEntity queenBee){
+        public SummonAngryBeesGoal(QueenBeeEntity queenBee){
             this.queenBee = queenBee;
         }
         @Override

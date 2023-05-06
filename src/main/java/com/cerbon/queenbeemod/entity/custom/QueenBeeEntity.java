@@ -84,7 +84,7 @@ public class QueenBeeEntity extends PathfinderMob implements GeoEntity, FlyingAn
     @Override
     protected void registerGoals(){
         this.goalSelector.addGoal(0, new MeleeAttackGoal(this, 1.4F, true));
-        this.goalSelector.addGoal(1, new QueenBeeEntity.QueenBeeBecomeAngryWhenBeeIsHurtGoal(this));
+        this.goalSelector.addGoal(1, new SetQueenBeeAngryWhenBeeIsAngry(this));
         this.goalSelector.addGoal(1, new QueenBeeEntity.SetNearbyBeesAngryGoal(this));
         this.goalSelector.addGoal(1, new QueenBeeEntity.SummonAngryBeesGoal(this));
         this.goalSelector.addGoal(2, new WaterAvoidingRandomFlyingGoal(this, 1.0D));
@@ -482,9 +482,9 @@ public class QueenBeeEntity extends PathfinderMob implements GeoEntity, FlyingAn
 //        }
 //    }
 
-    static class QueenBeeBecomeAngryWhenBeeIsHurtGoal extends Goal{
+    static class SetQueenBeeAngryWhenBeeIsAngry extends Goal{
         private final QueenBeeEntity queenBee;
-        public QueenBeeBecomeAngryWhenBeeIsHurtGoal(QueenBeeEntity queenBee){
+        public SetQueenBeeAngryWhenBeeIsAngry(QueenBeeEntity queenBee){
             this.queenBee = queenBee;
         }
 

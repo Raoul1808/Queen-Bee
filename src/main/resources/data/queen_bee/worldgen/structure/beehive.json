@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:jigsaw",
+  "start_pool": "queen_bee:beehive/start_pool",
+  "size": 2,
+  "max_distance_from_center": 80,
+  "biomes": "#queen_bee:has_structure/beehive",
+  "step": "surface_structures",
+  "terrain_adaptation": "beard_thin",
+  "start_height": {
+    "absolute": 0
+  },
+  "project_start_to_heightmap": "WORLD_SURFACE_WG",
+  "use_expansion_hack": true,
+  "spawn_overrides": {}
+}

@@ -1,0 +1,15 @@
+{
+  "name": "queen_bee:beehive/hole_under_beehive",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "location": "queen_bee:hole_under_beehive",
+        "processors": "queen_bee:change_stone_to_air",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    }
+  ]
+}

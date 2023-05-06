@@ -1,0 +1,16 @@
+{
+  "structures": [
+    {
+      "structure": "queen_bee:beehive",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "salt": 1644336879,
+    "spacing": 35,
+    "separation": 12,
+    "frequency": 0.15,
+    "type": "minecraft:random_spread",
+    "spread_type": "triangular"
+  }
+}

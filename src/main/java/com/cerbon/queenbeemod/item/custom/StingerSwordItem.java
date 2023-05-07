@@ -63,7 +63,7 @@ public class StingerSwordItem extends SwordItem {
         if (Screen.hasShiftDown()){
             pTooltipComponents.add(Component.translatable("tooltips.stinger_sword.shift_down").withStyle(ChatFormatting.YELLOW));
         }else {
-            pTooltipComponents.add(Component.translatable("tooltips.stinger_sword.shift_up").withStyle(ChatFormatting.YELLOW));
+            pTooltipComponents.add(Component.translatable("tooltips.item.shift_up").withStyle(ChatFormatting.YELLOW));
         }
         super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
     }

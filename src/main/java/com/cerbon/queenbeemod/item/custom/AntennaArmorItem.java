@@ -52,7 +52,7 @@ public class AntennaArmorItem extends ArmorItem implements GeoItem {
         if (Screen.hasShiftDown()){
             pTooltipComponents.add(Component.translatable("tooltips.antenna.shift_down").withStyle(ChatFormatting.YELLOW));
         }else {
-            pTooltipComponents.add(Component.translatable("tooltips.antenna.shift_up").withStyle(ChatFormatting.YELLOW));
+            pTooltipComponents.add(Component.translatable("tooltips.item.shift_up").withStyle(ChatFormatting.YELLOW));
         }
         super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
     }

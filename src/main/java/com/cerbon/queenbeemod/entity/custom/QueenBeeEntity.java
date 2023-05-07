@@ -84,14 +84,14 @@ public class QueenBeeEntity extends PathfinderMob implements GeoEntity, FlyingAn
     @Override
     protected void registerGoals(){
         this.goalSelector.addGoal(0, new MeleeAttackGoal(this, 1.4F, true));
-        this.goalSelector.addGoal(1, new SetQueenBeeAngryWhenBeeIsAngry(this));
+        this.goalSelector.addGoal(1, new QueenBeeEntity.SetQueenBeeAngryWhenBeeIsAngryGoal(this));
         this.goalSelector.addGoal(1, new QueenBeeEntity.SetNearbyBeesAngryGoal(this));
         this.goalSelector.addGoal(1, new QueenBeeEntity.SummonAngryBeesGoal(this));
         this.goalSelector.addGoal(2, new WaterAvoidingRandomFlyingGoal(this, 1.0D));
         this.goalSelector.addGoal(3, new RandomLookAroundGoal(this));
 
         this.targetSelector.addGoal(1, new QueenBeeEntity.QueenBeeHurtByOtherGoal(this).setAlertOthers());
-        this.targetSelector.addGoal(2, new QueenBeeBecomeAngryTargetGoal(this));
+        this.targetSelector.addGoal(2, new QueenBeeEntity.QueenBeeBecomeAngryTargetGoal(this));
         this.targetSelector.addGoal(3, new ResetUniversalAngerTargetGoal<>(this, true));
     }
 
@@ -482,9 +482,9 @@ public class QueenBeeEntity extends PathfinderMob implements GeoEntity, FlyingAn
 //        }
 //    }
 
-    static class SetQueenBeeAngryWhenBeeIsAngry extends Goal{
+    static class SetQueenBeeAngryWhenBeeIsAngryGoal extends Goal{
         private final QueenBeeEntity queenBee;
-        public SetQueenBeeAngryWhenBeeIsAngry(QueenBeeEntity queenBee){
+        public SetQueenBeeAngryWhenBeeIsAngryGoal(QueenBeeEntity queenBee){
             this.queenBee = queenBee;
         }
 

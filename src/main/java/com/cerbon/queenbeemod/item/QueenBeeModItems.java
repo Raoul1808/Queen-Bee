@@ -2,7 +2,9 @@ package com.cerbon.queenbeemod.item;
 
 import com.cerbon.queenbeemod.QueenBeeMod;
 import com.cerbon.queenbeemod.entity.QueenBeeModEntities;
+import com.cerbon.queenbeemod.item.custom.AntennaArmorItem;
 import com.cerbon.queenbeemod.item.custom.StingerSwordItem;
+import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -22,6 +24,9 @@ public class QueenBeeModItems {
 
     public static final RegistryObject<Item> STINGER_SWORD = ITEMS.register("stinger_sword",
             () -> new StingerSwordItem(3, -2.0F, new Item.Properties()));
+
+    public static final RegistryObject<Item> ANTENNA = ITEMS.register("antenna",
+            () -> new AntennaArmorItem(QueenBeeModArmorMaterials.ANTENNA, ArmorItem.Type.HELMET, new Item.Properties()));
 
     public static void register(IEventBus eventBus){
         ITEMS.register(eventBus);

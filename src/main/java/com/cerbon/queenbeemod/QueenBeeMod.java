@@ -46,6 +46,7 @@ public class QueenBeeMod
             event.accept(QueenBeeModItems.STINGER);
             event.accept(QueenBeeModItems.QUEEN_BEE_SPAWN_EGG);
             event.accept(QueenBeeModItems.STINGER_SWORD);
+            event.accept(QueenBeeModItems.ANTENNA);
         }
     }
 

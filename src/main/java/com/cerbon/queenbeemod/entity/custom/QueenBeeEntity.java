@@ -72,13 +72,13 @@ public class QueenBeeEntity extends PathfinderMob implements GeoEntity, FlyingAn
 
     public static AttributeSupplier setAttribute(){
         return Monster.createMonsterAttributes()
-                .add(Attributes.MAX_HEALTH, 100.D)
+                .add(Attributes.MAX_HEALTH, 100.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.3F)
                 .add(Attributes.ARMOR, 5.0D)
                 .add(Attributes.ATTACK_DAMAGE, 7.0D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.5D)
                 .add(Attributes.FLYING_SPEED, 0.6F)
-                .add(Attributes.FOLLOW_RANGE, 48.D).build();
+                .add(Attributes.FOLLOW_RANGE, 48.0D).build();
     }
 
     @Override

@@ -12,5 +12,7 @@
   "advancements.it_shouldnt_bee_edible.descr": "Eat the bee stinger",
 
   "tooltips.stinger_sword.shift_down": "When antenna is equipped, Shift + Right click to summon a friendly bee that will give you and nearby friends the regeneration effect.",
-  "tooltips.stinger_sword.shift_up": "Press SHIFT for more info!"
+  "tooltips.stinger_sword.shift_up": "Press SHIFT for more info!",
+  "tooltips.antenna.shift_down": "When equipped bees will never aggro on you.",
+  "tooltips.antenna.shift_up": "Press SHIFT for more info!"
 }

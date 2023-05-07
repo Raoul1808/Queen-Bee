@@ -6,8 +6,6 @@ import com.cerbon.queenbeemod.entity.custom.QueenBeeEntity;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-
-import java.util.Optional;
 @Mod.EventBusSubscriber(modid = QueenBeeMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class QueenBeeModEvents {
     @SubscribeEvent

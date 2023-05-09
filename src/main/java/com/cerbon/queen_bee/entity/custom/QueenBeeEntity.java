@@ -1,6 +1,7 @@
 package com.cerbon.queen_bee.entity.custom;
 
 import com.cerbon.queen_bee.client.sound.QueenBeeFlyingSoundInstance;
+import com.cerbon.queen_bee.item.QueenBeeModItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -93,6 +94,14 @@ public class QueenBeeEntity extends PathfinderMob implements GeoEntity, FlyingAn
         this.targetSelector.addGoal(1, new QueenBeeEntity.QueenBeeHurtByOtherGoal(this).setAlertOthers());
         this.targetSelector.addGoal(2, new QueenBeeEntity.QueenBeeBecomeAngryTargetGoal(this));
         this.targetSelector.addGoal(3, new ResetUniversalAngerTargetGoal<>(this, true));
+    }
+
+    @Override
+    public boolean canAttack(LivingEntity pTarget) {
+        if (pTarget.getItemBySlot(EquipmentSlot.HEAD).getItem() == (QueenBeeModItems.ANTENNA.get())){
+            return false;
+        }
+        return super.canAttack(pTarget);
     }
 
     @Override

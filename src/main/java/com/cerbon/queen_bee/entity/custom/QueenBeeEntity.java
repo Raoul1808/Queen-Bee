@@ -55,7 +55,7 @@ import java.util.UUID;
 public class QueenBeeEntity extends PathfinderMob implements GeoEntity, FlyingAnimal, NeutralMob, Enemy {
     private static final EntityDataAccessor<Integer> DATA_REMAINING_ANGER_TIME = SynchedEntityData.defineId(QueenBeeEntity.class, EntityDataSerializers.INT);
     private UUID persistentAngerTarget;
-    private static final UniformInt PERSISTENT_ANGER_TIME = TimeUtil.rangeOfSeconds(20, 39);
+    private static final UniformInt PERSISTENT_ANGER_TIME = TimeUtil.rangeOfSeconds(39, 58);
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
     private int underWaterTicks;
     private int poisonNimbusCooldown;
@@ -138,8 +138,6 @@ public class QueenBeeEntity extends PathfinderMob implements GeoEntity, FlyingAn
     public boolean hurt(DamageSource pSource, float pAmount) {
         if (!pSource.isCreativePlayer() && pSource.getEntity() instanceof LivingEntity){
             if (this.isAngry()){
-                this.setRemainingPersistentAngerTime(PERSISTENT_ANGER_TIME.sample(this.random));
-
                 if (this.poisonNimbusCooldown == 0 && this.random.nextFloat() <= 0.2F){
                     this.summonPoisonNimbus();
                     this.poisonNimbusCooldown = 200;

@@ -2,7 +2,7 @@ package com.cerbon.queen_bee;
 
 import com.cerbon.queen_bee.client.entity.renderer.QueenBeeRenderer;
 import com.cerbon.queen_bee.entity.QueenBeeModEntities;
-import com.cerbon.queen_bee.item.QueenBeeCreativeModeTabs;
+import com.cerbon.queen_bee.item.QueenBeeModCreativeModeTabs;
 import com.cerbon.queen_bee.item.QueenBeeModItems;
 import com.cerbon.queen_bee.loot.QueenBeeModLootModifiers;
 import com.mojang.logging.LogUtils;
@@ -42,7 +42,7 @@ public class QueenBeeMod
     private void commonSetup(final FMLCommonSetupEvent event) {}
 
     private void addCreativeTab(CreativeModeTabEvent.BuildContents event) {
-        if(event.getTab() == QueenBeeCreativeModeTabs.QUEEN_BEE_TAB){
+        if(event.getTab() == QueenBeeModCreativeModeTabs.QUEEN_BEE_TAB){
             event.accept(QueenBeeModItems.STINGER);
             event.accept(QueenBeeModItems.QUEEN_BEE_SPAWN_EGG);
             event.accept(QueenBeeModItems.STINGER_SWORD);

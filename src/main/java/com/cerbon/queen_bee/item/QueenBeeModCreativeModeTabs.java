@@ -10,7 +10,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = QueenBeeMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class QueenBeeCreativeModeTabs {
+public class QueenBeeModCreativeModeTabs {
     public static CreativeModeTab QUEEN_BEE_TAB;
     @SubscribeEvent
     public static void registerCreativeModeTabs(CreativeModeTabEvent.Register event){

@@ -1,4 +1,4 @@
-package com.cerbon.queen_bee.mixin;
+package com.cerbon.queen_bee.mixin.blocks;
 
 import com.cerbon.queen_bee.item.QueenBeeModItems;
 import net.minecraft.core.BlockPos;

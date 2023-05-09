@@ -1,0 +1,32 @@
+{
+  "display": {
+    "icon": {
+      "item": "queen_bee:antenna"
+    },
+    "title": {
+      "translate": "advancements.im_the_queen.title"
+    },
+    "description": {
+      "translate": "advancements.im_the_queen.descr"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "queen_bee:root",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "queen_bee:antenna"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

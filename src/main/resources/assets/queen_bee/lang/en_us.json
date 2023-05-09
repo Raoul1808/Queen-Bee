@@ -10,6 +10,10 @@
 
   "advancements.it_shouldnt_bee_edible.title": "It Shouldn't Bee Edible",
   "advancements.it_shouldnt_bee_edible.descr": "Eat the bee stinger",
+  "advancements.im_the_queen.title": "I'm The Queen",
+  "advancements.im_the_queen.descr": "Defeat Queen Bee and get her antennas",
+  "advancements.root.title": "Queen Bee Mod",
+  "advancements.root.descr": "Queen Bee mod advancements",
 
   "tooltips.item.shift_up": "Press SHIFT for more info!",
   "tooltips.stinger_sword.shift_down": "When antenna is equipped, Shift + Right click to summon a friendly bee that will give you and nearby friends the regeneration effect.",

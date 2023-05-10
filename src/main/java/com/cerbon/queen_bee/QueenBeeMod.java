@@ -1,6 +1,7 @@
 package com.cerbon.queen_bee;
 
 import com.cerbon.queen_bee.client.entity.renderer.QueenBeeRenderer;
+import com.cerbon.queen_bee.config.QueenBeeModCommonConfigs;
 import com.cerbon.queen_bee.entity.QueenBeeModEntities;
 import com.cerbon.queen_bee.item.QueenBeeModCreativeModeTabs;
 import com.cerbon.queen_bee.item.QueenBeeModItems;
@@ -13,7 +14,9 @@ import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -37,6 +40,8 @@ public class QueenBeeMod
 
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(this::addCreativeTab);
+
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, QueenBeeModCommonConfigs.SPEC, "queen_bee.toml");
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {}

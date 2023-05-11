@@ -19,7 +19,7 @@ public class QueenBeeModItems {
             () -> new Item(new Item.Properties().food(QueenBeeModFoods.STINGER)));
 
     public static final RegistryObject<Item> QUEEN_BEE_SPAWN_EGG = ITEMS.register("queen_bee_spawn_egg",
-            () -> new ForgeSpawnEggItem(QueenBeeModEntities.QUEEN_BEE, 0xEDC343, 0x1E1E28,
+            () -> new ForgeSpawnEggItem(QueenBeeModEntities.QUEEN_BEE, 0xffffff, 0xffffff,
                     new Item.Properties()));
 
     public static final RegistryObject<Item> STINGER_SWORD = ITEMS.register("stinger_sword",

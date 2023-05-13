@@ -48,7 +48,7 @@ public enum QueenBeeModArmorMaterials implements ArmorMaterial {
         this.repairIngredient = new LazyLoadedValue<>(p_268256_);
     }
 
-    public int getDurabilityForType(ArmorItem.Type p_266745_) {
+    public int getDurabilityForType(ArmorItem.@NotNull Type p_266745_) {
         return HEALTH_FUNCTION_FOR_TYPE.get(p_266745_) * this.durabilityMultiplier;
     }
 

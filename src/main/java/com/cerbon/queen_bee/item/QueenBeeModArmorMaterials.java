@@ -9,6 +9,7 @@ import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ArmorMaterials;
 import net.minecraft.world.item.crafting.Ingredient;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.EnumMap;
 import java.util.function.Supplier;
@@ -51,7 +52,7 @@ public enum QueenBeeModArmorMaterials implements ArmorMaterial {
         return HEALTH_FUNCTION_FOR_TYPE.get(p_266745_) * this.durabilityMultiplier;
     }
 
-    public int getDefenseForType(ArmorItem.Type p_266752_) {
+    public int getDefenseForType(ArmorItem.@NotNull Type p_266752_) {
         return this.protectionFunctionForType.get(p_266752_);
     }
 
@@ -59,15 +60,15 @@ public enum QueenBeeModArmorMaterials implements ArmorMaterial {
         return this.enchantmentValue;
     }
 
-    public SoundEvent getEquipSound() {
+    public @NotNull SoundEvent getEquipSound() {
         return this.sound;
     }
 
-    public Ingredient getRepairIngredient() {
+    public @NotNull Ingredient getRepairIngredient() {
         return this.repairIngredient.get();
     }
 
-    public String getName() {
+    public @NotNull String getName() {
         return this.name;
     }
 

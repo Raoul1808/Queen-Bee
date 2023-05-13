@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.function.Consumer;
 
 public class AntennaArmorItem extends ArmorItem implements GeoItem {
-    private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
+    private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
     public AntennaArmorItem(ArmorMaterial material, Type type, Properties properties) {
         super(material, type, properties);
     }
@@ -50,7 +50,7 @@ public class AntennaArmorItem extends ArmorItem implements GeoItem {
     }
 
     @Override
-    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
+    public void appendHoverText(@NotNull ItemStack pStack, @Nullable Level pLevel, @NotNull List<Component> pTooltipComponents, @NotNull TooltipFlag pIsAdvanced) {
         if (QueenBeeModCommonConfigs.ENABLE_ANTENNA.get() && QueenBeeModCommonConfigs.ENABLE_ANTENNA_TOOLTIP.get()){
             if (Screen.hasShiftDown()){
                 pTooltipComponents.add(Component.translatable("tooltip." + QueenBeeMod.MOD_ID + ".antenna").withStyle(ChatFormatting.YELLOW));
@@ -68,7 +68,7 @@ public class AntennaArmorItem extends ArmorItem implements GeoItem {
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-        controllerRegistrar.add(new AnimationController(this, "controller", 0, this::predicate));
+        controllerRegistrar.add(new AnimationController<>(this, "controller", 0, this::predicate));
     }
 
     @Override

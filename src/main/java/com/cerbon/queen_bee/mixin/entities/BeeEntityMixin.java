@@ -9,6 +9,7 @@ import net.minecraft.world.entity.NeutralMob;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.Bee;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 
@@ -19,7 +20,7 @@ public abstract class BeeEntityMixin extends Animal implements NeutralMob{
         super(pEntityType, pLevel);
     }
 
-    public boolean canAttack(LivingEntity target){
+    public boolean canAttack(@NotNull LivingEntity target){
         boolean isAntennaEnabled = QueenBeeModCommonConfigs.ENABLE_ANTENNA.get();
 
         if (isAntennaEnabled){

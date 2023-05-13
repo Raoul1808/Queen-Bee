@@ -19,6 +19,7 @@ import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -61,7 +62,7 @@ public class StingerSwordItem extends SwordItem {
     }
 
     @Override
-    public boolean hurtEnemy(ItemStack pStack, LivingEntity pTarget, LivingEntity pAttacker) {
+    public boolean hurtEnemy(@NotNull ItemStack pStack, @NotNull LivingEntity pTarget, @NotNull LivingEntity pAttacker) {
         if (QueenBeeModCommonConfigs.ENABLE_POISON_EFFECT.get()) {
             pTarget.addEffect(new MobEffectInstance(MobEffects.POISON, 100, 0));
         }
@@ -72,7 +73,7 @@ public class StingerSwordItem extends SwordItem {
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
+    public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level pLevel, @NotNull Player pPlayer, @NotNull InteractionHand pUsedHand) {
         if (QueenBeeModCommonConfigs.ENABLE_CURE_BEE.get()) {
             if (pPlayer.isCrouching() && pPlayer.getItemBySlot(EquipmentSlot.HEAD).getItem() == QueenBeeModItems.ANTENNA.get()) {
                 Bee bee = EntityType.BEE.create(pLevel);
@@ -98,7 +99,9 @@ public class StingerSwordItem extends SwordItem {
                 new Timer().schedule(new TimerTask() {
                     @Override
                     public void run() {
-                        bee.remove(Entity.RemovalReason.KILLED);
+                        if (bee != null){
+                            bee.remove(Entity.RemovalReason.KILLED);
+                        }
                     }
                 }, 11700);
             }
@@ -108,7 +111,7 @@ public class StingerSwordItem extends SwordItem {
 
 
     @Override
-    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
+    public void appendHoverText(@NotNull ItemStack pStack, @Nullable Level pLevel, @NotNull List<Component> pTooltipComponents, @NotNull TooltipFlag pIsAdvanced) {
         if (QueenBeeModCommonConfigs.ENABLE_CURE_BEE.get() && QueenBeeModCommonConfigs.ENABLE_STINGER_SWORD_TOOLTIP.get()) {
             if (Screen.hasShiftDown()) {
                 pTooltipComponents.add(Component.translatable("tooltip." + QueenBeeMod.MOD_ID + ".stinger_sword").withStyle(ChatFormatting.YELLOW));

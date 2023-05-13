@@ -97,7 +97,7 @@ public class QueenBeeEntity extends PathfinderMob implements GeoEntity, FlyingAn
     }
 
     @Override
-    public boolean canAttack(LivingEntity pTarget) {
+    public boolean canAttack(@NotNull LivingEntity pTarget) {
         boolean isAntennaEnabled = QueenBeeModCommonConfigs.ENABLE_ANTENNA.get();
 
         if (isAntennaEnabled){
@@ -116,7 +116,7 @@ public class QueenBeeEntity extends PathfinderMob implements GeoEntity, FlyingAn
     }
 
     @Override
-    public MobType getMobType() {
+    public @NotNull MobType getMobType() {
         return MobType.ARTHROPOD;
     }
 
@@ -233,11 +233,11 @@ public class QueenBeeEntity extends PathfinderMob implements GeoEntity, FlyingAn
     }
 
     @Override
-    protected void playStepSound(BlockPos pPos, BlockState pState) {
+    protected void playStepSound(@NotNull BlockPos pPos, @NotNull BlockState pState) {
     }
 
     @Override
-    protected PathNavigation createNavigation(Level pLevel) {
+    protected @NotNull PathNavigation createNavigation(@NotNull Level pLevel) {
         FlyingPathNavigation flyingpathnavigation = new FlyingPathNavigation(this, pLevel);
 
         flyingpathnavigation.setCanOpenDoors(false);
@@ -252,7 +252,7 @@ public class QueenBeeEntity extends PathfinderMob implements GeoEntity, FlyingAn
     }
 
     @Override
-    protected void checkFallDamage(double pY, boolean pOnGround, BlockState pState, BlockPos pPos) {}
+    protected void checkFallDamage(double pY, boolean pOnGround, @NotNull BlockState pState, @NotNull BlockPos pPos) {}
 
     @Override
     public void setNoGravity(boolean pNoGravity) {
@@ -316,7 +316,7 @@ public class QueenBeeEntity extends PathfinderMob implements GeoEntity, FlyingAn
         }
 
         @Override
-        public void addEffect(MobEffectInstance pEffectInstance) {
+        public void addEffect(@NotNull MobEffectInstance pEffectInstance) {
             AABB aabb = this.getBoundingBox().inflate( 7.0D);
             List<LivingEntity> nearbyEntities = this.level.getEntitiesOfClass(LivingEntity.class, aabb);
 
@@ -366,7 +366,7 @@ public class QueenBeeEntity extends PathfinderMob implements GeoEntity, FlyingAn
 
 
         @Override
-        protected void alertOther(Mob pMob, LivingEntity pTarget) {
+        protected void alertOther(@NotNull Mob pMob, @NotNull LivingEntity pTarget) {
             if (pMob instanceof QueenBeeEntity && this.mob.hasLineOfSight(pTarget)) {
                 pMob.setTarget(pTarget);
             }
@@ -451,55 +451,6 @@ public class QueenBeeEntity extends PathfinderMob implements GeoEntity, FlyingAn
            }
        }
     }
-
-//    static class summonPoisonNimbusGoal extends Goal {
-//        private final QueenBeeEntity queenBee;
-//        private int cooldown;
-//
-//        public summonPoisonNimbusGoal(QueenBeeEntity queenBee) {
-//            this.queenBee = queenBee;
-//        }
-//
-//        @Override
-//        public boolean canUse() {
-//            LivingEntity target = this.queenBee.getTarget();
-//            return target != null && target.isAlive() && this.queenBee.isAngry();
-//        }
-//
-//        @Override
-//        public void start() {
-//            this.cooldown = 0;
-//        }
-//
-//        @Override
-//        public boolean requiresUpdateEveryTick() {
-//            return true;
-//        }
-//
-//        @Override
-//        public void tick() {
-//            LivingEntity target = this.queenBee.getTarget();
-//            if (target == null) return;
-//
-//            ++this.cooldown;
-//            if (this.cooldown >= 200) {
-//                if (target.distanceToSqr(this.queenBee) <= 49 && this.queenBee.hasLineOfSight(target)) {
-//                    AreaEffectCloud areaEffectCloud = new AreaEffectCloud(this.queenBee.level, this.queenBee.getX(), this.queenBee.getY(), this.queenBee.getZ());
-//                    areaEffectCloud.setOwner(this.queenBee);
-//                    areaEffectCloud.setDuration(40);
-//                    areaEffectCloud.setRadius(7.0F);
-//                    areaEffectCloud.setPotion(Potions.POISON);
-//                    areaEffectCloud.addEffect(new MobEffectInstance(MobEffects.POISON, 200, 1)); //Bees should not get the effect (Needs a fix)
-//                    this.queenBee.level.addFreshEntity(areaEffectCloud);
-//
-//                    if (this.cooldown >= 200) {
-//                        this.cooldown = 0;
-//                    }
-//                }
-//            }
-//        }
-//    }
-
     static class SetQueenBeeAngryWhenBeeIsAngryGoal extends Goal{
         private final QueenBeeEntity queenBee;
         public SetQueenBeeAngryWhenBeeIsAngryGoal(QueenBeeEntity queenBee){

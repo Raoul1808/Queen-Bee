@@ -7,6 +7,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraftforge.common.brewing.IBrewingRecipe;
+import org.jetbrains.annotations.NotNull;
 
 public class StingerToPoisonPotionBrewingRecipe implements IBrewingRecipe {
     @Override
@@ -22,7 +23,7 @@ public class StingerToPoisonPotionBrewingRecipe implements IBrewingRecipe {
     }
 
     @Override
-    public ItemStack getOutput(ItemStack input, ItemStack ingredient) {
+    public @NotNull ItemStack getOutput(@NotNull ItemStack input, @NotNull ItemStack ingredient) {
         if (isInput(input) && isIngredient(ingredient)){
             return PotionUtils.setPotion(new ItemStack(input.getItem()), Potions.POISON);
         }

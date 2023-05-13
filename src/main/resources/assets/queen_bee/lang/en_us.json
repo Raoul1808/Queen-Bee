@@ -5,7 +5,7 @@
   "item.queen_bee.antenna": "Antenna",
 
   "tooltip.queen_bee.item.shift_up": "Press SHIFT for more info!",
-  "tooltip.queen_bee.stinger_sword": "When antenna is equipped, Shift + Right click to summon a friendly bee that will give you and nearby friends the regeneration effect.",
+  "tooltip.queen_bee.stinger_sword": "When antenna is equipped, Shift + Right click to summon a friendly bee that will give you and nearby friends the regeneration effect. Also, this sword inflicts poison and nausea.",
   "tooltip.queen_bee.antenna": "When equipped bees will never aggro on you.",
 
   "advancement.queen_bee.it_shouldnt_bee_edible.title": "It Shouldn't Bee Edible",

@@ -32,7 +32,6 @@ import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.animal.Bee;
 import net.minecraft.world.entity.animal.FlyingAnimal;
-import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -53,7 +52,7 @@ import software.bernie.geckolib.core.object.PlayState;
 import java.util.List;
 import java.util.UUID;
 
-public class QueenBeeEntity extends PathfinderMob implements GeoEntity, FlyingAnimal, NeutralMob, Enemy {
+public class QueenBeeEntity extends PathfinderMob implements GeoEntity, FlyingAnimal, NeutralMob {
     private static final EntityDataAccessor<Integer> DATA_REMAINING_ANGER_TIME = SynchedEntityData.defineId(QueenBeeEntity.class, EntityDataSerializers.INT);
     private UUID persistentAngerTarget;
     private static final UniformInt PERSISTENT_ANGER_TIME = TimeUtil.rangeOfSeconds(39, 58);

@@ -16,7 +16,7 @@ public class QueenBeeModEntities {
 
     public static final RegistryObject<EntityType<QueenBeeEntity>> QUEEN_BEE =
             ENTITY_TYPES.register("queen_bee",
-                    () -> EntityType.Builder.of(QueenBeeEntity::new, MobCategory.MONSTER)
+                    () -> EntityType.Builder.of(QueenBeeEntity::new, MobCategory.CREATURE)
                             .sized(0.85f, 1.38f)
                             .build(new ResourceLocation(QueenBeeMod.MOD_ID, "queen_bee").toString()));
 

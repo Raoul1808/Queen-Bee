@@ -1,5 +1,6 @@
 package com.cerbon.queen_bee.mixin.blocks;
 
+import com.cerbon.queen_bee.config.QueenBeeModCommonConfigs;
 import com.cerbon.queen_bee.item.QueenBeeModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
@@ -36,15 +37,30 @@ public abstract class BeehiveBlockMixin {
                                               InteractionHand pHand, BlockHitResult pHit,
                                               CallbackInfoReturnable<InteractionResult> cir)
     {
-        if (!(pPlayer.getItemBySlot(EquipmentSlot.HEAD).getItem() == (QueenBeeModItems.ANTENNA.get()) || CampfireBlock.isSmokeyPos(pLevel, pPos))) {
-            if (this.hiveContainsBees(pLevel, pPos)) {
-                this.angerNearbyBees(pLevel, pPos);
-            }
-            this.releaseBeesAndResetHoneyLevel(pLevel, pState, pPos, pPlayer, BeehiveBlockEntity.BeeReleaseStatus.EMERGENCY);
-        }else {
-            this.resetHoneyLevel(pLevel, pState, pPos);
-        }
+        boolean isAntennaEnabled = QueenBeeModCommonConfigs.ENABLE_ANTENNA.get();
 
-        cir.setReturnValue(InteractionResult.sidedSuccess(pLevel.isClientSide));
+        if (isAntennaEnabled){
+            String playerDimension = pPlayer.level.dimension().location().toString();
+            boolean isPlayerInBumblezoneDimension = playerDimension.equals("the_bumblezone:the_bumblezone");
+            boolean isPlayerWearingAntenna = pPlayer.getItemBySlot(EquipmentSlot.HEAD).is(QueenBeeModItems.ANTENNA.get());
+            boolean isAntennaEnabledInBlumblezoneDimension = QueenBeeModCommonConfigs.ENABLE_ANTENNA_BUMBLEZONE_DIMENSION.get();
+
+            if (!isPlayerInBumblezoneDimension && isPlayerWearingAntenna){
+                this.resetHoneyLevel(pLevel, pState, pPos);
+
+            }else if (isPlayerInBumblezoneDimension && isPlayerWearingAntenna && isAntennaEnabledInBlumblezoneDimension){
+                this.resetHoneyLevel(pLevel, pState, pPos);
+
+            }else if (CampfireBlock.isSmokeyPos(pLevel, pPos)){
+                this.resetHoneyLevel(pLevel, pState, pPos);
+
+            }else {
+                if (this.hiveContainsBees(pLevel, pPos)) {
+                    this.angerNearbyBees(pLevel, pPos);
+                }
+                this.releaseBeesAndResetHoneyLevel(pLevel, pState, pPos, pPlayer, BeehiveBlockEntity.BeeReleaseStatus.EMERGENCY);
+            }
+            cir.setReturnValue(InteractionResult.sidedSuccess(pLevel.isClientSide));
+        }
     }
 }

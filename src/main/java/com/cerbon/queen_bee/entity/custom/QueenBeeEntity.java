@@ -1,6 +1,7 @@
 package com.cerbon.queen_bee.entity.custom;
 
 import com.cerbon.queen_bee.client.sound.QueenBeeFlyingSoundInstance;
+import com.cerbon.queen_bee.config.QueenBeeModCommonConfigs;
 import com.cerbon.queen_bee.item.QueenBeeModItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -98,8 +99,19 @@ public class QueenBeeEntity extends PathfinderMob implements GeoEntity, FlyingAn
 
     @Override
     public boolean canAttack(LivingEntity pTarget) {
-        if (pTarget.getItemBySlot(EquipmentSlot.HEAD).getItem() == (QueenBeeModItems.ANTENNA.get())){
-            return false;
+        boolean isAntennaEnabled = QueenBeeModCommonConfigs.ENABLE_ANTENNA.get();
+
+        if (isAntennaEnabled){
+            String targetDimension = pTarget.level.dimension().location().toString();
+            boolean isTargetInBumblezoneDimension = targetDimension.equals("the_bumblezone:the_bumblezone");
+            boolean isTargetWearingAntenna = pTarget.getItemBySlot(EquipmentSlot.HEAD).getItem() == (QueenBeeModItems.ANTENNA.get());
+            boolean isAntennaEnabledInBlumblezoneDimension = QueenBeeModCommonConfigs.ENABLE_ANTENNA_BUMBLEZONE_DIMENSION.get();
+
+            if (isAntennaEnabledInBlumblezoneDimension && isTargetInBumblezoneDimension && isTargetWearingAntenna){
+                return false;
+            }else if(isTargetWearingAntenna && !isTargetInBumblezoneDimension){
+                return false;
+            }
         }
         return super.canAttack(pTarget);
     }
@@ -136,9 +148,9 @@ public class QueenBeeEntity extends PathfinderMob implements GeoEntity, FlyingAn
 
     @Override
     public boolean hurt(DamageSource pSource, float pAmount) {
-        if (!pSource.isCreativePlayer() && pSource.getEntity() instanceof LivingEntity){
-            if (this.isAngry()){
-                if (this.poisonNimbusCooldown == 0 && this.random.nextFloat() <= 0.2F){
+        if (!pSource.isCreativePlayer() && pSource.getEntity() instanceof LivingEntity) {
+            if (this.isAngry()) {
+                if (this.poisonNimbusCooldown == 0 && this.random.nextFloat() <= 0.2F) {
                     this.summonPoisonNimbus();
                     this.poisonNimbusCooldown = 200;
                 }

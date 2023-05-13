@@ -10,6 +10,9 @@ public class QueenBeeModCommonConfigs {
     public static final ForgeConfigSpec.ConfigValue<Boolean> ENABLE_NAUSEA_EFFECT;
     public static final ForgeConfigSpec.ConfigValue<Boolean> ENABLE_POISON_EFFECT;
     public static final ForgeConfigSpec.ConfigValue<Integer> STINGER_SWORD_COOLDOWN;
+    public static final ForgeConfigSpec.ConfigValue<Boolean> ENABLE_ANTENNA;
+    public static final ForgeConfigSpec.ConfigValue<Boolean> ENABLE_ANTENNA_BUMBLEZONE_DIMENSION;
+    public static final ForgeConfigSpec.ConfigValue<Boolean> ENABLE_ANTENNA_TOOLTIP;
 
     static {
 
@@ -24,6 +27,16 @@ public class QueenBeeModCommonConfigs {
         STINGER_SWORD_COOLDOWN = BUILDER.comment("Sets Stinger Sword cooldown in ticks after using right click ability. DEFAULT: 900")
                         .define("Stinger Sword Cooldown", 900);
 
+        BUILDER.pop();
+
+        BUILDER.push("Antenna Configs");
+
+        ENABLE_ANTENNA = BUILDER.comment("If false antenna will not prevent bees aggro on you. DEFAULT: TRUE")
+                        .define("Enable Antenna", true);
+        ENABLE_ANTENNA_BUMBLEZONE_DIMENSION = BUILDER.comment("If false will disable antenna only in the bumblezone dimension. DEFAULT: TRUE")
+                        .define("Enable Antenna Bumblezone Dimension", true);
+        ENABLE_ANTENNA_TOOLTIP = BUILDER.comment("If false will disable antenna tooltip. DEFAULT: TRUE")
+                        .define("Enable Antenna Tooltip", true);
 
         BUILDER.pop();
         SPEC = BUILDER.build();

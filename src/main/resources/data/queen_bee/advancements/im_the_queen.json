@@ -4,10 +4,10 @@
       "item": "queen_bee:antenna"
     },
     "title": {
-      "translate": "advancements.im_the_queen.title"
+      "translate": "advancement.queen_bee.im_the_queen.title"
     },
     "description": {
-      "translate": "advancements.im_the_queen.descr"
+      "translate": "advancement.queen_bee.im_the_queen.descr"
     },
     "frame": "challenge",
     "show_toast": true,

@@ -29,10 +29,10 @@ public class QueenBeeModJEIPlugin implements IModPlugin {
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
         registration.addIngredientInfo(new ItemStack(QueenBeeModItems.STINGER_SWORD.get()),
-                VanillaTypes.ITEM_STACK, Component.translatable("tooltips.stinger_sword.shift_down"));
+                VanillaTypes.ITEM_STACK, Component.translatable("tooltip." + QueenBeeMod.MOD_ID + ".stinger_sword"));
 
         registration.addIngredientInfo(new ItemStack(QueenBeeModItems.ANTENNA.get()),
-                VanillaTypes.ITEM_STACK, Component.translatable("tooltips.antenna.shift_down"));
+                VanillaTypes.ITEM_STACK, Component.translatable("tooltip." + QueenBeeMod.MOD_ID + ".antenna"));
 
         List<IJeiBrewingRecipe> recipes = new ArrayList<>();
         IVanillaRecipeFactory recipeFactory = registration.getVanillaRecipeFactory();

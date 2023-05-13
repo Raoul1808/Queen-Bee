@@ -6,16 +6,16 @@
 
   "entity.queen_bee.queen_bee": "Queen Bee",
 
-  "creativemodetab.queen_bee_tab": "Queen Bee",
+  "creativemodetab.queen_bee.queen_bee_tab": "Queen Bee",
 
-  "advancements.it_shouldnt_bee_edible.title": "It Shouldn't Bee Edible",
-  "advancements.it_shouldnt_bee_edible.descr": "Eat the bee stinger",
-  "advancements.im_the_queen.title": "I'm The Queen",
-  "advancements.im_the_queen.descr": "Defeat Queen Bee and get her antennas",
-  "advancements.root.title": "Queen Bee Mod",
-  "advancements.root.descr": "Queen Bee mod advancements",
+  "advancement.queen_bee.it_shouldnt_bee_edible.title": "It Shouldn't Bee Edible",
+  "advancement.queen_bee.it_shouldnt_bee_edible.descr": "Eat the bee stinger",
+  "advancement.queen_bee.im_the_queen.title": "I'm The Queen",
+  "advancement.queen_bee.im_the_queen.descr": "Defeat Queen Bee and get her antennas",
+  "advancement.queen_bee.root.title": "Queen Bee Mod",
+  "advancement.queen_bee.root.descr": "Queen Bee mod advancements",
 
-  "tooltips.item.shift_up": "Press SHIFT for more info!",
-  "tooltips.stinger_sword.shift_down": "When antenna is equipped, Shift + Right click to summon a friendly bee that will give you and nearby friends the regeneration effect.",
-  "tooltips.antenna.shift_down": "When equipped bees will never aggro on you."
+  "tooltip.queen_bee.item.shift_up": "Press SHIFT for more info!",
+  "tooltip.queen_bee.stinger_sword": "When antenna is equipped, Shift + Right click to summon a friendly bee that will give you and nearby friends the regeneration effect.",
+  "tooltip.queen_bee.antenna": "When equipped bees will never aggro on you."
 }

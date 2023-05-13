@@ -4,10 +4,10 @@
       "item": "queen_bee:stinger"
     },
     "title": {
-      "translate": "advancements.it_shouldnt_bee_edible.title"
+      "translate": "advancement.queen_bee.it_shouldnt_bee_edible.title"
     },
     "description": {
-      "translate": "advancements.it_shouldnt_bee_edible.descr"
+      "translate": "advancement.queen_bee.it_shouldnt_bee_edible.descr"
     },
     "frame": "task",
     "show_toast": true,

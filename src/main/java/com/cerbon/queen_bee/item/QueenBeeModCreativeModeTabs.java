@@ -16,6 +16,6 @@ public class QueenBeeModCreativeModeTabs {
     public static void registerCreativeModeTabs(CreativeModeTabEvent.Register event){
         QUEEN_BEE_TAB = event.registerCreativeModeTab(new ResourceLocation(QueenBeeMod.MOD_ID, "queen_bee_tab"),
                 builder -> builder.icon(()-> new ItemStack(QueenBeeModItems.STINGER.get()))
-                        .title(Component.translatable("creativemodetab.queen_bee_tab")));
+                        .title(Component.translatable("creativemodetab." + QueenBeeMod.MOD_ID + ".queen_bee_tab")));
     }
 }

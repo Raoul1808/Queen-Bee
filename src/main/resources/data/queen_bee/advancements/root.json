@@ -4,10 +4,10 @@
       "item": "queen_bee:queen_bee_spawn_egg"
     },
     "title": {
-      "translate": "advancements.root.title"
+      "translate": "advancement.queen_bee.root.title"
     },
     "description": {
-      "translate": "advancements.root.descr"
+      "translate": "advancement.queen_bee.root.descr"
     },
     "background": "minecraft:textures/block/honeycomb_block.png",
     "frame": "task",

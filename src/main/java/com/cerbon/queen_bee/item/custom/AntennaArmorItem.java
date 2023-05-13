@@ -1,5 +1,6 @@
 package com.cerbon.queen_bee.item.custom;
 
+import com.cerbon.queen_bee.QueenBeeMod;
 import com.cerbon.queen_bee.client.item.renderer.AntennaArmorRenderer;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
@@ -50,9 +51,9 @@ public class AntennaArmorItem extends ArmorItem implements GeoItem {
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
         if (Screen.hasShiftDown()){
-            pTooltipComponents.add(Component.translatable("tooltips.antenna.shift_down").withStyle(ChatFormatting.YELLOW));
+            pTooltipComponents.add(Component.translatable("tooltip." + QueenBeeMod.MOD_ID + ".antenna").withStyle(ChatFormatting.YELLOW));
         }else {
-            pTooltipComponents.add(Component.translatable("tooltips.item.shift_up").withStyle(ChatFormatting.YELLOW));
+            pTooltipComponents.add(Component.translatable("tooltip." + QueenBeeMod.MOD_ID + ".item.shift_up").withStyle(ChatFormatting.YELLOW));
         }
         super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
     }

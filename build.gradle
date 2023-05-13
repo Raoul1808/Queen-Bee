@@ -94,6 +94,12 @@ mixin {
 }
 
 repositories {
+    maven {
+        url "https://cursemaven.com"
+        content {
+            includeGroup "curse.maven"
+        }
+    }
     maven { url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
     maven {
         // location of the maven that hosts JEI files before January 2023
@@ -118,6 +124,7 @@ dependencies {
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
     implementation fg.deobf('software.bernie.geckolib:geckolib-forge-1.19.4:4.1.3')
+    implementation fg.deobf("curse.maven:the-bumblezone-forge-362479:4529667") //v6.7.19-1.19.4
 
     //JEI
     compileOnly(fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}"))

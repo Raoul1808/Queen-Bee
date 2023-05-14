@@ -64,10 +64,10 @@ public class StingerSwordItem extends SwordItem {
     @Override
     public boolean hurtEnemy(@NotNull ItemStack pStack, @NotNull LivingEntity pTarget, @NotNull LivingEntity pAttacker) {
         if (QueenBeeModCommonConfigs.ENABLE_POISON_EFFECT.get()) {
-            pTarget.addEffect(new MobEffectInstance(MobEffects.POISON, 100, 0));
+            pTarget.addEffect(new MobEffectInstance(MobEffects.POISON, QueenBeeModCommonConfigs.STINGER_SWORD_POISON_EFFECT_DURATION.get(), QueenBeeModCommonConfigs.STINGER_SWORD_POISON_EFFECT_AMPLIFIER.get()));
         }
         if (QueenBeeModCommonConfigs.ENABLE_NAUSEA_EFFECT.get()) {
-            pTarget.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 300, 0));
+            pTarget.addEffect(new MobEffectInstance(MobEffects.CONFUSION, QueenBeeModCommonConfigs.NAUSEA_EFFECT_DURATION.get(), 0));
         }
         return super.hurtEnemy(pStack, pTarget, pAttacker);
     }

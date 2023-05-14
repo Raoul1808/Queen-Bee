@@ -19,6 +19,9 @@ public class QueenBeeModCommonConfigs {
     public static final ForgeConfigSpec.ConfigValue<Integer> ANGRY_BEES_AMOUNT;
     public static final ForgeConfigSpec.ConfigValue<Boolean> ENABLE_CURE_BEE;
     public static final ForgeConfigSpec.ConfigValue<Boolean> ENABLE_NAUSEA_EFFECT;
+    public static final ForgeConfigSpec.ConfigValue<Integer> NAUSEA_EFFECT_DURATION;
+    public static final ForgeConfigSpec.ConfigValue<Integer> STINGER_SWORD_POISON_EFFECT_DURATION;
+    public static final ForgeConfigSpec.ConfigValue<Integer> STINGER_SWORD_POISON_EFFECT_AMPLIFIER;
     public static final ForgeConfigSpec.ConfigValue<Boolean> ENABLE_POISON_EFFECT;
     public static final ForgeConfigSpec.ConfigValue<Integer> STINGER_SWORD_COOLDOWN;
     public static final ForgeConfigSpec.ConfigValue<Boolean> ENABLE_STINGER_SWORD_TOOLTIP;
@@ -68,8 +71,14 @@ public class QueenBeeModCommonConfigs {
                 .define("Enable Cure Bee", true);
         ENABLE_NAUSEA_EFFECT = BUILDER.comment("If false stinger sword will not inflict nausea effect. DEFAULT: TRUE")
                         .define("Enable Nausea Effect", true);
+        NAUSEA_EFFECT_DURATION = BUILDER.comment("Sets the duration in ticks of the nausea effect. DEFAULT: 300")
+                .define("Nausea Effect Duration", 300);
         ENABLE_POISON_EFFECT = BUILDER.comment("If false stinger sword will not inflict poison effect. DEFAULT: TRUE")
                         .define("Enable Poison Effect", true);
+        STINGER_SWORD_POISON_EFFECT_DURATION = BUILDER.comment("Sets the duration in ticks of the poison effect. DEFAULT: 100")
+                .define("Poison Effect Duration", 100);
+        STINGER_SWORD_POISON_EFFECT_AMPLIFIER = BUILDER.comment("Sets the amplifier of the poison effect. DEFAULT: 0")
+                .define("Poison Effect Amplifier", 0);
         STINGER_SWORD_COOLDOWN = BUILDER.comment("Sets Stinger Sword cooldown in ticks after using right click ability. DEFAULT: 900")
                         .define("Stinger Sword Cooldown", 900);
         ENABLE_STINGER_SWORD_TOOLTIP = BUILDER.comment("If false will disable stinger sword tooltip. DEFAULT: TRUE")

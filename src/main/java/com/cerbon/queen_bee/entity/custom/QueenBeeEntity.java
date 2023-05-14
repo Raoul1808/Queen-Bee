@@ -8,7 +8,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.TimeUtil;
@@ -58,6 +60,8 @@ public class QueenBeeEntity extends PathfinderMob implements GeoEntity, FlyingAn
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
     private int underWaterTicks;
     private int poisonNimbusCooldown;
+    private final ServerBossEvent bossInfo = new ServerBossEvent(this.getDisplayName(), ServerBossEvent.BossBarColor.YELLOW, ServerBossEvent.BossBarOverlay.PROGRESS);
+
 
     public QueenBeeEntity(EntityType<? extends QueenBeeEntity> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -183,6 +187,22 @@ public class QueenBeeEntity extends PathfinderMob implements GeoEntity, FlyingAn
     }
 
     @Override
+    public void startSeenByPlayer(@NotNull ServerPlayer pServerPlayer) {
+        super.startSeenByPlayer(pServerPlayer);
+        if (QueenBeeModCommonConfigs.ENABLE_QUEEN_BEE_BOSS_BAR.get()){
+            this.bossInfo.addPlayer(pServerPlayer);
+        }
+    }
+
+    @Override
+    public void stopSeenByPlayer(@NotNull ServerPlayer pServerPlayer) {
+        super.stopSeenByPlayer(pServerPlayer);
+        if (QueenBeeModCommonConfigs.ENABLE_QUEEN_BEE_BOSS_BAR.get()){
+            this.bossInfo.removePlayer(pServerPlayer);
+        }
+    }
+
+    @Override
     public void aiStep() {
         super.aiStep();
         if (!this.level.isClientSide){
@@ -206,6 +226,9 @@ public class QueenBeeEntity extends PathfinderMob implements GeoEntity, FlyingAn
 
         if (!this.level.isClientSide) {
             this.updatePersistentAnger((ServerLevel)this.level, false);
+        }
+        if (QueenBeeModCommonConfigs.ENABLE_QUEEN_BEE_BOSS_BAR.get()){
+            this.bossInfo.setProgress(this.getHealth() / this.getMaxHealth());
         }
     }
 

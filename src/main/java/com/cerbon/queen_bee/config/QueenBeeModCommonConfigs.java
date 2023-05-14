@@ -6,7 +6,7 @@ public class QueenBeeModCommonConfigs {
     public static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
     public static final ForgeConfigSpec SPEC;
 
-
+    public static final ForgeConfigSpec.ConfigValue<Boolean> ENABLE_QUEEN_BEE_BOSS_BAR;
     public static final ForgeConfigSpec.ConfigValue<Boolean> ENABLE_SUMMON_ANGRY_BEES;
     public static final ForgeConfigSpec.ConfigValue<Integer> SUMMON_ANGRY_BEES_COOLDOWN;
     public static final ForgeConfigSpec.ConfigValue<Boolean> ENABLE_POISON_NIMBUS;
@@ -28,6 +28,9 @@ public class QueenBeeModCommonConfigs {
 
     static {
         BUILDER.push("Queen Bee Configs");
+
+        ENABLE_QUEEN_BEE_BOSS_BAR = BUILDER.comment("If true enables Queen Bee boss bar. DEFAULT: FALSE")
+                        .define("Enable Boss Bar",false);
 
         BUILDER.push("Summon Angry Bees Attack");
 

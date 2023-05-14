@@ -148,10 +148,10 @@ public class QueenBeeEntity extends PathfinderMob implements GeoEntity, FlyingAn
     @Override
     public boolean hurt(DamageSource pSource, float pAmount) {
         if (!pSource.isCreativePlayer() && pSource.getEntity() instanceof LivingEntity) {
-            if (this.isAngry()) {
+            if (this.isAngry() && QueenBeeModCommonConfigs.ENABLE_POISON_NIMBUS.get()) {
                 if (this.poisonNimbusCooldown == 0 && this.random.nextFloat() <= 0.2F) {
                     this.summonPoisonNimbus();
-                    this.poisonNimbusCooldown = 200;
+                    this.poisonNimbusCooldown = QueenBeeModCommonConfigs.POISON_NIMBUS_COOLDOWN.get();
                 }
             }
         }
@@ -161,13 +161,13 @@ public class QueenBeeEntity extends PathfinderMob implements GeoEntity, FlyingAn
     protected void summonPoisonNimbus(){
         LivingEntity target = this.getTarget();
           if (target != null){
-              if (target.distanceToSqr(this) <= 49 && this.hasLineOfSight(target)) {
+              if (target.distanceToSqr(this) <= QueenBeeModCommonConfigs.TARGET_DISTANCE_TO_SQR.get() && this.hasLineOfSight(target)) {
                   PoisonNimbusAreaEffectCloud areaEffectCloud = new PoisonNimbusAreaEffectCloud(this.level, this.getX(), this.getY(), this.getZ());
                   areaEffectCloud.setOwner(this);
-                  areaEffectCloud.setDuration(40);
-                  areaEffectCloud.setRadius(7.0F);
+                  areaEffectCloud.setDuration(QueenBeeModCommonConfigs.POISON_NIMBUS_DURATION.get());
+                  areaEffectCloud.setRadius(QueenBeeModCommonConfigs.POISON_NIMBUS_RADIUS.get());
                   areaEffectCloud.setFixedColor(8889187);
-                  areaEffectCloud.addEffect(new MobEffectInstance(MobEffects.POISON, 200, 1));
+                  areaEffectCloud.addEffect(new MobEffectInstance(MobEffects.POISON, QueenBeeModCommonConfigs.POISON_EFFECT_DURATION.get(), QueenBeeModCommonConfigs.POISON_EFFECT_AMPLIFIER.get()));
                   this.level.addFreshEntity(areaEffectCloud);
               }
           }
@@ -410,7 +410,7 @@ public class QueenBeeEntity extends PathfinderMob implements GeoEntity, FlyingAn
         @Override
         public boolean canUse() {
             LivingEntity target = this.queenBee.getTarget();
-            return target != null && target.isAlive() && this.queenBee.isAngry();
+            return target != null && target.isAlive() && this.queenBee.isAngry() && QueenBeeModCommonConfigs.ENABLE_SUMMON_ANGRY_BEES.get();
         }
 
         @Override
@@ -429,14 +429,14 @@ public class QueenBeeEntity extends PathfinderMob implements GeoEntity, FlyingAn
            if(target == null) return;
 
            ++this.cooldown;
-           if (this.cooldown >= 200){
+           if (this.cooldown >= QueenBeeModCommonConfigs.SUMMON_ANGRY_BEES_COOLDOWN.get()){
                double d0 = this.queenBee.getAttributeValue(Attributes.FOLLOW_RANGE);
                AABB aabb = this.queenBee.getBoundingBox().inflate(d0, 10.0D, d0);
                List<Bee> nearbyBees = this.queenBee.level.getEntitiesOfClass(Bee.class, aabb);
                boolean allStung = nearbyBees.stream().allMatch(Bee::hasStung);
 
                if (nearbyBees.isEmpty() || allStung){
-                   for(int i = 0; i < 3; i++){
+                   for(int i = 0; i < QueenBeeModCommonConfigs.ANGRY_BEES_AMOUNT.get(); i++){
                        Bee bee = EntityType.BEE.create(this.queenBee.level);
                        if (bee != null){
                            bee.moveTo(this.queenBee.getX(), this.queenBee.getY(), this.queenBee.getZ());
@@ -444,7 +444,7 @@ public class QueenBeeEntity extends PathfinderMob implements GeoEntity, FlyingAn
                            this.queenBee.level.addFreshEntity(bee);
                        }
                    }
-                   if (this.cooldown >= 200){
+                   if (this.cooldown >= QueenBeeModCommonConfigs.SUMMON_ANGRY_BEES_COOLDOWN.get()){
                        this.cooldown = 0;
                    }
                }

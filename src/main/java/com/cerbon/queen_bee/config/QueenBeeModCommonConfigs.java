@@ -18,6 +18,10 @@ public class QueenBeeModCommonConfigs {
     public static final ForgeConfigSpec.ConfigValue<Integer> POISON_NIMBUS_COOLDOWN;
     public static final ForgeConfigSpec.ConfigValue<Integer> ANGRY_BEES_AMOUNT;
     public static final ForgeConfigSpec.ConfigValue<Boolean> ENABLE_CURE_BEE;
+    public static final ForgeConfigSpec.ConfigValue<Integer> REGENERATION_AREA_EFFECT_CLOUD_DURATION;
+    public static final ForgeConfigSpec.ConfigValue<Integer> REGENERATION_AREA_EFFECT_CLOUD_RADIUS;
+    public static final ForgeConfigSpec.ConfigValue<Integer> REGENERATION_EFFECT_DURATION;
+    public static final ForgeConfigSpec.ConfigValue<Integer> REGENERATION_EFFECT_AMPLIFIER;
     public static final ForgeConfigSpec.ConfigValue<Boolean> ENABLE_NAUSEA_EFFECT;
     public static final ForgeConfigSpec.ConfigValue<Integer> NAUSEA_EFFECT_DURATION;
     public static final ForgeConfigSpec.ConfigValue<Integer> STINGER_SWORD_POISON_EFFECT_DURATION;
@@ -69,6 +73,14 @@ public class QueenBeeModCommonConfigs {
 
         ENABLE_CURE_BEE = BUILDER.comment("If false right click ability of stinger sword will not work. DEFAULT: TRUE")
                 .define("Enable Cure Bee", true);
+        REGENERATION_AREA_EFFECT_CLOUD_DURATION = BUILDER.comment("Sets the regeneration area effect cloud duration in ticks. DEFAULT: 200")
+                .define("Regeneration Area Effect Cloud Duration", 200);
+        REGENERATION_AREA_EFFECT_CLOUD_RADIUS = BUILDER.comment("Sets the regeneration area effect cloud size. DEFAULT: 4")
+                .define("Regeneration Area Effect Cloud Radius", 4);
+        REGENERATION_EFFECT_DURATION = BUILDER.comment("Sets the duration in ticks of the regeneration effect. DEFAULT: 40 ")
+                .define("Regeneration Effect Duration", 40);
+        REGENERATION_EFFECT_AMPLIFIER = BUILDER.comment("Sets the amplifier of the regeneration effect. DEFAULT: 1")
+                .define("Regeneration Effect Amplifier", 1);
         ENABLE_NAUSEA_EFFECT = BUILDER.comment("If false stinger sword will not inflict nausea effect. DEFAULT: TRUE")
                         .define("Enable Nausea Effect", true);
         NAUSEA_EFFECT_DURATION = BUILDER.comment("Sets the duration in ticks of the nausea effect. DEFAULT: 300")

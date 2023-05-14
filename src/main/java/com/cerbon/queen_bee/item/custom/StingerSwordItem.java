@@ -85,11 +85,12 @@ public class StingerSwordItem extends SwordItem {
                 }
                 AreaEffectCloud areaEffectCloud = new AreaEffectCloud(pLevel, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ());
                 areaEffectCloud.setOwner(pPlayer);
-                areaEffectCloud.setDuration(200);
-                areaEffectCloud.setRadius(4.0F);
+                areaEffectCloud.setDuration(QueenBeeModCommonConfigs.REGENERATION_AREA_EFFECT_CLOUD_DURATION.get());
+                areaEffectCloud.setRadius(QueenBeeModCommonConfigs.REGENERATION_AREA_EFFECT_CLOUD_RADIUS.get());
                 areaEffectCloud.setFixedColor(13458603);
-                areaEffectCloud.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 40, 1));
+                areaEffectCloud.addEffect(new MobEffectInstance(MobEffects.REGENERATION, QueenBeeModCommonConfigs.REGENERATION_EFFECT_DURATION.get(), QueenBeeModCommonConfigs.REGENERATION_EFFECT_AMPLIFIER.get()));
                 pLevel.addFreshEntity(areaEffectCloud);
+                int delay = (int) (areaEffectCloud.getDuration() * 58.5);
 
                 pPlayer.swing(pUsedHand);
                 pPlayer.getCooldowns().addCooldown(this, QueenBeeModCommonConfigs.STINGER_SWORD_COOLDOWN.get());
@@ -103,7 +104,7 @@ public class StingerSwordItem extends SwordItem {
                             bee.remove(Entity.RemovalReason.KILLED);
                         }
                     }
-                }, 11700);
+                }, delay);
             }
         }
         return super.use(pLevel, pPlayer, pUsedHand);

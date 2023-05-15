@@ -11,7 +11,7 @@ assignees: ''
 
 - [ ] **I have checked that the bug is not a duplicate or, if it is, it needs to be reopened**
 - [ ] **I have checked that I am running the latest version of Queen Bee Mod**
-- [ ] **I have checked the [FAQ]() section for solutions**
+- [ ] **I have checked the [FAQ](https://github.com/CerbonXD/QueenBeeMod/blob/master/FAQ.md) section for solutions**
 - [ ] **I have read the [contributing guidelines](https://github.com/CerbonXD/QueenBeeMod/blob/master/CONTRIBUTING.md#issue) and I agree with the [Code of Conduct](https://github.com/CerbonXD/QueenBeeMod/blob/master/CODE_OF_CONDUCT.md)**
 
 ## Minecraft Version

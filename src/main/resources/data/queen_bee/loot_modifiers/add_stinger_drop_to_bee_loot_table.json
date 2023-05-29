@@ -5,7 +5,6 @@
       "condition": "minecraft:entity_properties",
       "entity": "this",
       "predicate": {
-        "type": "minecraft:bee",
         "nbt": "{HasStung:0b}"
       }
     }

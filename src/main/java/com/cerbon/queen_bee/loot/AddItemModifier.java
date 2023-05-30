@@ -1,5 +1,6 @@
 package com.cerbon.queen_bee.loot;
 
+import com.cerbon.queen_bee.config.QueenBeeModCommonConfigs;
 import com.google.common.base.Suppliers;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -30,7 +31,7 @@ public class AddItemModifier extends LootModifier {
 
     @Override
     protected @NotNull ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context) {
-        if (checkIfInjectLoot(context)){
+        if (checkIfInjectLoot(context) && QueenBeeModCommonConfigs.ENABLE_BEES_DROPPING_STINGER.get()){
             generatedLoot.add(new ItemStack(item));
         }
         return generatedLoot;

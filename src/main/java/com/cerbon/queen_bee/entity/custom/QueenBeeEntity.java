@@ -40,6 +40,8 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.AABB;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
@@ -234,6 +236,7 @@ public class QueenBeeEntity extends PathfinderMob implements GeoEntity, FlyingAn
 
     @Nullable
     @Override
+    @OnlyIn(Dist.CLIENT)
     protected SoundEvent getAmbientSound() {
         Minecraft.getInstance().getSoundManager().play(new QueenBeeFlyingSoundInstance(this));
         return null;

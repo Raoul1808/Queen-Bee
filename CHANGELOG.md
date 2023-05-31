@@ -9,12 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-Add option to enable/disable stinger drop from bees 
+- Add option to enable/disable stinger drop from bees 
 
 ### Fixed
 
-Fix stinger item not dropping from productive bees
-Fix mod not working on servers
+- Fix stinger item not dropping from productive bees
+- Fix mod not working on servers
 
 
 ## [3.0.0] - 2023-05-28

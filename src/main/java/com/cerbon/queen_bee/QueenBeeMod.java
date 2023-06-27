@@ -26,6 +26,7 @@ public class QueenBeeMod
     public QueenBeeMod()
     {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        modEventBus.addListener(this::addCreativeTab);
 
         QueenBeeModCreativeModeTabs.register(modEventBus);
         QueenBeeModItems.register(modEventBus);
@@ -33,8 +34,6 @@ public class QueenBeeMod
         QueenBeeModLootModifiers.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
-
-        modEventBus.addListener(this::addCreativeTab);
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, QueenBeeModCommonConfigs.SPEC, "queen_bee.toml");
     }

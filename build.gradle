@@ -1,9 +1,13 @@
+import net.darkhax.curseforgegradle.TaskPublishCurseForge
+
 plugins {
     id 'eclipse'
     id 'maven-publish'
     id 'net.minecraftforge.gradle' version '5.1.+'
     id 'org.parchmentmc.librarian.forgegradle' version '1.+'
     id 'org.spongepowered.mixin' version '0.7.+'
+    id "com.modrinth.minotaur" version "2.+"
+    id 'net.darkhax.curseforgegradle' version '1.1.15'
 }
 
 version = "${mod_version}-${mc_version}"
@@ -123,6 +127,29 @@ dependencies {
 mixin {
     add sourceSets.main, "mixins.${mod_id}.refmap.json"
     config "mixins.${mod_id}.json"
+}
+
+tasks.register('publishCurseForge', TaskPublishCurseForge) {
+    apiToken = findProperty('CURSEFORGE_TOKEN')
+
+    def mainFile = upload(523596, jar)
+    mainFile.changelog = rootProject.file("CHANGELOG.md").getText('UTF-8')
+    mainFile.changelogType = 'markdown'
+    mainFile.releaseType = 'release'
+    mainFile.addGameVersion("${mc_version}", "1.20.1")
+}
+
+modrinth {
+    token = System.getenv("MODRINTH_TOKEN")
+    versionName = "Queen Bee ${project.version}"
+    versionNumber = "${project.version}"
+    projectId = "BT6ySFDE"
+    changelog = rootProject.file("CHANGELOG.md").getText('UTF-8')
+    versionType = "release"
+    uploadFile = jar
+    gameVersions = ["${mc_version}", "1.20.1"]
+    loaders = ["forge"]
+    syncBodyFrom = rootProject.file("README.md").getText('UTF-8')
 }
 
 jar {

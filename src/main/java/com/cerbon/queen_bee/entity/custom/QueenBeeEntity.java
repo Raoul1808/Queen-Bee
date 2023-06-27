@@ -106,7 +106,7 @@ public class QueenBeeEntity extends PathfinderMob implements GeoEntity, FlyingAn
         boolean isAntennaEnabled = QueenBeeModCommonConfigs.ENABLE_ANTENNA.get();
 
         if (isAntennaEnabled){
-            String targetDimension = pTarget.level.dimension().location().toString();
+            String targetDimension = pTarget.level().dimension().location().toString();
             boolean isTargetInBumblezoneDimension = targetDimension.equals("the_bumblezone:the_bumblezone");
             boolean isTargetWearingAntenna = pTarget.getItemBySlot(EquipmentSlot.HEAD).getItem() == (QueenBeeModItems.ANTENNA.get());
             boolean isAntennaEnabledInBlumblezoneDimension = QueenBeeModCommonConfigs.ENABLE_ANTENNA_BUMBLEZONE_DIMENSION.get();
@@ -137,7 +137,7 @@ public class QueenBeeEntity extends PathfinderMob implements GeoEntity, FlyingAn
         if(flag){
             this.doEnchantDamageEffects(this, pEntity);
             if(pEntity instanceof LivingEntity){
-                if(this.level.getDifficulty() == Difficulty.EASY){
+                if(this.level().getDifficulty() == Difficulty.EASY){
                     ((LivingEntity)pEntity).addEffect(new MobEffectInstance(MobEffects.POISON, 200, 0));
                     ((LivingEntity)pEntity).addEffect(new MobEffectInstance(MobEffects.CONFUSION, 300, 0));
                 } else {
@@ -167,13 +167,13 @@ public class QueenBeeEntity extends PathfinderMob implements GeoEntity, FlyingAn
         LivingEntity target = this.getTarget();
           if (target != null){
               if (target.distanceToSqr(this) <= QueenBeeModCommonConfigs.TARGET_DISTANCE_TO_SQR.get() && this.hasLineOfSight(target)) {
-                  PoisonNimbusAreaEffectCloud areaEffectCloud = new PoisonNimbusAreaEffectCloud(this.level, this.getX(), this.getY(), this.getZ());
+                  PoisonNimbusAreaEffectCloud areaEffectCloud = new PoisonNimbusAreaEffectCloud(this.level(), this.getX(), this.getY(), this.getZ());
                   areaEffectCloud.setOwner(this);
                   areaEffectCloud.setDuration(QueenBeeModCommonConfigs.POISON_NIMBUS_DURATION.get());
                   areaEffectCloud.setRadius(QueenBeeModCommonConfigs.POISON_NIMBUS_RADIUS.get());
                   areaEffectCloud.setFixedColor(8889187);
                   areaEffectCloud.addEffect(new MobEffectInstance(MobEffects.POISON, QueenBeeModCommonConfigs.POISON_EFFECT_DURATION.get(), QueenBeeModCommonConfigs.POISON_EFFECT_AMPLIFIER.get()));
-                  this.level.addFreshEntity(areaEffectCloud);
+                  this.level().addFreshEntity(areaEffectCloud);
               }
           }
     }
@@ -207,7 +207,7 @@ public class QueenBeeEntity extends PathfinderMob implements GeoEntity, FlyingAn
     @Override
     public void aiStep() {
         super.aiStep();
-        if (!this.level.isClientSide){
+        if (!this.level().isClientSide){
             if (this.poisonNimbusCooldown > 0){
                 --poisonNimbusCooldown;
             }
@@ -226,8 +226,8 @@ public class QueenBeeEntity extends PathfinderMob implements GeoEntity, FlyingAn
             this.hurt(this.damageSources().drown(), 1.0F);
         }
 
-        if (!this.level.isClientSide) {
-            this.updatePersistentAnger((ServerLevel)this.level, false);
+        if (!this.level().isClientSide) {
+            this.updatePersistentAnger((ServerLevel)this.level(), false);
         }
         if (QueenBeeModCommonConfigs.ENABLE_QUEEN_BEE_BOSS_BAR.get()){
             this.bossInfo.setProgress(this.getHealth() / this.getMaxHealth());
@@ -273,7 +273,7 @@ public class QueenBeeEntity extends PathfinderMob implements GeoEntity, FlyingAn
 
     @Override
     public boolean isFlying() {
-        return !this.onGround;
+        return !this.onGround();
     }
 
     @Override
@@ -343,7 +343,7 @@ public class QueenBeeEntity extends PathfinderMob implements GeoEntity, FlyingAn
         @Override
         public void addEffect(@NotNull MobEffectInstance pEffectInstance) {
             AABB aabb = this.getBoundingBox().inflate( 7.0D);
-            List<LivingEntity> nearbyEntities = this.level.getEntitiesOfClass(LivingEntity.class, aabb);
+            List<LivingEntity> nearbyEntities = this.level().getEntitiesOfClass(LivingEntity.class, aabb);
 
             for (LivingEntity entity : nearbyEntities){
                 if (!(entity instanceof Bee || entity instanceof QueenBeeEntity)){
@@ -416,7 +416,7 @@ public class QueenBeeEntity extends PathfinderMob implements GeoEntity, FlyingAn
             if (target == null) return;
             double d0 = this.queenBee.getAttributeValue(Attributes.FOLLOW_RANGE);
             AABB aabb = this.queenBee.getBoundingBox().inflate(d0, 10.0D, d0);
-            List<Bee> nearbyBees = this.queenBee.level.getEntitiesOfClass(Bee.class, aabb);
+            List<Bee> nearbyBees = this.queenBee.level().getEntitiesOfClass(Bee.class, aabb);
 
             for(Bee bee : nearbyBees){
                 if (bee.getPersistentAngerTarget() == null){
@@ -457,16 +457,16 @@ public class QueenBeeEntity extends PathfinderMob implements GeoEntity, FlyingAn
            if (this.cooldown >= QueenBeeModCommonConfigs.SUMMON_ANGRY_BEES_COOLDOWN.get()){
                double d0 = this.queenBee.getAttributeValue(Attributes.FOLLOW_RANGE);
                AABB aabb = this.queenBee.getBoundingBox().inflate(d0, 10.0D, d0);
-               List<Bee> nearbyBees = this.queenBee.level.getEntitiesOfClass(Bee.class, aabb);
+               List<Bee> nearbyBees = this.queenBee.level().getEntitiesOfClass(Bee.class, aabb);
                boolean allStung = nearbyBees.stream().allMatch(Bee::hasStung);
 
                if (nearbyBees.isEmpty() || allStung){
                    for(int i = 0; i < QueenBeeModCommonConfigs.ANGRY_BEES_AMOUNT.get(); i++){
-                       Bee bee = EntityType.BEE.create(this.queenBee.level);
+                       Bee bee = EntityType.BEE.create(this.queenBee.level());
                        if (bee != null){
                            bee.moveTo(this.queenBee.getX(), this.queenBee.getY(), this.queenBee.getZ());
                            bee.setTarget(target);
-                           this.queenBee.level.addFreshEntity(bee);
+                           this.queenBee.level().addFreshEntity(bee);
                        }
                    }
                    if (this.cooldown >= QueenBeeModCommonConfigs.SUMMON_ANGRY_BEES_COOLDOWN.get()){
@@ -491,7 +491,7 @@ public class QueenBeeEntity extends PathfinderMob implements GeoEntity, FlyingAn
         public void tick() {
             double d0 = this.queenBee.getAttributeValue(Attributes.FOLLOW_RANGE);
             AABB aabb = this.queenBee.getBoundingBox().inflate(d0, 10.0D, d0);
-            List<Bee> nearbyBees = this.queenBee.level.getEntitiesOfClass(Bee.class, aabb);
+            List<Bee> nearbyBees = this.queenBee.level().getEntitiesOfClass(Bee.class, aabb);
 
             for (Bee bee : nearbyBees){
                 if (bee.isAngry()){

@@ -9,7 +9,7 @@ import com.cerbon.queen_bee.loot.QueenBeeModLootModifiers;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.CreativeModeTabEvent;
+import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -27,6 +27,7 @@ public class QueenBeeMod
     {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
+        QueenBeeModCreativeModeTabs.register(modEventBus);
         QueenBeeModItems.register(modEventBus);
         QueenBeeModEntities.register(modEventBus);
         QueenBeeModLootModifiers.register(modEventBus);
@@ -38,8 +39,8 @@ public class QueenBeeMod
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, QueenBeeModCommonConfigs.SPEC, "queen_bee.toml");
     }
 
-    private void addCreativeTab(CreativeModeTabEvent.BuildContents event) {
-        if(event.getTab() == QueenBeeModCreativeModeTabs.QUEEN_BEE_TAB){
+    private void addCreativeTab(BuildCreativeModeTabContentsEvent event) {
+        if(event.getTab() == QueenBeeModCreativeModeTabs.QUEEN_BEE_TAB.get()){
             event.accept(QueenBeeModItems.STINGER);
             event.accept(QueenBeeModItems.QUEEN_BEE_SPAWN_EGG);
             event.accept(QueenBeeModItems.STINGER_SWORD);

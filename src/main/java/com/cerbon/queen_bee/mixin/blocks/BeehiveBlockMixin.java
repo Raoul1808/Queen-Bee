@@ -40,7 +40,7 @@ public abstract class BeehiveBlockMixin {
         boolean isAntennaEnabled = QueenBeeModCommonConfigs.ENABLE_ANTENNA.get();
 
         if (isAntennaEnabled){
-            String playerDimension = pPlayer.level.dimension().location().toString();
+            String playerDimension = pPlayer.level().dimension().location().toString();
             boolean isPlayerInBumblezoneDimension = playerDimension.equals("the_bumblezone:the_bumblezone");
             boolean isPlayerWearingAntenna = pPlayer.getItemBySlot(EquipmentSlot.HEAD).is(QueenBeeModItems.ANTENNA.get());
             boolean isAntennaEnabledInBlumblezoneDimension = QueenBeeModCommonConfigs.ENABLE_ANTENNA_BUMBLEZONE_DIMENSION.get();

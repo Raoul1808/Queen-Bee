@@ -1,21 +1,14 @@
-buildscript {
-    dependencies {
-        classpath 'org.spongepowered:mixingradle:0.7.+'
-    }
-}
-
 plugins {
     id 'eclipse'
     id 'maven-publish'
     id 'net.minecraftforge.gradle' version '5.1.+'
     id 'org.parchmentmc.librarian.forgegradle' version '1.+'
+    id 'org.spongepowered.mixin' version '0.7.+'
 }
 
-apply plugin: 'org.spongepowered.mixin'
-
-version = "3.0.3-${mc_version}"
-group = 'com.cerbon.queen_bee'
-archivesBaseName = 'queen_bee'
+version = "${mod_version}-${mc_version}"
+group = "com.cerbon.${mod_id}"
+archivesBaseName = "${mod_id}"
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
@@ -23,7 +16,7 @@ println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty '
 
 minecraft {
 
-    mappings channel: 'parchment', version: '1.19.3-2023.03.12-1.20'
+    mappings channel: 'parchment', version: "${parchment_version}"
 
     // accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
@@ -89,8 +82,8 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 mixin {
-    add sourceSets.main, 'mixins.queen_bee.refmap.json'
-    config 'mixins.queen_bee.json'
+    add sourceSets.main, "mixins.${mod_id}.refmap.json"
+    config "mixins.${mod_id}.json"
 }
 
 repositories {
@@ -123,7 +116,7 @@ dependencies {
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
-    implementation fg.deobf("software.bernie.geckolib:geckolib-forge-${mc_version}:${geckolib_version}")
+    implementation fg.deobf("curse.maven:geckolib-388172:${geckolib_version}")
 //    implementation fg.deobf("curse.maven:the-bumblezone-forge-362479:4557907") //v6.7.20-1.19.4
 
     //JEI

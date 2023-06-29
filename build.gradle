@@ -137,6 +137,7 @@ tasks.register('publishCurseForge', TaskPublishCurseForge) {
     mainFile.changelogType = 'markdown'
     mainFile.releaseType = 'release'
     mainFile.addGameVersion("${mc_version}", "1.20.1")
+    mainFile.addRequirement("geckolib")
 }
 
 modrinth {
@@ -150,6 +151,9 @@ modrinth {
     gameVersions = ["${mc_version}", "1.20.1"]
     loaders = ["forge"]
     syncBodyFrom = rootProject.file("README.md").getText('UTF-8')
+    dependencies {
+        required.project "geckolib"
+    }
 }
 
 jar {

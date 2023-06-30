@@ -130,7 +130,7 @@ mixin {
 }
 
 tasks.register('publishCurseForge', TaskPublishCurseForge) {
-    apiToken = findProperty('CURSEFORGE_TOKEN')
+    apiToken = System.getenv('CURSEFORGE_TOKEN')
 
     def mainFile = upload(523596, jar)
     mainFile.changelog = rootProject.file("CHANGELOG.md").getText('UTF-8')
@@ -148,8 +148,6 @@ modrinth {
     changelog = rootProject.file("CHANGELOG.md").getText('UTF-8')
     versionType = "release"
     uploadFile = jar
-    gameVersions = ["${mc_version}", "1.20.1"]
-    loaders = ["forge"]
     syncBodyFrom = rootProject.file("README.md").getText('UTF-8')
     dependencies {
         required.project "geckolib"

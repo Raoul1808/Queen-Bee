@@ -58,14 +58,14 @@ public class AntennaArmorItem extends ArmorItem implements GeoItem {
         super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
     }
 
-    private <T extends GeoAnimatable> PlayState predicate(@NotNull AnimationState<T> animationState){
-     animationState.getController().setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
-     return PlayState.CONTINUE;
-    }
-
     @Override
     public void registerControllers(AnimatableManager.@NotNull ControllerRegistrar controllerRegistrar) {
         controllerRegistrar.add(new AnimationController<>(this, "controller", 0, this::predicate));
+    }
+
+    private <T extends GeoAnimatable> PlayState predicate(@NotNull AnimationState<T> animationState){
+        animationState.getController().setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
+        return PlayState.CONTINUE;
     }
 
     @Override

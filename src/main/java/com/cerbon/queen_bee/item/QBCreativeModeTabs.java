@@ -13,8 +13,8 @@ public class QBCreativeModeTabs {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB,
             QBConstants.MOD_ID);
 
-    public static RegistryObject<CreativeModeTab> QUEEN_BEE_TAB = CREATIVE_MODE_TABS.register("queen_bee_tab", ()->
-            CreativeModeTab.builder()
+    public static RegistryObject<CreativeModeTab> QUEEN_BEE_TAB = CREATIVE_MODE_TABS.register("queen_bee_tab",
+            ()-> CreativeModeTab.builder()
                     .icon(()-> new ItemStack(QBItems.STINGER.get()))
                     .title(Component.translatable(QBConstants.QUEEN_BEE_TAB_NAME))
                     .build());

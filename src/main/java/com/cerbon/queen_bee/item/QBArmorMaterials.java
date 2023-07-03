@@ -14,12 +14,9 @@ import org.jetbrains.annotations.NotNull;
 import java.util.EnumMap;
 import java.util.function.Supplier;
 
-public enum QBArmorMaterials implements ArmorMaterial {
-    ANTENNA("antenna", 0, Util.make(new EnumMap<>(ArmorItem.Type.class), (p_266655_) -> {
-        p_266655_.put(ArmorItem.Type.HELMET, 0);
-    }), 15, SoundEvents.ARMOR_EQUIP_LEATHER, 0.0F, 0.0F, () -> {
-        return null;
-    });
+public enum QBArmorMaterials implements StringRepresentable, ArmorMaterial {
+    ANTENNA("antenna", 0, Util.make(new EnumMap<>(ArmorItem.Type.class),
+            (p_266655_) -> p_266655_.put(ArmorItem.Type.HELMET, 0)), 15, SoundEvents.ARMOR_EQUIP_LEATHER, 0.0F, 0.0F, () -> null);
 
     public static final StringRepresentable.EnumCodec<ArmorMaterials> CODEC = StringRepresentable.fromEnum(ArmorMaterials::values);
     private static final EnumMap<ArmorItem.Type, Integer> HEALTH_FUNCTION_FOR_TYPE = Util.make(new EnumMap<>(ArmorItem.Type.class), (p_266653_) -> {
@@ -76,14 +73,12 @@ public enum QBArmorMaterials implements ArmorMaterial {
         return this.toughness;
     }
 
-    /**
-     * Gets the percentage of knockback resistance provided by armor of the material.
-     */
     public float getKnockbackResistance() {
         return this.knockbackResistance;
     }
 
-    public String getSerializedName() {
+    @Override
+    public @NotNull String getSerializedName() {
         return this.name;
     }
 }

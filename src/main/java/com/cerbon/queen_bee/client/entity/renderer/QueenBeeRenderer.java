@@ -15,10 +15,7 @@ public class QueenBeeRenderer extends GeoEntityRenderer<QueenBeeEntity> {
 
     @Override
     public @NotNull ResourceLocation getTextureLocation(@NotNull QueenBeeEntity entity) {
-        if(entity.isAngry()){
-            return new ResourceLocation(QBConstants.MOD_ID, QBConstants.QUEEN_BEE_ANGRY_TEXTURE_PATH);
-        }else {
-            return new ResourceLocation(QBConstants.MOD_ID, QBConstants.QUEEN_BEE_TEXTURE_PATH);
-        }
+        return new ResourceLocation(QBConstants.MOD_ID, entity.isAngry()
+                ? QBConstants.QUEEN_BEE_ANGRY_TEXTURE_PATH : QBConstants.QUEEN_BEE_TEXTURE_PATH);
     }
 }

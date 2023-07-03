@@ -63,12 +63,8 @@ public class StingerSwordItem extends SwordItem {
 
     @Override
     public boolean hurtEnemy(@NotNull ItemStack pStack, @NotNull LivingEntity pTarget, @NotNull LivingEntity pAttacker) {
-        if (QBCommonConfigs.ENABLE_POISON_EFFECT.get()) {
-            pTarget.addEffect(new MobEffectInstance(MobEffects.POISON, QBCommonConfigs.STINGER_SWORD_POISON_EFFECT_DURATION.get(), QBCommonConfigs.STINGER_SWORD_POISON_EFFECT_AMPLIFIER.get()));
-        }
-        if (QBCommonConfigs.ENABLE_NAUSEA_EFFECT.get()) {
-            pTarget.addEffect(new MobEffectInstance(MobEffects.CONFUSION, QBCommonConfigs.NAUSEA_EFFECT_DURATION.get(), 0));
-        }
+        if (QBCommonConfigs.ENABLE_POISON_EFFECT.get()) pTarget.addEffect(new MobEffectInstance(MobEffects.POISON, QBCommonConfigs.STINGER_SWORD_POISON_EFFECT_DURATION.get(), QBCommonConfigs.STINGER_SWORD_POISON_EFFECT_AMPLIFIER.get()));
+        if (QBCommonConfigs.ENABLE_NAUSEA_EFFECT.get()) pTarget.addEffect(new MobEffectInstance(MobEffects.CONFUSION, QBCommonConfigs.NAUSEA_EFFECT_DURATION.get(), 0));
         return super.hurtEnemy(pStack, pTarget, pAttacker);
     }
 
@@ -114,11 +110,7 @@ public class StingerSwordItem extends SwordItem {
     @Override
     public void appendHoverText(@NotNull ItemStack pStack, @Nullable Level pLevel, @NotNull List<Component> pTooltipComponents, @NotNull TooltipFlag pIsAdvanced) {
         if (QBCommonConfigs.ENABLE_CURE_BEE.get() && QBCommonConfigs.ENABLE_STINGER_SWORD_TOOLTIP.get()) {
-            if (Screen.hasShiftDown()) {
-                pTooltipComponents.add(Component.translatable(QBConstants.STINGER_SWORD_SHIFT_DOWN_TOOLTIP).withStyle(ChatFormatting.YELLOW));
-            } else {
-                pTooltipComponents.add(Component.translatable(QBConstants.ITEM_SHIFT_UP_TOOLTIP).withStyle(ChatFormatting.YELLOW));
-            }
+            pTooltipComponents.add(Component.translatable(Screen.hasShiftDown() ? QBConstants.STINGER_SWORD_SHIFT_DOWN_TOOLTIP : QBConstants.ITEM_SHIFT_UP_TOOLTIP).withStyle(ChatFormatting.YELLOW));
         }
         super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
     }

@@ -104,9 +104,7 @@ public class QueenBeeEntity extends PathfinderMob implements GeoEntity, FlyingAn
 
     @Override
     public boolean canAttack(@NotNull LivingEntity pTarget) {
-        boolean isAntennaEnabled = QBCommonConfigs.ENABLE_ANTENNA.get();
-
-        if (isAntennaEnabled){
+        if (QBCommonConfigs.ENABLE_ANTENNA.get()){
             String targetDimension = pTarget.level().dimension().location().toString();
             boolean isTargetInBumblezoneDimension = targetDimension.equals(QBConstants.BUMBLEZONE_DIMENSION_ID);
             boolean isTargetWearingAntenna = pTarget.getItemBySlot(EquipmentSlot.HEAD).getItem() == (QBItems.ANTENNA.get());
@@ -135,16 +133,12 @@ public class QueenBeeEntity extends PathfinderMob implements GeoEntity, FlyingAn
     @Override
     public boolean doHurtTarget(@NotNull Entity pEntity) {
         boolean flag = pEntity.hurt(this.damageSources().sting(this), (float)((int)this.getAttributeValue(Attributes.ATTACK_DAMAGE)));
+
         if(flag){
             this.doEnchantDamageEffects(this, pEntity);
             if(pEntity instanceof LivingEntity){
-                if(this.level().getDifficulty() == Difficulty.EASY){
-                    ((LivingEntity)pEntity).addEffect(new MobEffectInstance(MobEffects.POISON, 200, 0));
-                    ((LivingEntity)pEntity).addEffect(new MobEffectInstance(MobEffects.CONFUSION, 300, 0));
-                } else {
-                    ((LivingEntity)pEntity).addEffect(new MobEffectInstance(MobEffects.POISON, 200, 1));
-                    ((LivingEntity)pEntity).addEffect(new MobEffectInstance(MobEffects.CONFUSION, 300, 0));
-                }
+                ((LivingEntity)pEntity).addEffect(new MobEffectInstance(MobEffects.POISON, 200, this.level().getDifficulty() == Difficulty.EASY ? 0 : 1));
+                ((LivingEntity)pEntity).addEffect(new MobEffectInstance(MobEffects.CONFUSION, 300, 0));
             }
             this.playSound(SoundEvents.BEE_STING, 1.0F, 1.0F);
         }

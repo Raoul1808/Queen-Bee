@@ -53,11 +53,7 @@ public class AntennaArmorItem extends ArmorItem implements GeoItem {
     @Override
     public void appendHoverText(@NotNull ItemStack pStack, @Nullable Level pLevel, @NotNull List<Component> pTooltipComponents, @NotNull TooltipFlag pIsAdvanced) {
         if (QBCommonConfigs.ENABLE_ANTENNA.get() && QBCommonConfigs.ENABLE_ANTENNA_TOOLTIP.get()){
-            if (Screen.hasShiftDown()){
-                pTooltipComponents.add(Component.translatable(QBConstants.ANTENNA_SHIFT_DOWN_TOOLTIP).withStyle(ChatFormatting.YELLOW));
-            }else {
-                pTooltipComponents.add(Component.translatable(QBConstants.ITEM_SHIFT_UP_TOOLTIP).withStyle(ChatFormatting.YELLOW));
-            }
+            pTooltipComponents.add(Component.translatable(Screen.hasShiftDown() ? QBConstants.ANTENNA_SHIFT_DOWN_TOOLTIP : QBConstants.ITEM_SHIFT_UP_TOOLTIP).withStyle(ChatFormatting.YELLOW));
         }
         super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
     }

@@ -1,6 +1,5 @@
 package com.cerbon.queen_bee.item.custom;
 
-import com.cerbon.queen_bee.QueenBeeMod;
 import com.cerbon.queen_bee.client.item.renderer.AntennaArmorRenderer;
 import com.cerbon.queen_bee.config.QBCommonConfigs;
 import com.cerbon.queen_bee.util.QBConstants;

@@ -56,8 +56,7 @@ public class QBJEIPlugin implements IModPlugin {
         registration.addRecipes(RecipeTypes.BREWING, recipes);
     }
 
-    private void addBrewingRecipe(@NotNull List<IJeiBrewingRecipe> recipes, @NotNull IVanillaRecipeFactory recipeFactory,
-                                  List<ItemStack> ingredient, ItemStack input, ItemStack output) {
+    private void addBrewingRecipe(@NotNull List<IJeiBrewingRecipe> recipes, @NotNull IVanillaRecipeFactory recipeFactory, List<ItemStack> ingredient, ItemStack input, ItemStack output) {
         recipes.add(recipeFactory.createBrewingRecipe(ingredient, Collections.singletonList(input), output));
     }
 }

@@ -22,9 +22,7 @@ public abstract class BeeEntityMixin extends Animal implements NeutralMob{
     }
 
     public boolean canAttack(@NotNull LivingEntity target){
-        boolean isAntennaEnabled = QBCommonConfigs.ENABLE_ANTENNA.get();
-
-        if (isAntennaEnabled){
+        if (QBCommonConfigs.ENABLE_ANTENNA.get()){
             String targetDimension = target.level().dimension().location().toString();
             boolean isTargetInBumblezoneDimension = targetDimension.equals(QBConstants.BUMBLEZONE_DIMENSION_ID);
             boolean isTargetWearingAntenna = target.getItemBySlot(EquipmentSlot.HEAD).getItem() == (QBItems.ANTENNA.get());
@@ -41,9 +39,7 @@ public abstract class BeeEntityMixin extends Animal implements NeutralMob{
 
     public void setTarget(@Nullable LivingEntity target) {
         if (target != null){
-            boolean isAntennaEnabled = QBCommonConfigs.ENABLE_ANTENNA.get();
-
-            if (isAntennaEnabled){
+            if (QBCommonConfigs.ENABLE_ANTENNA.get()){
                 String targetDimension = target.level().dimension().location().toString();
                 boolean isTargetInBumblezoneDimension = targetDimension.equals(QBConstants.BUMBLEZONE_DIMENSION_ID);
                 boolean isTargetWearingAntenna = target.getItemBySlot(EquipmentSlot.HEAD).getItem() == (QBItems.ANTENNA.get());

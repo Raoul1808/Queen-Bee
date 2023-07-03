@@ -1,7 +1,7 @@
 package com.cerbon.queen_bee.integration.jei;
 
 import com.cerbon.queen_bee.QueenBeeMod;
-import com.cerbon.queen_bee.item.QueenBeeModItems;
+import com.cerbon.queen_bee.item.QBItems;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.RecipeTypes;
@@ -20,7 +20,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.*;
 
 @JeiPlugin
-public class QueenBeeModJEIPlugin implements IModPlugin {
+public class QBJEIPlugin implements IModPlugin {
     @Override
     public @NotNull ResourceLocation getPluginUid() {
         return new ResourceLocation(QueenBeeMod.MOD_ID, "jei_plugin");
@@ -28,15 +28,15 @@ public class QueenBeeModJEIPlugin implements IModPlugin {
 
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
-        registration.addIngredientInfo(new ItemStack(QueenBeeModItems.STINGER_SWORD.get()),
+        registration.addIngredientInfo(new ItemStack(QBItems.STINGER_SWORD.get()),
                 VanillaTypes.ITEM_STACK, Component.translatable("tooltip." + QueenBeeMod.MOD_ID + ".stinger_sword"));
 
-        registration.addIngredientInfo(new ItemStack(QueenBeeModItems.ANTENNA.get()),
+        registration.addIngredientInfo(new ItemStack(QBItems.ANTENNA.get()),
                 VanillaTypes.ITEM_STACK, Component.translatable("tooltip." + QueenBeeMod.MOD_ID + ".antenna"));
 
         List<IJeiBrewingRecipe> recipes = new ArrayList<>();
         IVanillaRecipeFactory recipeFactory = registration.getVanillaRecipeFactory();
-        List<ItemStack> ingredient = Collections.singletonList(new ItemStack(QueenBeeModItems.STINGER.get()));
+        List<ItemStack> ingredient = Collections.singletonList(new ItemStack(QBItems.STINGER.get()));
 
         ItemStack awkwardPotion = PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.AWKWARD);
         ItemStack poisonPotion = PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.POISON);

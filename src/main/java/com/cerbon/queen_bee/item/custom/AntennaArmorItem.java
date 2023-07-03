@@ -2,7 +2,7 @@ package com.cerbon.queen_bee.item.custom;
 
 import com.cerbon.queen_bee.QueenBeeMod;
 import com.cerbon.queen_bee.client.item.renderer.AntennaArmorRenderer;
-import com.cerbon.queen_bee.config.QueenBeeModCommonConfigs;
+import com.cerbon.queen_bee.config.QBCommonConfigs;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.model.HumanoidModel;
@@ -51,7 +51,7 @@ public class AntennaArmorItem extends ArmorItem implements GeoItem {
 
     @Override
     public void appendHoverText(@NotNull ItemStack pStack, @Nullable Level pLevel, @NotNull List<Component> pTooltipComponents, @NotNull TooltipFlag pIsAdvanced) {
-        if (QueenBeeModCommonConfigs.ENABLE_ANTENNA.get() && QueenBeeModCommonConfigs.ENABLE_ANTENNA_TOOLTIP.get()){
+        if (QBCommonConfigs.ENABLE_ANTENNA.get() && QBCommonConfigs.ENABLE_ANTENNA_TOOLTIP.get()){
             if (Screen.hasShiftDown()){
                 pTooltipComponents.add(Component.translatable("tooltip." + QueenBeeMod.MOD_ID + ".antenna").withStyle(ChatFormatting.YELLOW));
             }else {

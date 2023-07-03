@@ -1,11 +1,11 @@
 package com.cerbon.queen_bee;
 
 import com.cerbon.queen_bee.client.entity.renderer.QueenBeeRenderer;
-import com.cerbon.queen_bee.config.QueenBeeModCommonConfigs;
-import com.cerbon.queen_bee.entity.QueenBeeModEntities;
-import com.cerbon.queen_bee.item.QueenBeeModCreativeModeTabs;
-import com.cerbon.queen_bee.item.QueenBeeModItems;
-import com.cerbon.queen_bee.loot.QueenBeeModLootModifiers;
+import com.cerbon.queen_bee.config.QBCommonConfigs;
+import com.cerbon.queen_bee.entity.QBEntities;
+import com.cerbon.queen_bee.item.QBCreativeModeTabs;
+import com.cerbon.queen_bee.item.QBItems;
+import com.cerbon.queen_bee.loot.QBLootModifiers;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -28,22 +28,22 @@ public class QueenBeeMod
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         modEventBus.addListener(this::addCreativeTab);
 
-        QueenBeeModCreativeModeTabs.register(modEventBus);
-        QueenBeeModItems.register(modEventBus);
-        QueenBeeModEntities.register(modEventBus);
-        QueenBeeModLootModifiers.register(modEventBus);
+        QBCreativeModeTabs.register(modEventBus);
+        QBItems.register(modEventBus);
+        QBEntities.register(modEventBus);
+        QBLootModifiers.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
 
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, QueenBeeModCommonConfigs.SPEC, "queen_bee.toml");
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, QBCommonConfigs.SPEC, "queen_bee.toml");
     }
 
     private void addCreativeTab(BuildCreativeModeTabContentsEvent event) {
-        if(event.getTab() == QueenBeeModCreativeModeTabs.QUEEN_BEE_TAB.get()){
-            event.accept(QueenBeeModItems.STINGER);
-            event.accept(QueenBeeModItems.QUEEN_BEE_SPAWN_EGG);
-            event.accept(QueenBeeModItems.STINGER_SWORD);
-            event.accept(QueenBeeModItems.ANTENNA);
+        if(event.getTab() == QBCreativeModeTabs.QUEEN_BEE_TAB.get()){
+            event.accept(QBItems.STINGER);
+            event.accept(QBItems.QUEEN_BEE_SPAWN_EGG);
+            event.accept(QBItems.STINGER_SWORD);
+            event.accept(QBItems.ANTENNA);
         }
     }
 
@@ -52,7 +52,7 @@ public class QueenBeeMod
     {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
-            EntityRenderers.register(QueenBeeModEntities.QUEEN_BEE.get(), QueenBeeRenderer::new);
+            EntityRenderers.register(QBEntities.QUEEN_BEE.get(), QueenBeeRenderer::new);
         }
     }
 }

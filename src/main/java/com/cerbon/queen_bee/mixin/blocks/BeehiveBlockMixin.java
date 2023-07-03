@@ -1,7 +1,7 @@
 package com.cerbon.queen_bee.mixin.blocks;
 
-import com.cerbon.queen_bee.config.QueenBeeModCommonConfigs;
-import com.cerbon.queen_bee.item.QueenBeeModItems;
+import com.cerbon.queen_bee.config.QBCommonConfigs;
+import com.cerbon.queen_bee.item.QBItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -37,13 +37,13 @@ public abstract class BeehiveBlockMixin {
                                               InteractionHand pHand, BlockHitResult pHit,
                                               CallbackInfoReturnable<InteractionResult> cir)
     {
-        boolean isAntennaEnabled = QueenBeeModCommonConfigs.ENABLE_ANTENNA.get();
+        boolean isAntennaEnabled = QBCommonConfigs.ENABLE_ANTENNA.get();
 
         if (isAntennaEnabled){
             String playerDimension = pPlayer.level().dimension().location().toString();
             boolean isPlayerInBumblezoneDimension = playerDimension.equals("the_bumblezone:the_bumblezone");
-            boolean isPlayerWearingAntenna = pPlayer.getItemBySlot(EquipmentSlot.HEAD).is(QueenBeeModItems.ANTENNA.get());
-            boolean isAntennaEnabledInBlumblezoneDimension = QueenBeeModCommonConfigs.ENABLE_ANTENNA_BUMBLEZONE_DIMENSION.get();
+            boolean isPlayerWearingAntenna = pPlayer.getItemBySlot(EquipmentSlot.HEAD).is(QBItems.ANTENNA.get());
+            boolean isAntennaEnabledInBlumblezoneDimension = QBCommonConfigs.ENABLE_ANTENNA_BUMBLEZONE_DIMENSION.get();
 
             if (!isPlayerInBumblezoneDimension && isPlayerWearingAntenna){
                 this.resetHoneyLevel(pLevel, pState, pPos);

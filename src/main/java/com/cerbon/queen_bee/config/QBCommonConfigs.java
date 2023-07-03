@@ -2,7 +2,7 @@ package com.cerbon.queen_bee.config;
 
 import net.minecraftforge.common.ForgeConfigSpec;
 
-public class QueenBeeModCommonConfigs {
+public class QBCommonConfigs {
     public static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
     public static final ForgeConfigSpec SPEC;
 

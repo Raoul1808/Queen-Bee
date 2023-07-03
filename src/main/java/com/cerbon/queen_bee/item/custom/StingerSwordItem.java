@@ -1,8 +1,8 @@
 package com.cerbon.queen_bee.item.custom;
 
 import com.cerbon.queen_bee.QueenBeeMod;
-import com.cerbon.queen_bee.config.QueenBeeModCommonConfigs;
-import com.cerbon.queen_bee.item.QueenBeeModItems;
+import com.cerbon.queen_bee.config.QBCommonConfigs;
+import com.cerbon.queen_bee.item.QBItems;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
@@ -63,19 +63,19 @@ public class StingerSwordItem extends SwordItem {
 
     @Override
     public boolean hurtEnemy(@NotNull ItemStack pStack, @NotNull LivingEntity pTarget, @NotNull LivingEntity pAttacker) {
-        if (QueenBeeModCommonConfigs.ENABLE_POISON_EFFECT.get()) {
-            pTarget.addEffect(new MobEffectInstance(MobEffects.POISON, QueenBeeModCommonConfigs.STINGER_SWORD_POISON_EFFECT_DURATION.get(), QueenBeeModCommonConfigs.STINGER_SWORD_POISON_EFFECT_AMPLIFIER.get()));
+        if (QBCommonConfigs.ENABLE_POISON_EFFECT.get()) {
+            pTarget.addEffect(new MobEffectInstance(MobEffects.POISON, QBCommonConfigs.STINGER_SWORD_POISON_EFFECT_DURATION.get(), QBCommonConfigs.STINGER_SWORD_POISON_EFFECT_AMPLIFIER.get()));
         }
-        if (QueenBeeModCommonConfigs.ENABLE_NAUSEA_EFFECT.get()) {
-            pTarget.addEffect(new MobEffectInstance(MobEffects.CONFUSION, QueenBeeModCommonConfigs.NAUSEA_EFFECT_DURATION.get(), 0));
+        if (QBCommonConfigs.ENABLE_NAUSEA_EFFECT.get()) {
+            pTarget.addEffect(new MobEffectInstance(MobEffects.CONFUSION, QBCommonConfigs.NAUSEA_EFFECT_DURATION.get(), 0));
         }
         return super.hurtEnemy(pStack, pTarget, pAttacker);
     }
 
     @Override
     public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level pLevel, @NotNull Player pPlayer, @NotNull InteractionHand pUsedHand) {
-        if (QueenBeeModCommonConfigs.ENABLE_CURE_BEE.get()) {
-            if (pPlayer.isCrouching() && pPlayer.getItemBySlot(EquipmentSlot.HEAD).getItem() == QueenBeeModItems.ANTENNA.get()) {
+        if (QBCommonConfigs.ENABLE_CURE_BEE.get()) {
+            if (pPlayer.isCrouching() && pPlayer.getItemBySlot(EquipmentSlot.HEAD).getItem() == QBItems.ANTENNA.get()) {
                 Bee bee = EntityType.BEE.create(pLevel);
                 if (bee != null) {
                     bee.moveTo(pPlayer.getX(), pPlayer.getY() + 1, pPlayer.getZ());
@@ -85,15 +85,15 @@ public class StingerSwordItem extends SwordItem {
                 }
                 AreaEffectCloud areaEffectCloud = new AreaEffectCloud(pLevel, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ());
                 areaEffectCloud.setOwner(pPlayer);
-                areaEffectCloud.setDuration(QueenBeeModCommonConfigs.REGENERATION_AREA_EFFECT_CLOUD_DURATION.get());
-                areaEffectCloud.setRadius(QueenBeeModCommonConfigs.REGENERATION_AREA_EFFECT_CLOUD_RADIUS.get());
+                areaEffectCloud.setDuration(QBCommonConfigs.REGENERATION_AREA_EFFECT_CLOUD_DURATION.get());
+                areaEffectCloud.setRadius(QBCommonConfigs.REGENERATION_AREA_EFFECT_CLOUD_RADIUS.get());
                 areaEffectCloud.setFixedColor(13458603);
-                areaEffectCloud.addEffect(new MobEffectInstance(MobEffects.REGENERATION, QueenBeeModCommonConfigs.REGENERATION_EFFECT_DURATION.get(), QueenBeeModCommonConfigs.REGENERATION_EFFECT_AMPLIFIER.get()));
+                areaEffectCloud.addEffect(new MobEffectInstance(MobEffects.REGENERATION, QBCommonConfigs.REGENERATION_EFFECT_DURATION.get(), QBCommonConfigs.REGENERATION_EFFECT_AMPLIFIER.get()));
                 pLevel.addFreshEntity(areaEffectCloud);
                 int delay = (int) (areaEffectCloud.getDuration() * 58.5);
 
                 pPlayer.swing(pUsedHand);
-                pPlayer.getCooldowns().addCooldown(this, QueenBeeModCommonConfigs.STINGER_SWORD_COOLDOWN.get());
+                pPlayer.getCooldowns().addCooldown(this, QBCommonConfigs.STINGER_SWORD_COOLDOWN.get());
 
                 // I think this is not the best way to do it. Not sure to be honest.
                 // TODO: Find a better way to schedule the bee death
@@ -113,7 +113,7 @@ public class StingerSwordItem extends SwordItem {
 
     @Override
     public void appendHoverText(@NotNull ItemStack pStack, @Nullable Level pLevel, @NotNull List<Component> pTooltipComponents, @NotNull TooltipFlag pIsAdvanced) {
-        if (QueenBeeModCommonConfigs.ENABLE_CURE_BEE.get() && QueenBeeModCommonConfigs.ENABLE_STINGER_SWORD_TOOLTIP.get()) {
+        if (QBCommonConfigs.ENABLE_CURE_BEE.get() && QBCommonConfigs.ENABLE_STINGER_SWORD_TOOLTIP.get()) {
             if (Screen.hasShiftDown()) {
                 pTooltipComponents.add(Component.translatable("tooltip." + QueenBeeMod.MOD_ID + ".stinger_sword").withStyle(ChatFormatting.YELLOW));
             } else {

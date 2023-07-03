@@ -1,6 +1,6 @@
 package com.cerbon.queen_bee.recipe.brewing;
 
-import com.cerbon.queen_bee.item.QueenBeeModItems;
+import com.cerbon.queen_bee.item.QBItems;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -19,7 +19,7 @@ public class StingerToPoisonPotionBrewingRecipe implements IBrewingRecipe {
 
     @Override
     public boolean isIngredient(ItemStack ingredient) {
-        return ingredient.is(QueenBeeModItems.STINGER.get());
+        return ingredient.is(QBItems.STINGER.get());
     }
 
     @Override

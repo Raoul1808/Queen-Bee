@@ -1,7 +1,7 @@
 package com.cerbon.queen_bee.mixin.entities;
 
-import com.cerbon.queen_bee.config.QueenBeeModCommonConfigs;
-import com.cerbon.queen_bee.item.QueenBeeModItems;
+import com.cerbon.queen_bee.config.QBCommonConfigs;
+import com.cerbon.queen_bee.item.QBItems;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -21,13 +21,13 @@ public abstract class BeeEntityMixin extends Animal implements NeutralMob{
     }
 
     public boolean canAttack(@NotNull LivingEntity target){
-        boolean isAntennaEnabled = QueenBeeModCommonConfigs.ENABLE_ANTENNA.get();
+        boolean isAntennaEnabled = QBCommonConfigs.ENABLE_ANTENNA.get();
 
         if (isAntennaEnabled){
             String targetDimension = target.level().dimension().location().toString();
             boolean isTargetInBumblezoneDimension = targetDimension.equals("the_bumblezone:the_bumblezone");
-            boolean isTargetWearingAntenna = target.getItemBySlot(EquipmentSlot.HEAD).getItem() == (QueenBeeModItems.ANTENNA.get());
-            boolean isAntennaEnabledInBlumblezoneDimension = QueenBeeModCommonConfigs.ENABLE_ANTENNA_BUMBLEZONE_DIMENSION.get();
+            boolean isTargetWearingAntenna = target.getItemBySlot(EquipmentSlot.HEAD).getItem() == (QBItems.ANTENNA.get());
+            boolean isAntennaEnabledInBlumblezoneDimension = QBCommonConfigs.ENABLE_ANTENNA_BUMBLEZONE_DIMENSION.get();
 
             if (isAntennaEnabledInBlumblezoneDimension && isTargetInBumblezoneDimension && isTargetWearingAntenna){
                 return false;
@@ -40,13 +40,13 @@ public abstract class BeeEntityMixin extends Animal implements NeutralMob{
 
     public void setTarget(@Nullable LivingEntity target) {
         if (target != null){
-            boolean isAntennaEnabled = QueenBeeModCommonConfigs.ENABLE_ANTENNA.get();
+            boolean isAntennaEnabled = QBCommonConfigs.ENABLE_ANTENNA.get();
 
             if (isAntennaEnabled){
                 String targetDimension = target.level().dimension().location().toString();
                 boolean isTargetInBumblezoneDimension = targetDimension.equals("the_bumblezone:the_bumblezone");
-                boolean isTargetWearingAntenna = target.getItemBySlot(EquipmentSlot.HEAD).getItem() == (QueenBeeModItems.ANTENNA.get());
-                boolean isAntennaEnabledInBlumblezoneDimension = QueenBeeModCommonConfigs.ENABLE_ANTENNA_BUMBLEZONE_DIMENSION.get();
+                boolean isTargetWearingAntenna = target.getItemBySlot(EquipmentSlot.HEAD).getItem() == (QBItems.ANTENNA.get());
+                boolean isAntennaEnabledInBlumblezoneDimension = QBCommonConfigs.ENABLE_ANTENNA_BUMBLEZONE_DIMENSION.get();
 
                 if (isAntennaEnabledInBlumblezoneDimension && isTargetInBumblezoneDimension && isTargetWearingAntenna){
                     return;

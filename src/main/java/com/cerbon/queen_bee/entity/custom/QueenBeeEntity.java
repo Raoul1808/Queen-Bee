@@ -36,6 +36,8 @@ import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.animal.Bee;
 import net.minecraft.world.entity.animal.FlyingAnimal;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
@@ -166,7 +168,7 @@ public class QueenBeeEntity extends PathfinderMob implements GeoEntity, FlyingAn
                   areaEffectCloud.setOwner(this);
                   areaEffectCloud.setDuration(QBCommonConfigs.POISON_NIMBUS_DURATION.get());
                   areaEffectCloud.setRadius(QBCommonConfigs.POISON_NIMBUS_RADIUS.get());
-                  areaEffectCloud.setFixedColor(8889187);
+                  areaEffectCloud.setFixedColor(PotionUtils.getColor(Potions.POISON));
                   areaEffectCloud.addEffect(new MobEffectInstance(MobEffects.POISON, QBCommonConfigs.POISON_EFFECT_DURATION.get(), QBCommonConfigs.POISON_EFFECT_AMPLIFIER.get()));
                   this.level().addFreshEntity(areaEffectCloud);
               }

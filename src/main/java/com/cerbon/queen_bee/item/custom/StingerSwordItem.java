@@ -17,6 +17,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
@@ -83,7 +85,7 @@ public class StingerSwordItem extends SwordItem {
                 areaEffectCloud.setOwner(pPlayer);
                 areaEffectCloud.setDuration(QBCommonConfigs.REGENERATION_AREA_EFFECT_CLOUD_DURATION.get());
                 areaEffectCloud.setRadius(QBCommonConfigs.REGENERATION_AREA_EFFECT_CLOUD_RADIUS.get());
-                areaEffectCloud.setFixedColor(13458603);
+                areaEffectCloud.setFixedColor(PotionUtils.getColor(Potions.REGENERATION));
                 areaEffectCloud.addEffect(new MobEffectInstance(MobEffects.REGENERATION, QBCommonConfigs.REGENERATION_EFFECT_DURATION.get(), QBCommonConfigs.REGENERATION_EFFECT_AMPLIFIER.get()));
                 pLevel.addFreshEntity(areaEffectCloud);
                 int delay = (int) (areaEffectCloud.getDuration() * 58.5);

@@ -106,7 +106,6 @@ public class StingerSwordItem extends SwordItem {
         return super.use(pLevel, pPlayer, pUsedHand);
     }
 
-
     @Override
     public void appendHoverText(@NotNull ItemStack pStack, @Nullable Level pLevel, @NotNull List<Component> pTooltipComponents, @NotNull TooltipFlag pIsAdvanced) {
         if (QBCommonConfigs.ENABLE_CURE_BEE.get() && QBCommonConfigs.ENABLE_STINGER_SWORD_TOOLTIP.get()) {

@@ -1,9 +1,9 @@
 package com.cerbon.queen_bee.item;
 
-import com.cerbon.queen_bee.QueenBeeMod;
 import com.cerbon.queen_bee.entity.QBEntities;
 import com.cerbon.queen_bee.item.custom.AntennaArmorItem;
 import com.cerbon.queen_bee.item.custom.StingerSwordItem;
+import com.cerbon.queen_bee.util.QBConstants;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.ForgeSpawnEggItem;
@@ -13,7 +13,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 public class QBItems {
-    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, QueenBeeMod.MOD_ID);
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, QBConstants.MOD_ID);
 
     public static final RegistryObject<Item> STINGER = ITEMS.register("stinger",
             () -> new Item(new Item.Properties().food(QBFoods.STINGER)));

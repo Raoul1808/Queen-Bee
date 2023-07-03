@@ -2,6 +2,7 @@ package com.cerbon.queen_bee.mixin.entities;
 
 import com.cerbon.queen_bee.config.QBCommonConfigs;
 import com.cerbon.queen_bee.item.QBItems;
+import com.cerbon.queen_bee.util.QBConstants;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -25,7 +26,7 @@ public abstract class BeeEntityMixin extends Animal implements NeutralMob{
 
         if (isAntennaEnabled){
             String targetDimension = target.level().dimension().location().toString();
-            boolean isTargetInBumblezoneDimension = targetDimension.equals("the_bumblezone:the_bumblezone");
+            boolean isTargetInBumblezoneDimension = targetDimension.equals(QBConstants.BUMBLEZONE_DIMENSION_ID);
             boolean isTargetWearingAntenna = target.getItemBySlot(EquipmentSlot.HEAD).getItem() == (QBItems.ANTENNA.get());
             boolean isAntennaEnabledInBlumblezoneDimension = QBCommonConfigs.ENABLE_ANTENNA_BUMBLEZONE_DIMENSION.get();
 
@@ -44,7 +45,7 @@ public abstract class BeeEntityMixin extends Animal implements NeutralMob{
 
             if (isAntennaEnabled){
                 String targetDimension = target.level().dimension().location().toString();
-                boolean isTargetInBumblezoneDimension = targetDimension.equals("the_bumblezone:the_bumblezone");
+                boolean isTargetInBumblezoneDimension = targetDimension.equals(QBConstants.BUMBLEZONE_DIMENSION_ID);
                 boolean isTargetWearingAntenna = target.getItemBySlot(EquipmentSlot.HEAD).getItem() == (QBItems.ANTENNA.get());
                 boolean isAntennaEnabledInBlumblezoneDimension = QBCommonConfigs.ENABLE_ANTENNA_BUMBLEZONE_DIMENSION.get();
 

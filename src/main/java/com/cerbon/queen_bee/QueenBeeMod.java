@@ -6,6 +6,7 @@ import com.cerbon.queen_bee.entity.QBEntities;
 import com.cerbon.queen_bee.item.QBCreativeModeTabs;
 import com.cerbon.queen_bee.item.QBItems;
 import com.cerbon.queen_bee.loot.QBLootModifiers;
+import com.cerbon.queen_bee.util.QBConstants;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -19,11 +20,9 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.jetbrains.annotations.NotNull;
 
-@Mod(QueenBeeMod.MOD_ID)
+@Mod(QBConstants.MOD_ID)
 public class QueenBeeMod
 {
-    public static final String MOD_ID = "queen_bee";
-
     public QueenBeeMod()
     {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -36,7 +35,7 @@ public class QueenBeeMod
 
         MinecraftForge.EVENT_BUS.register(this);
 
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, QBCommonConfigs.SPEC, "queen_bee.toml");
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, QBCommonConfigs.SPEC, QBConstants.COMMON_CONFIG_NAME);
     }
 
     private void addCreativeTab(@NotNull BuildCreativeModeTabContentsEvent event) {
@@ -48,7 +47,7 @@ public class QueenBeeMod
         }
     }
 
-    @Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+    @Mod.EventBusSubscriber(modid = QBConstants.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModEvents
     {
         @SubscribeEvent

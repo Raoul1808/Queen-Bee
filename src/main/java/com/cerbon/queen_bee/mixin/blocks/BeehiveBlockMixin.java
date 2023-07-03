@@ -2,6 +2,7 @@ package com.cerbon.queen_bee.mixin.blocks;
 
 import com.cerbon.queen_bee.config.QBCommonConfigs;
 import com.cerbon.queen_bee.item.QBItems;
+import com.cerbon.queen_bee.util.QBConstants;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -41,7 +42,7 @@ public abstract class BeehiveBlockMixin {
 
         if (isAntennaEnabled){
             String playerDimension = pPlayer.level().dimension().location().toString();
-            boolean isPlayerInBumblezoneDimension = playerDimension.equals("the_bumblezone:the_bumblezone");
+            boolean isPlayerInBumblezoneDimension = playerDimension.equals(QBConstants.BUMBLEZONE_DIMENSION_ID);
             boolean isPlayerWearingAntenna = pPlayer.getItemBySlot(EquipmentSlot.HEAD).is(QBItems.ANTENNA.get());
             boolean isAntennaEnabledInBlumblezoneDimension = QBCommonConfigs.ENABLE_ANTENNA_BUMBLEZONE_DIMENSION.get();
 

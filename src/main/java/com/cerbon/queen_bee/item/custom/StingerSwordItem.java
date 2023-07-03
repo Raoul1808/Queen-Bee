@@ -1,8 +1,8 @@
 package com.cerbon.queen_bee.item.custom;
 
-import com.cerbon.queen_bee.QueenBeeMod;
 import com.cerbon.queen_bee.config.QBCommonConfigs;
 import com.cerbon.queen_bee.item.QBItems;
+import com.cerbon.queen_bee.util.QBConstants;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
@@ -115,9 +115,9 @@ public class StingerSwordItem extends SwordItem {
     public void appendHoverText(@NotNull ItemStack pStack, @Nullable Level pLevel, @NotNull List<Component> pTooltipComponents, @NotNull TooltipFlag pIsAdvanced) {
         if (QBCommonConfigs.ENABLE_CURE_BEE.get() && QBCommonConfigs.ENABLE_STINGER_SWORD_TOOLTIP.get()) {
             if (Screen.hasShiftDown()) {
-                pTooltipComponents.add(Component.translatable("tooltip." + QueenBeeMod.MOD_ID + ".stinger_sword").withStyle(ChatFormatting.YELLOW));
+                pTooltipComponents.add(Component.translatable(QBConstants.STINGER_SWORD_SHIFT_DOWN_TOOLTIP).withStyle(ChatFormatting.YELLOW));
             } else {
-                pTooltipComponents.add(Component.translatable("tooltip." + QueenBeeMod.MOD_ID + ".item.shift_up").withStyle(ChatFormatting.YELLOW));
+                pTooltipComponents.add(Component.translatable(QBConstants.ITEM_SHIFT_UP_TOOLTIP).withStyle(ChatFormatting.YELLOW));
             }
         }
         super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);

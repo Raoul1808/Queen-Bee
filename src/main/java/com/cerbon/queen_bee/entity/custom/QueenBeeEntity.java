@@ -3,6 +3,7 @@ package com.cerbon.queen_bee.entity.custom;
 import com.cerbon.queen_bee.client.sound.QueenBeeFlyingSoundInstance;
 import com.cerbon.queen_bee.config.QBCommonConfigs;
 import com.cerbon.queen_bee.item.QBItems;
+import com.cerbon.queen_bee.util.QBConstants;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -107,7 +108,7 @@ public class QueenBeeEntity extends PathfinderMob implements GeoEntity, FlyingAn
 
         if (isAntennaEnabled){
             String targetDimension = pTarget.level().dimension().location().toString();
-            boolean isTargetInBumblezoneDimension = targetDimension.equals("the_bumblezone:the_bumblezone");
+            boolean isTargetInBumblezoneDimension = targetDimension.equals(QBConstants.BUMBLEZONE_DIMENSION_ID);
             boolean isTargetWearingAntenna = pTarget.getItemBySlot(EquipmentSlot.HEAD).getItem() == (QBItems.ANTENNA.get());
             boolean isAntennaEnabledInBlumblezoneDimension = QBCommonConfigs.ENABLE_ANTENNA_BUMBLEZONE_DIMENSION.get();
 

@@ -55,8 +55,8 @@ public class StingerSwordItem extends SwordItem {
             }
 
             @Override
-            public Ingredient getRepairIngredient() {
-                return null;
+            public @NotNull Ingredient getRepairIngredient() {
+                return Ingredient.of(new ItemStack(QBItems.STINGER.get()));
             }
         }, pAttackDamageModifier, pAttackSpeedModifier, pProperties);
     }

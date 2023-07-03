@@ -17,6 +17,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import org.jetbrains.annotations.NotNull;
 
 @Mod(QueenBeeMod.MOD_ID)
 public class QueenBeeMod
@@ -38,7 +39,7 @@ public class QueenBeeMod
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, QBCommonConfigs.SPEC, "queen_bee.toml");
     }
 
-    private void addCreativeTab(BuildCreativeModeTabContentsEvent event) {
+    private void addCreativeTab(@NotNull BuildCreativeModeTabContentsEvent event) {
         if(event.getTab() == QBCreativeModeTabs.QUEEN_BEE_TAB.get()){
             event.accept(QBItems.STINGER);
             event.accept(QBItems.QUEEN_BEE_SPAWN_EGG);

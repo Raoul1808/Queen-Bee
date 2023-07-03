@@ -76,7 +76,7 @@ public class QueenBeeEntity extends PathfinderMob implements GeoEntity, FlyingAn
         this.setPathfindingMalus(BlockPathTypes.FENCE, -1.0F);
     }
 
-    public static AttributeSupplier setAttribute(){
+    public static @NotNull AttributeSupplier setAttribute(){
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 100.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.3F)
@@ -132,7 +132,7 @@ public class QueenBeeEntity extends PathfinderMob implements GeoEntity, FlyingAn
     }
 
     @Override
-    public boolean doHurtTarget(Entity pEntity) {
+    public boolean doHurtTarget(@NotNull Entity pEntity) {
         boolean flag = pEntity.hurt(this.damageSources().sting(this), (float)((int)this.getAttributeValue(Attributes.ATTACK_DAMAGE)));
         if(flag){
             this.doEnchantDamageEffects(this, pEntity);
@@ -151,7 +151,7 @@ public class QueenBeeEntity extends PathfinderMob implements GeoEntity, FlyingAn
     }
 
     @Override
-    public boolean hurt(DamageSource pSource, float pAmount) {
+    public boolean hurt(@NotNull DamageSource pSource, float pAmount) {
         if (!pSource.isCreativePlayer() && pSource.getEntity() instanceof LivingEntity) {
             if (this.isAngry() && QBCommonConfigs.ENABLE_POISON_NIMBUS.get()) {
                 if (this.poisonNimbusCooldown == 0 && this.random.nextFloat() <= 0.2F) {
@@ -179,7 +179,7 @@ public class QueenBeeEntity extends PathfinderMob implements GeoEntity, FlyingAn
     }
 
     @Override
-    public float getWalkTargetValue(@NotNull BlockPos pPos, LevelReader pLevel) {
+    public float getWalkTargetValue(@NotNull BlockPos pPos, @NotNull LevelReader pLevel) {
         return pLevel.getBlockState(pPos).isAir() ? 10.0F : 0.0F;
     }
 
@@ -311,12 +311,12 @@ public class QueenBeeEntity extends PathfinderMob implements GeoEntity, FlyingAn
     }
 
     @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
+    public void registerControllers(AnimatableManager.@NotNull ControllerRegistrar controllerRegistrar) {
         controllerRegistrar.add(new AnimationController<>(this, "controller", 4, this::predicate));
         controllerRegistrar.add(new AnimationController<>(this, "attackController", 4, this::attackPredicate));
     }
 
-    private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> tAnimationState) {
+    private <T extends GeoAnimatable> PlayState predicate(@NotNull AnimationState<T> tAnimationState) {
         tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.queen_bee.idle", Animation.LoopType.LOOP));
         return PlayState.CONTINUE;
     }

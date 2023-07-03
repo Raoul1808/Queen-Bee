@@ -42,7 +42,7 @@ public class AddItemModifier extends LootModifier {
         return CODEC.get();
     }
 
-    public static boolean checkIfInjectLoot(LootContext context) {
+    public static boolean checkIfInjectLoot(@NotNull LootContext context) {
         if (context.hasParam(LootContextParams.THIS_ENTITY)) {
             return context.getParam(LootContextParams.THIS_ENTITY) instanceof Bee;
         }

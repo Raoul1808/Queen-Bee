@@ -27,7 +27,7 @@ public class QBJEIPlugin implements IModPlugin {
     }
 
     @Override
-    public void registerRecipes(IRecipeRegistration registration) {
+    public void registerRecipes(@NotNull IRecipeRegistration registration) {
         registration.addIngredientInfo(new ItemStack(QBItems.STINGER_SWORD.get()),
                 VanillaTypes.ITEM_STACK, Component.translatable("tooltip." + QueenBeeMod.MOD_ID + ".stinger_sword"));
 
@@ -54,7 +54,7 @@ public class QBJEIPlugin implements IModPlugin {
         registration.addRecipes(RecipeTypes.BREWING, recipes);
     }
 
-    private void addBrewingRecipe(List<IJeiBrewingRecipe> recipes, IVanillaRecipeFactory recipeFactory,
+    private void addBrewingRecipe(@NotNull List<IJeiBrewingRecipe> recipes, @NotNull IVanillaRecipeFactory recipeFactory,
                                   List<ItemStack> ingredient, ItemStack input, ItemStack output) {
         recipes.add(recipeFactory.createBrewingRecipe(ingredient, Collections.singletonList(input), output));
     }

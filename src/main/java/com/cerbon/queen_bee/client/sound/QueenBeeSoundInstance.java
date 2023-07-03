@@ -9,12 +9,13 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.jetbrains.annotations.NotNull;
 
 @OnlyIn(Dist.CLIENT)
 public abstract class QueenBeeSoundInstance extends AbstractTickableSoundInstance {
     protected final QueenBeeEntity queenBee;
     private boolean hasSwitched;
-    protected QueenBeeSoundInstance(QueenBeeEntity queenBee, SoundEvent pSoundEvent, SoundSource pSource) {
+    protected QueenBeeSoundInstance(@NotNull QueenBeeEntity queenBee, SoundEvent pSoundEvent, SoundSource pSource) {
         super(pSoundEvent, pSource, SoundInstance.createUnseededRandom());
         this.queenBee = queenBee;
         this.x = ((float)queenBee.getX());

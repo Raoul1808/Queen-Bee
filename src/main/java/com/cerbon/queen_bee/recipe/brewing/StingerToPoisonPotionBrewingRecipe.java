@@ -11,14 +11,14 @@ import org.jetbrains.annotations.NotNull;
 
 public class StingerToPoisonPotionBrewingRecipe implements IBrewingRecipe {
     @Override
-    public boolean isInput(ItemStack input) {
+    public boolean isInput(@NotNull ItemStack input) {
         Item inputItem = input.getItem();
         return (inputItem == Items.POTION || inputItem == Items.SPLASH_POTION || inputItem == Items.LINGERING_POTION) && PotionUtils.getPotion(input) == Potions.AWKWARD;
 
     }
 
     @Override
-    public boolean isIngredient(ItemStack ingredient) {
+    public boolean isIngredient(@NotNull ItemStack ingredient) {
         return ingredient.is(QBItems.STINGER.get());
     }
 

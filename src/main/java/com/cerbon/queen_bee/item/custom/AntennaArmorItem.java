@@ -33,7 +33,7 @@ public class AntennaArmorItem extends ArmorItem implements GeoItem {
     }
 
     @Override
-    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+    public void initializeClient(@NotNull Consumer<IClientItemExtensions> consumer) {
         consumer.accept(new IClientItemExtensions() {
             private AntennaArmorRenderer renderer;
 
@@ -61,13 +61,13 @@ public class AntennaArmorItem extends ArmorItem implements GeoItem {
         super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
     }
 
-    private PlayState predicate(AnimationState animationState){
+    private PlayState predicate(@NotNull AnimationState animationState){
      animationState.getController().setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
      return PlayState.CONTINUE;
     }
 
     @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
+    public void registerControllers(AnimatableManager.@NotNull ControllerRegistrar controllerRegistrar) {
         controllerRegistrar.add(new AnimationController<>(this, "controller", 0, this::predicate));
     }
 

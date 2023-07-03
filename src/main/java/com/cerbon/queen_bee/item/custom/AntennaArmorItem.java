@@ -18,6 +18,7 @@ import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoItem;
+import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.*;
@@ -61,7 +62,7 @@ public class AntennaArmorItem extends ArmorItem implements GeoItem {
         super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
     }
 
-    private PlayState predicate(@NotNull AnimationState animationState){
+    private <T extends GeoAnimatable> PlayState predicate(@NotNull AnimationState<T> animationState){
      animationState.getController().setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
      return PlayState.CONTINUE;
     }

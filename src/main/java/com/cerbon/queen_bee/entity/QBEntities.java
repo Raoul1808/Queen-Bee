@@ -20,7 +20,7 @@ public class QBEntities {
                             .sized(0.85f, 1.38f)
                             .build(new ResourceLocation(QBConstants.MOD_ID, "queen_bee").toString()));
 
-    public static void register(IEventBus eventBusbus){
-        ENTITY_TYPES.register(eventBusbus);
+    public static void register(IEventBus eventBus){
+        ENTITY_TYPES.register(eventBus);
     }
 }

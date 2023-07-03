@@ -82,12 +82,12 @@ public class QueenBeeEntity extends PathfinderMob implements GeoEntity, FlyingAn
     public static @NotNull AttributeSupplier setAttribute(){
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 100.0D)
-                .add(Attributes.MOVEMENT_SPEED, 0.3F)
-                .add(Attributes.ARMOR, 5.0D)
                 .add(Attributes.ATTACK_DAMAGE, 7.0D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.5D)
+                .add(Attributes.MOVEMENT_SPEED, 0.3F)
                 .add(Attributes.FLYING_SPEED, 0.6F)
-                .add(Attributes.FOLLOW_RANGE, 48.0D).build();
+                .add(Attributes.FOLLOW_RANGE, 48.0D)
+                .add(Attributes.ARMOR, 5.0D).build();
     }
 
     @Override
@@ -135,13 +135,14 @@ public class QueenBeeEntity extends PathfinderMob implements GeoEntity, FlyingAn
     @Override
     public boolean doHurtTarget(@NotNull Entity pEntity) {
         boolean flag = pEntity.hurt(this.damageSources().sting(this), (float)((int)this.getAttributeValue(Attributes.ATTACK_DAMAGE)));
-
         if(flag){
             this.doEnchantDamageEffects(this, pEntity);
-            if(pEntity instanceof LivingEntity){
-                ((LivingEntity)pEntity).addEffect(new MobEffectInstance(MobEffects.POISON, 200, this.level().getDifficulty() == Difficulty.EASY ? 0 : 1));
-                ((LivingEntity)pEntity).addEffect(new MobEffectInstance(MobEffects.CONFUSION, 300, 0));
+
+            if(pEntity instanceof LivingEntity livingEntity) {
+                livingEntity.addEffect(new MobEffectInstance(MobEffects.POISON, 200, this.level().getDifficulty() == Difficulty.EASY ? 0 : 1));
+                livingEntity.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 300, 0));
             }
+
             this.playSound(SoundEvents.BEE_STING, 1.0F, 1.0F);
         }
         return flag;
@@ -164,13 +165,13 @@ public class QueenBeeEntity extends PathfinderMob implements GeoEntity, FlyingAn
         LivingEntity target = this.getTarget();
           if (target != null){
               if (target.distanceToSqr(this) <= QBCommonConfigs.TARGET_DISTANCE_TO_SQR.get() && this.hasLineOfSight(target)) {
-                  PoisonNimbusAreaEffectCloud areaEffectCloud = new PoisonNimbusAreaEffectCloud(this.level(), this.getX(), this.getY(), this.getZ());
-                  areaEffectCloud.setOwner(this);
-                  areaEffectCloud.setDuration(QBCommonConfigs.POISON_NIMBUS_DURATION.get());
-                  areaEffectCloud.setRadius(QBCommonConfigs.POISON_NIMBUS_RADIUS.get());
-                  areaEffectCloud.setFixedColor(PotionUtils.getColor(Potions.POISON));
-                  areaEffectCloud.addEffect(new MobEffectInstance(MobEffects.POISON, QBCommonConfigs.POISON_EFFECT_DURATION.get(), QBCommonConfigs.POISON_EFFECT_AMPLIFIER.get()));
-                  this.level().addFreshEntity(areaEffectCloud);
+                  PoisonNimbusAreaEffectCloud poisonNimbus = new PoisonNimbusAreaEffectCloud(this.level(), this.getX(), this.getY(), this.getZ());
+                  poisonNimbus.setOwner(this);
+                  poisonNimbus.setDuration(QBCommonConfigs.POISON_NIMBUS_DURATION.get());
+                  poisonNimbus.setRadius(QBCommonConfigs.POISON_NIMBUS_RADIUS.get());
+                  poisonNimbus.setFixedColor(PotionUtils.getColor(Potions.POISON));
+                  poisonNimbus.addEffect(new MobEffectInstance(MobEffects.POISON, QBCommonConfigs.POISON_EFFECT_DURATION.get(), QBCommonConfigs.POISON_EFFECT_AMPLIFIER.get()));
+                  this.level().addFreshEntity(poisonNimbus);
               }
           }
     }
@@ -202,16 +203,6 @@ public class QueenBeeEntity extends PathfinderMob implements GeoEntity, FlyingAn
     }
 
     @Override
-    public void aiStep() {
-        super.aiStep();
-        if (!this.level().isClientSide){
-            if (this.poisonNimbusCooldown > 0){
-                --poisonNimbusCooldown;
-            }
-        }
-    }
-
-    @Override
     protected void customServerAiStep() {
         if(this.isInWaterOrBubble()){
             ++this.underWaterTicks;
@@ -225,7 +216,12 @@ public class QueenBeeEntity extends PathfinderMob implements GeoEntity, FlyingAn
 
         if (!this.level().isClientSide) {
             this.updatePersistentAnger((ServerLevel)this.level(), false);
+
+            if (this.poisonNimbusCooldown > 0){
+                --poisonNimbusCooldown;
+            }
         }
+
         if (QBCommonConfigs.ENABLE_QUEEN_BEE_BOSS_BAR.get()){
             this.bossInfo.setProgress(this.getHealth() / this.getMaxHealth());
         }
@@ -411,14 +407,13 @@ public class QueenBeeEntity extends PathfinderMob implements GeoEntity, FlyingAn
         public void tick() {
             LivingEntity target = this.queenBee.getTarget();
             if (target == null) return;
+
             double d0 = this.queenBee.getAttributeValue(Attributes.FOLLOW_RANGE);
             AABB aabb = this.queenBee.getBoundingBox().inflate(d0, 10.0D, d0);
             List<Bee> nearbyBees = this.queenBee.level().getEntitiesOfClass(Bee.class, aabb);
 
             for(Bee bee : nearbyBees){
-                if (bee.getPersistentAngerTarget() == null){
-                    bee.setTarget(target);
-                }
+                if (bee.getPersistentAngerTarget() == null) bee.setTarget(target);
             }
         }
     }

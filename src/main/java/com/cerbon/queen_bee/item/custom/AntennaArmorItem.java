@@ -29,6 +29,7 @@ import java.util.function.Consumer;
 
 public class AntennaArmorItem extends ArmorItem implements GeoItem {
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
+
     public AntennaArmorItem(ArmorMaterial material, Type type, Properties properties) {
         super(material, type, properties);
     }
@@ -39,8 +40,7 @@ public class AntennaArmorItem extends ArmorItem implements GeoItem {
             private AntennaArmorRenderer renderer;
 
             @Override
-            public @NotNull HumanoidModel<?> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack,
-                                                                   EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
+            public @NotNull HumanoidModel<?> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
                 if (this.renderer == null)
                     this.renderer = new AntennaArmorRenderer();
 

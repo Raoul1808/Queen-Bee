@@ -42,7 +42,7 @@ public abstract class BeeEntityMixin extends Animal implements NeutralMob{
             if (QBCommonConfigs.ENABLE_ANTENNA.get()){
                 String targetDimension = target.level().dimension().location().toString();
                 boolean isTargetInBumblezoneDimension = targetDimension.equals(QBConstants.BUMBLEZONE_DIMENSION_ID);
-                boolean isTargetWearingAntenna = target.getItemBySlot(EquipmentSlot.HEAD).getItem() == (QBItems.ANTENNA.get());
+                boolean isTargetWearingAntenna = target.getItemBySlot(EquipmentSlot.HEAD).is(QBItems.ANTENNA.get());
                 boolean isAntennaEnabledInBlumblezoneDimension = QBCommonConfigs.ENABLE_ANTENNA_BUMBLEZONE_DIMENSION.get();
 
                 if (isAntennaEnabledInBlumblezoneDimension && isTargetInBumblezoneDimension && isTargetWearingAntenna){

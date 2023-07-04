@@ -72,38 +72,37 @@ public class StingerSwordItem extends SwordItem {
 
     @Override
     public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level pLevel, @NotNull Player pPlayer, @NotNull InteractionHand pUsedHand) {
-        if (QBCommonConfigs.ENABLE_CURE_BEE.get()) {
-            if (pPlayer.isCrouching() && pPlayer.getItemBySlot(EquipmentSlot.HEAD).getItem() == QBItems.ANTENNA.get()) {
-                Bee bee = EntityType.BEE.create(pLevel);
-                if (bee != null) {
-                    bee.moveTo(pPlayer.getX(), pPlayer.getY() + 1, pPlayer.getZ());
-                    bee.setInvulnerable(true);
-                    bee.setNoAi(true);
-                    pLevel.addFreshEntity(bee);
+        if (QBCommonConfigs.ENABLE_CURE_BEE.get() && pPlayer.isCrouching() && pPlayer.getItemBySlot(EquipmentSlot.HEAD).is(QBItems.ANTENNA.get())) {
+
+            Bee bee = new Bee(EntityType.BEE, pLevel);
+            bee.moveTo(pPlayer.getX(), pPlayer.getY() + 1, pPlayer.getZ());
+            bee.setInvulnerable(true);
+            bee.setNoAi(true);
+
+            AreaEffectCloud areaEffectCloud = new AreaEffectCloud(pLevel, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ());
+            areaEffectCloud.addEffect(new MobEffectInstance(MobEffects.REGENERATION, QBCommonConfigs.REGENERATION_EFFECT_DURATION.get(), QBCommonConfigs.REGENERATION_EFFECT_AMPLIFIER.get()));
+            areaEffectCloud.setDuration(QBCommonConfigs.REGENERATION_AREA_EFFECT_CLOUD_DURATION.get());
+            areaEffectCloud.setRadius(QBCommonConfigs.REGENERATION_AREA_EFFECT_CLOUD_RADIUS.get());
+            areaEffectCloud.setFixedColor(PotionUtils.getColor(Potions.REGENERATION));
+            areaEffectCloud.setOwner(pPlayer);
+
+            pLevel.addFreshEntity(bee);
+            pLevel.addFreshEntity(areaEffectCloud);
+
+            int delay = (int) (areaEffectCloud.getDuration() * 58.5);
+
+            pPlayer.swing(pUsedHand);
+            pPlayer.getCooldowns().addCooldown(this, QBCommonConfigs.STINGER_SWORD_COOLDOWN.get());
+
+            // I think this is not the best way to do it. Not sure to be honest.
+            // TODO: Find a better way to schedule the bee death
+            new Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    bee.remove(Entity.RemovalReason.KILLED);
                 }
-                AreaEffectCloud areaEffectCloud = new AreaEffectCloud(pLevel, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ());
-                areaEffectCloud.setOwner(pPlayer);
-                areaEffectCloud.setDuration(QBCommonConfigs.REGENERATION_AREA_EFFECT_CLOUD_DURATION.get());
-                areaEffectCloud.setRadius(QBCommonConfigs.REGENERATION_AREA_EFFECT_CLOUD_RADIUS.get());
-                areaEffectCloud.setFixedColor(PotionUtils.getColor(Potions.REGENERATION));
-                areaEffectCloud.addEffect(new MobEffectInstance(MobEffects.REGENERATION, QBCommonConfigs.REGENERATION_EFFECT_DURATION.get(), QBCommonConfigs.REGENERATION_EFFECT_AMPLIFIER.get()));
-                pLevel.addFreshEntity(areaEffectCloud);
-                int delay = (int) (areaEffectCloud.getDuration() * 58.5);
+            }, delay);
 
-                pPlayer.swing(pUsedHand);
-                pPlayer.getCooldowns().addCooldown(this, QBCommonConfigs.STINGER_SWORD_COOLDOWN.get());
-
-                // I think this is not the best way to do it. Not sure to be honest.
-                // TODO: Find a better way to schedule the bee death
-                new Timer().schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        if (bee != null){
-                            bee.remove(Entity.RemovalReason.KILLED);
-                        }
-                    }
-                }, delay);
-            }
         }
         return super.use(pLevel, pPlayer, pUsedHand);
     }

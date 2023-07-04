@@ -454,13 +454,12 @@ public class QueenBeeEntity extends PathfinderMob implements GeoEntity, FlyingAn
 
                if (nearbyBees.isEmpty() || allStung){
                    for(int i = 0; i < QBCommonConfigs.ANGRY_BEES_AMOUNT.get(); i++){
-                       Bee bee = EntityType.BEE.create(this.queenBee.level());
-                       if (bee != null){
-                           bee.moveTo(this.queenBee.getX(), this.queenBee.getY(), this.queenBee.getZ());
-                           bee.setTarget(target);
-                           this.queenBee.level().addFreshEntity(bee);
-                       }
+                       Bee bee = new Bee(EntityType.BEE, this.queenBee.level());
+                       bee.moveTo(this.queenBee.getX(), this.queenBee.getY(), this.queenBee.getZ());
+                       bee.setTarget(target);
+                       this.queenBee.level().addFreshEntity(bee);
                    }
+
                    if (this.cooldown >= QBCommonConfigs.SUMMON_ANGRY_BEES_COOLDOWN.get()){
                        this.cooldown = 0;
                    }

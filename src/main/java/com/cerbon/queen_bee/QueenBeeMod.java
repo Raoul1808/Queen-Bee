@@ -16,10 +16,8 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.jetbrains.annotations.NotNull;
 
 @Mod(QBConstants.MOD_ID)
-public class QueenBeeMod
-{
-    public QueenBeeMod()
-    {
+public class QueenBeeMod {
+    public QueenBeeMod() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         modEventBus.addListener(this::addCreativeTab);
 

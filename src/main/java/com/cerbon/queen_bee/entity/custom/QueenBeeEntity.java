@@ -59,22 +59,21 @@ import java.util.List;
 import java.util.UUID;
 
 public class QueenBeeEntity extends PathfinderMob implements GeoEntity, FlyingAnimal, NeutralMob {
+    private final ServerBossEvent bossInfo = new ServerBossEvent(this.getDisplayName(), ServerBossEvent.BossBarColor.YELLOW, ServerBossEvent.BossBarOverlay.PROGRESS);
     private static final EntityDataAccessor<Integer> DATA_REMAINING_ANGER_TIME = SynchedEntityData.defineId(QueenBeeEntity.class, EntityDataSerializers.INT);
-    private UUID persistentAngerTarget;
     private static final UniformInt PERSISTENT_ANGER_TIME = TimeUtil.rangeOfSeconds(39, 58);
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
-    private int underWaterTicks;
+    private UUID persistentAngerTarget;
     private int poisonNimbusCooldown;
-    private final ServerBossEvent bossInfo = new ServerBossEvent(this.getDisplayName(), ServerBossEvent.BossBarColor.YELLOW, ServerBossEvent.BossBarOverlay.PROGRESS);
-
+    private int underWaterTicks;
 
     public QueenBeeEntity(EntityType<? extends QueenBeeEntity> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
         this.moveControl = new FlyingMoveControl(this, 20, true);
         this.xpReward = 20;
         this.setPathfindingMalus(BlockPathTypes.DANGER_FIRE, -1.0F);
-        this.setPathfindingMalus(BlockPathTypes.WATER, -1.0F);
         this.setPathfindingMalus(BlockPathTypes.WATER_BORDER, 16.0F);
+        this.setPathfindingMalus(BlockPathTypes.WATER, -1.0F);
         this.setPathfindingMalus(BlockPathTypes.COCOA, -1.0F);
         this.setPathfindingMalus(BlockPathTypes.FENCE, -1.0F);
     }
@@ -366,6 +365,7 @@ public class QueenBeeEntity extends PathfinderMob implements GeoEntity, FlyingAn
                 return false;
             }
         }
+
         private boolean queenBeeCanTarget() {
             QueenBeeEntity queenBee = (QueenBeeEntity) this.mob;
             return queenBee.isAngry();
@@ -382,7 +382,6 @@ public class QueenBeeEntity extends PathfinderMob implements GeoEntity, FlyingAn
             return QueenBeeEntity.this.isAngry() && super.canContinueToUse();
         }
 
-
         @Override
         protected void alertOther(@NotNull Mob pMob, @NotNull LivingEntity pTarget) {
             if (pMob instanceof QueenBeeEntity && this.mob.hasLineOfSight(pTarget)) {
@@ -397,6 +396,7 @@ public class QueenBeeEntity extends PathfinderMob implements GeoEntity, FlyingAn
         public SetNearbyBeesAngryGoal(QueenBeeEntity queenBee){
             this.queenBee = queenBee;
         }
+
         @Override
         public boolean canUse() {
             LivingEntity target = this.queenBee.getTarget();
@@ -421,9 +421,11 @@ public class QueenBeeEntity extends PathfinderMob implements GeoEntity, FlyingAn
     static class SummonAngryBeesGoal extends Goal{
         private final QueenBeeEntity queenBee;
         private int cooldown;
+
         public SummonAngryBeesGoal(QueenBeeEntity queenBee){
             this.queenBee = queenBee;
         }
+
         @Override
         public boolean canUse() {
             LivingEntity target = this.queenBee.getTarget();
@@ -469,6 +471,7 @@ public class QueenBeeEntity extends PathfinderMob implements GeoEntity, FlyingAn
     }
     static class SetQueenBeeAngryWhenBeeIsAngryGoal extends Goal{
         private final QueenBeeEntity queenBee;
+
         public SetQueenBeeAngryWhenBeeIsAngryGoal(QueenBeeEntity queenBee){
             this.queenBee = queenBee;
         }

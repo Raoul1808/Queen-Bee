@@ -17,6 +17,7 @@ public class QBEvents {
     public static void entityAttributeEvent(@NotNull EntityAttributeCreationEvent event){
         event.put(QBEntities.QUEEN_BEE.get(), QueenBeeEntity.setAttribute());
     }
+
     @SubscribeEvent
     public static void onCommonSetup(@NotNull FMLCommonSetupEvent event){
         event.enqueueWork(()-> BrewingRecipeRegistry.addRecipe(new StingerToPoisonPotionBrewingRecipe()));

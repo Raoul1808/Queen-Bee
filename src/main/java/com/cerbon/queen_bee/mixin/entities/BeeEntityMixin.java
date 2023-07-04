@@ -22,6 +22,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(Bee.class)
 public abstract class BeeEntityMixin extends Animal implements NeutralMob, IBeeEntityMixin {
     private int despawnTime;
+    private boolean canDespawn;
 
     public BeeEntityMixin(EntityType<? extends Bee> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -29,12 +30,14 @@ public abstract class BeeEntityMixin extends Animal implements NeutralMob, IBeeE
 
     @Inject(method = "addAdditionalSaveData", at = @At("TAIL"))
     public void addCustomData(@NotNull CompoundTag pCompound, CallbackInfo ci){
-        pCompound.putInt("despawnTime", this.despawnTime);
+        pCompound.putInt("DespawnTime", this.getDespawnTime());
+        pCompound.putBoolean("CanDespawn", this.canDespawn());
     }
 
     @Inject(method = "readAdditionalSaveData", at = @At("TAIL"))
     public void readCustomData(@NotNull CompoundTag pCompound, CallbackInfo ci){
-        this.despawnTime = pCompound.getInt("despawnTime");
+        this.despawnTime = pCompound.getInt("DespawnTime");
+        this.canDespawn = pCompound.getBoolean("CanDespawn");
     }
 
     @Inject(method = "tick", at = @At("TAIL"))
@@ -43,7 +46,7 @@ public abstract class BeeEntityMixin extends Animal implements NeutralMob, IBeeE
             if (this.getDespawnTime() > 0){
                 --this.despawnTime;
             }
-            if (this.getDespawnTime() == 0 && this.isInvulnerable()){
+            if (this.getDespawnTime() == 0 && this.canDespawn()){
                 this.remove(RemovalReason.KILLED);
             }
         }
@@ -91,5 +94,15 @@ public abstract class BeeEntityMixin extends Animal implements NeutralMob, IBeeE
     @Override
     public void setDespawnTime(int ticks) {
         this.despawnTime = ticks;
+    }
+
+    @Override
+    public boolean canDespawn() {
+        return canDespawn;
+    }
+
+    @Override
+    public void setCanDespawn(boolean canDespawn) {
+        this.canDespawn = canDespawn;
     }
 }

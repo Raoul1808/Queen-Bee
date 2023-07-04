@@ -334,7 +334,7 @@ public class QueenBeeEntity extends PathfinderMob implements GeoEntity, FlyingAn
 
         @Override
         public void addEffect(@NotNull MobEffectInstance pEffectInstance) {
-            AABB aabb = this.getBoundingBox().inflate( 7.0D);
+            AABB aabb = this.getBoundingBox().inflate(QBCommonConfigs.POISON_NIMBUS_RADIUS.get());
             List<LivingEntity> nearbyEntities = this.level().getEntitiesOfClass(LivingEntity.class, aabb);
 
             for (LivingEntity entity : nearbyEntities){

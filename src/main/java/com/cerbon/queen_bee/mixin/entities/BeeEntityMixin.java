@@ -2,7 +2,9 @@ package com.cerbon.queen_bee.mixin.entities;
 
 import com.cerbon.queen_bee.config.QBCommonConfigs;
 import com.cerbon.queen_bee.item.QBItems;
+import com.cerbon.queen_bee.util.IBeeEntityMixin;
 import com.cerbon.queen_bee.util.QBConstants;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -13,12 +15,38 @@ import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Bee.class)
-public abstract class BeeEntityMixin extends Animal implements NeutralMob{
+public abstract class BeeEntityMixin extends Animal implements NeutralMob, IBeeEntityMixin {
+    private int despawnTime;
 
     public BeeEntityMixin(EntityType<? extends Bee> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
+    }
+
+    @Inject(method = "addAdditionalSaveData", at = @At("TAIL"))
+    public void addCustomData(@NotNull CompoundTag pCompound, CallbackInfo ci){
+        pCompound.putInt("despawnTime", this.despawnTime);
+    }
+
+    @Inject(method = "readAdditionalSaveData", at = @At("TAIL"))
+    public void readCustomData(@NotNull CompoundTag pCompound, CallbackInfo ci){
+        this.despawnTime = pCompound.getInt("despawnTime");
+    }
+
+    @Inject(method = "tick", at = @At("TAIL"))
+    public void despawnBee(CallbackInfo ci){
+        if (!this.level().isClientSide){
+            if (this.getDespawnTime() > 0){
+                --this.despawnTime;
+            }
+            if (this.getDespawnTime() == 0 && this.isInvulnerable()){
+                this.remove(RemovalReason.KILLED);
+            }
+        }
     }
 
     public boolean canAttack(@NotNull LivingEntity target){
@@ -53,5 +81,15 @@ public abstract class BeeEntityMixin extends Animal implements NeutralMob{
             }
         }
         super.setTarget(target);
+    }
+
+    @Override
+    public int getDespawnTime() {
+        return despawnTime;
+    }
+
+    @Override
+    public void setDespawnTime(int ticks) {
+        this.despawnTime = ticks;
     }
 }

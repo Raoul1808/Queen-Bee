@@ -116,6 +116,7 @@ dependencies {
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
     implementation fg.deobf("curse.maven:geckolib-388172:${geckolib_version}")
+    implementation fg.deobf("curse.maven:productivebees-377897:${productive_bees_version}")
 //    implementation fg.deobf("curse.maven:the-bumblezone-forge-362479:4557907") //v6.7.20-1.19.4
 
     //JEI

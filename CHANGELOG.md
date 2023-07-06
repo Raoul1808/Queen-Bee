@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.1.0] - 2023-07-?
+
+### Fixed
+
+- Fix bee not despawning when leaving and joining the world
+
+### Changed
+
+- Update mod to 1.20.x
+- General code improvements
+- Make it possible to repair the Stinger Sword using stingers
+
 ## [3.0.3] - 2023-06-24
 
 ### Added
@@ -14,6 +26,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Update JEI version (1.19.4)
+
+## [3.1.0] - 2023-06-?
+
+### Changed
+
+- Update to 1.20
 
 ## [3.0.2] - 2023-06-08
 

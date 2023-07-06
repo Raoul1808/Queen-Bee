@@ -27,12 +27,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Update JEI version (1.19.4)
 
-## [3.1.0] - 2023-06-?
-
-### Changed
-
-- Update to 1.20
-
 ## [3.0.2] - 2023-06-08
 
 ### Added

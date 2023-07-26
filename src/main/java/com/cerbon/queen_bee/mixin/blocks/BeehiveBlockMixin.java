@@ -34,7 +34,7 @@ public abstract class BeehiveBlockMixin {
     @Inject(method = "use", at = @At(value = "INVOKE",
             target = "Lnet/minecraft/world/level/block/CampfireBlock;isSmokeyPos(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;)Z"),
             cancellable = true)
-    public void preventBeesFromLeavingBeeHive(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit, CallbackInfoReturnable<InteractionResult> cir) {
+    public void queen_bee_preventBeesFromLeavingBeeHive(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit, CallbackInfoReturnable<InteractionResult> cir) {
         if (QBCommonConfigs.ENABLE_ANTENNA.get()){
             String playerDimension = pPlayer.level().dimension().location().toString();
             boolean isPlayerInBumblezoneDimension = playerDimension.equals(QBConstants.BUMBLEZONE_DIMENSION_ID);

@@ -85,8 +85,8 @@ public class StingerSwordItem extends SwordItem {
 
             Bee bee = new Bee(EntityType.BEE, pLevel);
             bee.moveTo(pPlayer.getX(), pPlayer.getY() + 1, pPlayer.getZ());
-            ((IBeeEntityMixin)(bee)).setDespawnTime(QBCommonConfigs.REGENERATION_AREA_EFFECT_CLOUD_DURATION.get());
-            ((IBeeEntityMixin)(bee)).setCanDespawn(true);
+            ((IBeeEntityMixin)(bee)).queen_bee_setDespawnTime(QBCommonConfigs.REGENERATION_AREA_EFFECT_CLOUD_DURATION.get());
+            ((IBeeEntityMixin)(bee)).queen_bee_setCanDespawn(true);
             bee.setInvulnerable(true);
             bee.setNoAi(true);
 

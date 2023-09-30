@@ -1,0 +1,17 @@
+{
+    "item.queen_bee.stinger": "針",
+    "item.queen_bee.queen_bee_spawn_egg": "女王バチのスポーンエッグ",
+    "item.queen_bee.stinger_sword": "針の剣",
+    "item.queen_bee.antenna": "触角",
+    "tooltip.queen_bee.item.shift_up": "Shiftで詳細を表示",
+    "tooltip.queen_bee.stinger_sword": "触角を装備中。Shift+右クリックで、周囲に再生の効果を付与するミツバチを召喚する。また、この剣は毒と吐き気を付与する。",
+    "tooltip.queen_bee.antenna": "装備中はミツバチが敵対しなくなる。",
+    "advancement.queen_bee.it_shouldnt_bee_edible.title": "食べられない",
+    "advancement.queen_bee.it_shouldnt_bee_edible.descr": "ハチの針を食べる",
+    "advancement.queen_bee.im_the_queen.title": "蜂起",
+    "advancement.queen_bee.im_the_queen.descr": "女王バチを倒し、触角を手に入れる",
+    "advancement.queen_bee.root.title": "女王バチ",
+    "advancement.queen_bee.root.descr": "女王バチ",
+    "entity.queen_bee.queen_bee": "女王バチ",
+    "creativemodetab.queen_bee.queen_bee_tab": "女王バチ"
+}

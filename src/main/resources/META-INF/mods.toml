@@ -35,3 +35,10 @@ issueTrackerURL="https://github.com/CerbonXD/QueenBeeMod/issues"
     versionRange="[4.2,)"
     ordering="NONE"
     side="BOTH"
+
+[[dependencies.queen_bee]]
+    modId="cerbons_api"
+    mandatory=true
+    versionRange="[1.0.0,)"
+    ordering="NONE"
+    side="BOTH"

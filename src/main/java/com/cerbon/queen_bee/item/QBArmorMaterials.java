@@ -51,7 +51,7 @@ public enum QBArmorMaterials implements StringRepresentable, ArmorMaterial {
     }
 
     public int getDefenseForType(ArmorItem.@NotNull Type p_266752_) {
-        return this.protectionFunctionForType.get(p_266752_);
+        return this.protectionFunctionForType.getOrDefault(p_266752_, 0);
     }
 
     public int getEnchantmentValue() {
